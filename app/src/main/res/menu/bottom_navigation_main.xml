@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/tab_home"
+        android:enabled="true"
+        android:icon="@drawable/ic_home"
+        android:title="Home"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/tab_schedule"
+        android:enabled="true"
+        android:icon="@drawable/ic_schedule"
+        android:title="Schedule"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/tab_time_off"
+        android:enabled="true"
+        android:icon="@drawable/ic_time_off"
+        android:title="Time Off"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/tab_notification"
+        android:enabled="true"
+        android:icon="@drawable/ic_notification"
+        android:title="Notification"
+        app:showAsAction="ifRoom"/>
+
+</menu>

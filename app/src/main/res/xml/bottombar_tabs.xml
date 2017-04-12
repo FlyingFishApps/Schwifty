@@ -1,0 +1,23 @@
+<tabs>
+    <tab
+        id="@+id/tab_home"
+        icon="@drawable/ic_home"
+        activeColor="@color/colorPrimary"
+        title="Home" />
+    <tab
+        id="@+id/tab_schedule"
+        icon="@drawable/ic_schedule"
+        activeColor="@color/colorPrimary"
+        title="Schedule" />
+    <tab
+        id="@+id/tab_time_off"
+        icon="@drawable/ic_time_off"
+        activeColor="@color/colorPrimary"
+        title="Time Off" />
+    <tab
+        id="@+id/tab_notification"
+        icon="@drawable/ic_notification"
+        activeColor="@color/colorPrimary"
+        title="Notifications" />
+
+</tabs>

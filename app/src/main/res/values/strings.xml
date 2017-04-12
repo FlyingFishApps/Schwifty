@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">SCHWIFTY</string>
+    <string name="login_email_hint">Enter your Email</string>
+    <string name="login_password_hint">Enter your password</string>
+    <string name="login_btn">Login</string>
+    <string name="lp_forgot_pass">Forgot Password</string>
+    <string name="lp_OR">OR</string>
+    <string name="lp_sign_up">Sign Up</string>
+    <string name="signup_btn">Sign Up</string>
+    <string name="su_login_btn">Login</string>
+    <string name="fragment_home">Job List</string>
+    <string name="fragment_notification">Notifications</string>
+    <string name="fragment_schedule">Schedule</string>
+    <string name="fragment_time_off">Time Off Request</string>
+</resources>

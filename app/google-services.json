@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "255189817478",
+    "firebase_url": "https://schwifty-33650.firebaseio.com",
+    "project_id": "schwifty-33650",
+    "storage_bucket": "schwifty-33650.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:255189817478:android:67852c1139538a4f",
+        "android_client_info": {
+          "package_name": "edu.montclair.mobilecomputing.r_soltes.schwifty"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "255189817478-lu9t81e8pr8ejlt655dk12fq23oemdop.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "edu.montclair.mobilecomputing.r_soltes.schwifty",
+            "certificate_hash": "fc47d20c982bd66fa6d103863291fbfe7291620d"
+          }
+        },
+        {
+          "client_id": "255189817478-7aoj4sr5bsjoaour0ssps5da4utg468v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrHaUwlDecwT2OBCwqropC7__0LJc6Q4Q"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "255189817478-7aoj4sr5bsjoaour0ssps5da4utg468v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_sign_up_page"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="16dp"
+    android:paddingTop="16dp"
+    android:paddingRight="16dp"
+    android:paddingLeft="16dp"
+    tools:context="edu.montclair.mobilecomputing.r_soltes.schwifty.SignUpPage">
+
+
+    <ImageView
+        android:id="@+id/su_logo"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/schwiftylogolong"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        />
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_below="@+id/su_logo"
+        android:id="@+id/su_input_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <EditText
+            android:id="@+id/su_signup_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/login_email_hint"
+            android:inputType="textCapWords"
+            android:maxLines="1"
+
+            />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_below="@+id/su_input_email"
+        android:id="@+id/su_input_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp">
+
+
+        <EditText
+            android:id="@+id/su_signup_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/login_password_hint"
+            android:inputType="textPassword"
+            android:maxLines="1"
+
+            />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:layout_below="@+id/su_input_password"
+        android:id="@+id/su_signup_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/signup_btn"
+        android:background="#4286f4"
+        style="@style/Widget.AppCompat.Button.Colored"/>
+
+    <TextView
+        android:layout_below="@+id/su_signup_btn"
+        android:id="@+id/su_forgot_pass_btn"
+        android:layout_centerHorizontal="true"
+        android:clickable="true"
+        android:textStyle="bold"
+        android:textColor="@color/colorDark"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/lp_forgot_pass"/>
+
+    <LinearLayout
+        android:layout_below="@+id/su_forgot_pass_btn"
+        android:id="@+id/su_layout_or"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <View
+            android:layout_width="200dp"
+            android:layout_height="1dp"
+            android:background="#c4c8c9"
+            android:layout_margin="5dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="@string/lp_OR"/>
+
+        <View
+            android:layout_width="200dp"
+            android:layout_height="1dp"
+            android:background="#c4c8c9"
+            android:layout_margin="5dp"/>
+
+
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_below="@+id/su_layout_or"
+        android:id="@+id/su_login_btn"
+        android:layout_centerHorizontal="true"
+        android:clickable="true"
+        android:textStyle="bold"
+        android:textColor="@color/colorDark"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/su_login_btn"/>
+
+</RelativeLayout>
