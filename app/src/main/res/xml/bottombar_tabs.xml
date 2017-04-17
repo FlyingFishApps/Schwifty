@@ -19,5 +19,10 @@
         icon="@drawable/ic_notification"
         activeColor="@color/colorPrimary"
         title="Notifications" />
+    <tab
+        id="@+id/tab_logout"
+        icon="@drawable/ic_logout"
+        activeColor="@color/colorPrimary"
+        title="Logout" />
 
 </tabs>
