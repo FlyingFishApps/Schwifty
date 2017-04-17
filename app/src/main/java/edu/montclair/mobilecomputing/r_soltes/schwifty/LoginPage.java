@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +17,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,17 +32,19 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
 
     RelativeLayout activity_login_page;
     private FirebaseAuth mFirebaseAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+    public static final String TAG = "";
+
 
     public Snackbar snackbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_page);
+
+        // Binding
         ButterKnife.bind(this);
-
-
         activity_login_page = (RelativeLayout)findViewById(R.id.activity_login_page);
-
 
         // Set click listeners for the login page buttons
         signupBtn.setOnClickListener(this);
@@ -50,13 +54,29 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
         // Init Firebase Auth
         mFirebaseAuth = FirebaseAuth.getInstance();
 
-        // Check for existing session , if yes -> HomePage
-//        if(mFirebaseAuth.getCurrentUser()!=null){
-//            startActivity(new Intent(LoginPage.this, HomePage.class));
-//        }
+        // Check if user is signed in
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    // User is signed in
+                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+                } else {
+                    // User is signed out
+                    Log.d(TAG, "onAuthStateChanged:signed_out");
+                }
+            }
+        };
 
 
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mFirebaseAuth.addAuthStateListener(mAuthListener);
     }
 
     @Override
@@ -109,5 +129,13 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
                     });
         }
 
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mFirebaseAuth.removeAuthStateListener(mAuthListener);
+        }
     }
 }
