@@ -68,9 +68,11 @@ public class ForgotPassPage extends AppCompatActivity implements View.OnClickLis
                                     if (task.isSuccessful()) {
                                         snackbar.make(findViewById(android.R.id.content), "We have sent you instructions to reset your password",
                                                 Snackbar.LENGTH_SHORT).setAction("Action", null).show();
+                                        minputEmail.getText().clear();
                                     } else {
                                         snackbar.make(findViewById(android.R.id.content), "Failed to reset your password",
                                                 Snackbar.LENGTH_SHORT).setAction("Action", null).show();
+                                        minputEmail.getText().clear();
                                     }
 
                                     mprogressBar.setVisibility(View.GONE);
