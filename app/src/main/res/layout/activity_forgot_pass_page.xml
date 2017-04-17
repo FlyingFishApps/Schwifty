@@ -1,9 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_forgot_pass_page"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="16dp"
+    android:paddingTop="16dp"
+    android:paddingRight="16dp"
+    android:paddingLeft="16dp"
     tools:context="edu.montclair.mobilecomputing.r_soltes.schwifty.ForgotPassPage">
 
-</android.support.constraint.ConstraintLayout>
+    <ImageView
+        android:id="@+id/fp_logo"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/schwiftylogolong"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="0dp" />
+
+
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_below="@+id/fp_logo"
+        android:id="@+id/fp_input_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp">
+
+
+        <EditText
+            android:id="@+id/fp_login_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/login_email_hint"
+            android:inputType="textCapWords"
+            android:maxLines="1"
+
+            />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:layout_below="@+id/fp_input_email"
+        android:id="@+id/fp_reset_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/resetPass_btn"
+        android:background="#4286f4"
+        style="@style/Widget.AppCompat.Button.Colored"/>
+
+    <TextView
+        android:layout_below="@+id/fp_reset_btn"
+        android:id="@+id/fp_signin_btn"
+        android:layout_centerHorizontal="true"
+        android:clickable="true"
+        android:textStyle="bold"
+        android:textColor="@color/colorDark"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/fp_signin"/>
+
+    <LinearLayout
+        android:layout_below="@+id/fp_signin_btn"
+        android:id="@+id/fp_layout_or"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <View
+            android:layout_width="200dp"
+            android:layout_height="1dp"
+            android:background="#c4c8c9"
+            android:layout_margin="5dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="@string/lp_OR"/>
+
+        <View
+            android:layout_width="200dp"
+            android:layout_height="1dp"
+            android:background="#c4c8c9"
+            android:layout_margin="5dp"/>
+
+
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_below="@+id/fp_layout_or"
+        android:id="@+id/fp_sign_up_btn"
+        android:layout_centerHorizontal="true"
+        android:clickable="true"
+        android:textStyle="bold"
+        android:textColor="@color/colorDark"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/lp_sign_up"/>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center|bottom"
+        android:layout_marginBottom="20dp"
+        android:visibility="gone" />
+
+</RelativeLayout>
