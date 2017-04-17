@@ -30,4 +30,11 @@
         android:title="Notification"
         app:showAsAction="ifRoom"/>
 
+    <item
+        android:id="@+id/tab_logout"
+        android:enabled="true"
+        android:icon="@drawable/ic_logout"
+        android:title="Logout"
+        app:showAsAction="ifRoom"/>
+
 </menu>
