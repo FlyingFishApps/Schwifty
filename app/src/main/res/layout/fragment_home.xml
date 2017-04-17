@@ -16,7 +16,8 @@
             android:textColor="@color/colorPrimary"
             android:textSize="40dp"
             android:padding="10dp"
-            android:layout_alignParentTop="true"/>
+            android:layout_alignParentTop="true"
+            android:gravity="center"/>
 
         <ListView
             android:id="@+id/job_list"

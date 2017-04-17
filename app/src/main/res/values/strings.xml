@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">SCHWIFTY</string>
     <string name="login_email_hint">Enter your Email</string>
+    <string name="fp_email_hint">Enter your Email</string>
     <string name="login_password_hint">Enter your password</string>
     <string name="login_btn">Login</string>
     <string name="lp_forgot_pass">Forgot Password</string>
@@ -12,4 +13,6 @@
     <string name="fragment_notification">Notifications</string>
     <string name="fragment_schedule">Schedule</string>
     <string name="fragment_time_off">Time Off Request</string>
+    <string name="resetPass_btn">Reset Password</string>
+    <string name="fp_signin">Sign In</string>
 </resources>
