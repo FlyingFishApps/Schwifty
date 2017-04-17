@@ -4,10 +4,30 @@
     android:layout_height="match_parent"
     tools:context="edu.montclair.mobilecomputing.r_soltes.schwifty.fragments.TimeOffFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/fragment_time_off" />
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/job_list_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/fragment_time_off"
+            android:textColor="@color/colorPrimary"
+            android:textSize="40dp"
+            android:padding="10dp"
+            android:layout_alignParentTop="true"
+            android:gravity="center"/>
+
+        <ListView
+            android:id="@+id/job_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@+id/job_list_tv"
+            android:layout_centerHorizontal="true"
+            />
+
+    </RelativeLayout>
 
 </FrameLayout>
