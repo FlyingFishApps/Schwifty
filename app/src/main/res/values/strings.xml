@@ -15,4 +15,5 @@
     <string name="fragment_time_off">Time Off Request</string>
     <string name="resetPass_btn">Reset Password</string>
     <string name="fp_signin">Sign In</string>
+    <string name="login_username_hint">Username</string>
 </resources>

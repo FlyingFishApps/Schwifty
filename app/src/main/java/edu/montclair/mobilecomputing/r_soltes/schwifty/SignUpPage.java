@@ -5,9 +5,12 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -15,9 +18,13 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import edu.montclair.mobilecomputing.r_soltes.schwifty.utils.User;
 
 public class SignUpPage extends AppCompatActivity implements View.OnClickListener {
 
@@ -26,9 +33,14 @@ public class SignUpPage extends AppCompatActivity implements View.OnClickListene
     @BindView(R.id.su_login_btn) TextView loginBtn;
     @BindView(R.id.su_signup_email) EditText inputEmail;
     @BindView(R.id.su_signup_password) EditText inputPass;
+    @BindView(R.id.su_signup_username) EditText inputUsername;
+    @BindView(R.id.suProgressBar) ProgressBar mprogressBar;
     RelativeLayout activity_sign_up_page;
+    public static final String TAG = SignUpPage.class.getSimpleName();
     Snackbar snackbar;
     private FirebaseAuth mFirebaseAuth;
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference mDatabaseReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,8 +54,18 @@ public class SignUpPage extends AppCompatActivity implements View.OnClickListene
 
         // Firebase Init
         mFirebaseAuth = FirebaseAuth.getInstance();
+        mDatabaseReference = FirebaseDatabase.getInstance().getReference();
 
     }
+
+
+
+    private void createNewUser(String name, String email, String userId) {
+        User user = new User(name, email, userId);
+
+        mDatabaseReference.child("users").child(userId).setValue(user);
+    }
+
 
     @Override
     public void onClick(View view) {
@@ -53,7 +75,11 @@ public class SignUpPage extends AppCompatActivity implements View.OnClickListene
                 finish();
                 break;
             case R.id.su_signup_btn:
-                signupUser(inputEmail.getText().toString(),inputPass.getText().toString());
+                if(!TextUtils.isEmpty(inputUsername.getText().toString())){
+                    signupUser(inputEmail.getText().toString(),inputPass.getText().toString());
+                }else{
+                    inputUsername.setError("Please enter a username");
+                }
                 break;
             case R.id.su_login_btn:
                 startActivity(new Intent(SignUpPage.this, LoginPage.class));
@@ -66,24 +92,31 @@ public class SignUpPage extends AppCompatActivity implements View.OnClickListene
         }
     }
 
-    private void signupUser(String email, String password) {
+    private void signupUser(final String email, String password) {
 
+        mprogressBar.setVisibility(View.VISIBLE);
         mFirebaseAuth.createUserWithEmailAndPassword(email,password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(!task.isSuccessful()){
-
                             snackbar.make(activity_sign_up_page, "Error: "+task.getException(),Snackbar.LENGTH_SHORT)
                                     .setAction("Action", null).show();
+                            Log.d(TAG, "CREATE_USER_ERROR: " + task.getException());
 
                         }else{
+                            FirebaseUser user = task.getResult().getUser();
+                            createNewUser(inputUsername.getText().toString(),email,user.getUid());
+                            inputUsername.getText().clear();
+                            inputEmail.getText().clear();
+                            inputPass.getText().clear();
                             snackbar.make(activity_sign_up_page, "User Created! ",Snackbar.LENGTH_SHORT)
                                     .setAction("Action", null).show();
                         }
-
+                        mprogressBar.setVisibility(View.GONE);
                     }
                 });
 
     }
+
 }

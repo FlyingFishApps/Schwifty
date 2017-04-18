@@ -17,7 +17,7 @@
         android:layout_centerHorizontal="true"
         android:background="@drawable/schwiftylogolong"
         android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_height="100dp"
         tools:layout_editor_absoluteY="0dp"
         tools:layout_editor_absoluteX="0dp" />
 
