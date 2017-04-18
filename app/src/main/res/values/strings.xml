@@ -11,6 +11,7 @@
     <string name="su_login_btn">Login</string>
     <string name="fragment_home">Job List</string>
     <string name="fragment_notification">Notifications</string>
+    <string name="fragment_manager_panel">Manager Panel</string>
     <string name="fragment_schedule">Schedule</string>
     <string name="fragment_time_off">Time Off Request</string>
     <string name="resetPass_btn">Reset Password</string>
@@ -21,4 +22,5 @@
         <item>Employee</item>
         <item>Manager</item>
     </string-array>
+
 </resources>
