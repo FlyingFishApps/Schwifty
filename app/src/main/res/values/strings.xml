@@ -16,4 +16,9 @@
     <string name="resetPass_btn">Reset Password</string>
     <string name="fp_signin">Sign In</string>
     <string name="login_username_hint">Username</string>
+    <string name="su_userRole">User Type</string>
+    <string-array name="user_role_array">
+        <item>Employee</item>
+        <item>Manager</item>
+    </string-array>
 </resources>
