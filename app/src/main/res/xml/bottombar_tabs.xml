@@ -1,5 +1,10 @@
 <tabs>
     <tab
+        id="@+id/tab_manager_panel"
+        icon="@drawable/ic_manager_panel"
+        activeColor="@color/colorPrimary"
+        title="Home" />
+    <tab
         id="@+id/tab_home"
         icon="@drawable/ic_home"
         activeColor="@color/colorPrimary"
@@ -14,11 +19,11 @@
         icon="@drawable/ic_time_off"
         activeColor="@color/colorPrimary"
         title="Time Off" />
-    <tab
-        id="@+id/tab_notification"
-        icon="@drawable/ic_notification"
-        activeColor="@color/colorPrimary"
-        title="Notifications" />
+    <!--<tab-->
+        <!--id="@+id/tab_notification"-->
+        <!--icon="@drawable/ic_notification"-->
+        <!--activeColor="@color/colorPrimary"-->
+        <!--title="Notifications" />-->
     <tab
         id="@+id/tab_logout"
         icon="@drawable/ic_logout"

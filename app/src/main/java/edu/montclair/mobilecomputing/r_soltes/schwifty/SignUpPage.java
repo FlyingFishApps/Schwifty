@@ -8,10 +8,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -34,7 +36,9 @@ public class SignUpPage extends AppCompatActivity implements View.OnClickListene
     @BindView(R.id.su_signup_email) EditText inputEmail;
     @BindView(R.id.su_signup_password) EditText inputPass;
     @BindView(R.id.su_signup_username) EditText inputUsername;
+    @BindView(R.id.user_role_spinner) Spinner userRoleSpinner;
     @BindView(R.id.suProgressBar) ProgressBar mprogressBar;
+
     RelativeLayout activity_sign_up_page;
     public static final String TAG = SignUpPage.class.getSimpleName();
     Snackbar snackbar;
@@ -48,6 +52,15 @@ public class SignUpPage extends AppCompatActivity implements View.OnClickListene
         ButterKnife.bind(this);
 
         activity_sign_up_page = (RelativeLayout)findViewById(R.id.activity_sign_up_page);
+
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.user_role_array, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        userRoleSpinner.setAdapter(adapter);
+
         signupBtn.setOnClickListener(this);
         forgotpassBtn.setOnClickListener(this);
         loginBtn.setOnClickListener(this);
@@ -60,8 +73,8 @@ public class SignUpPage extends AppCompatActivity implements View.OnClickListene
 
 
 
-    private void createNewUser(String name, String email, String userId) {
-        User user = new User(name, email, userId);
+    private void createNewUser(String name, String email, String userId, String userRole) {
+        User user = new User(name, email, userId, userRole);
 
         mDatabaseReference.child("users").child(userId).setValue(user);
     }
@@ -106,7 +119,8 @@ public class SignUpPage extends AppCompatActivity implements View.OnClickListene
 
                         }else{
                             FirebaseUser user = task.getResult().getUser();
-                            createNewUser(inputUsername.getText().toString(),email,user.getUid());
+                            createNewUser(inputUsername.getText().toString().trim(),
+                                    email,user.getUid(),userRoleSpinner.getSelectedItem().toString().trim());
                             inputUsername.getText().clear();
                             inputEmail.getText().clear();
                             inputPass.getText().clear();

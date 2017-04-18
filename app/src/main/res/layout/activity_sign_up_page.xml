@@ -11,7 +11,7 @@
     android:paddingLeft="16dp"
     tools:context="edu.montclair.mobilecomputing.r_soltes.schwifty.SignUpPage">
 
-
+    <!-- App Logo Image -->
     <ImageView
         android:id="@+id/su_logo"
         android:layout_alignParentTop="true"
@@ -21,6 +21,7 @@
         android:layout_height="100dp"
         />
 
+    <!-- Username Input -->
     <android.support.design.widget.TextInputLayout
         android:layout_below="@+id/su_logo"
         android:id="@+id/su_input_username"
@@ -40,6 +41,7 @@
 
     </android.support.design.widget.TextInputLayout>
 
+    <!-- Email Input -->
     <android.support.design.widget.TextInputLayout
         android:layout_below="@+id/su_input_username"
         android:id="@+id/su_input_email"
@@ -59,6 +61,7 @@
 
     </android.support.design.widget.TextInputLayout>
 
+    <!-- Password Input -->
     <android.support.design.widget.TextInputLayout
         android:layout_below="@+id/su_input_email"
         android:id="@+id/su_input_password"
@@ -79,8 +82,31 @@
 
     </android.support.design.widget.TextInputLayout>
 
-    <Button
+    <!-- User Role Input -->
+    <android.support.design.widget.TextInputLayout
         android:layout_below="@+id/su_input_password"
+        android:id="@+id/su_input_role"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="@string/su_userRole"/>
+
+        <Spinner
+            android:id="@+id/user_role_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <!-- Sign Up Button -->
+    <Button
+        android:layout_below="@+id/su_input_role"
         android:id="@+id/su_signup_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -88,6 +114,7 @@
         android:background="#4286f4"
         style="@style/Widget.AppCompat.Button.Colored"/>
 
+    <!-- Forgot Password Button -->
     <TextView
         android:layout_below="@+id/su_signup_btn"
         android:id="@+id/su_forgot_pass_btn"
@@ -100,6 +127,7 @@
         android:layout_height="wrap_content"
         android:text="@string/lp_forgot_pass"/>
 
+    <!-- Or Line -->
     <LinearLayout
         android:layout_below="@+id/su_forgot_pass_btn"
         android:id="@+id/su_layout_or"
@@ -126,10 +154,9 @@
             android:background="#c4c8c9"
             android:layout_margin="5dp"/>
 
-
-
     </LinearLayout>
 
+    <!-- Sign In Button -->
     <TextView
         android:layout_below="@+id/su_layout_or"
         android:id="@+id/su_login_btn"
@@ -140,8 +167,10 @@
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
         android:text="@string/su_login_btn"/>
 
+    <!-- Progress Bar -->
     <LinearLayout
         android:layout_below="@+id/su_login_btn"
         android:orientation="horizontal"
