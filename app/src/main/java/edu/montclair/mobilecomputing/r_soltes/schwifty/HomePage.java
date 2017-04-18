@@ -11,10 +11,13 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import butterknife.ButterKnife;
 import edu.montclair.mobilecomputing.r_soltes.schwifty.fragments.HomeFragment;
-import edu.montclair.mobilecomputing.r_soltes.schwifty.fragments.NotificationFragment;
+import edu.montclair.mobilecomputing.r_soltes.schwifty.fragments.ManagerPanelFragment;
 import edu.montclair.mobilecomputing.r_soltes.schwifty.fragments.ScheduleFragment;
 import edu.montclair.mobilecomputing.r_soltes.schwifty.fragments.TimeOffFragment;
 
@@ -22,6 +25,7 @@ public class HomePage extends AppCompatActivity {
 
     public Snackbar snackbar;
     private FirebaseAuth mFirebaseAuth;
+    private DatabaseReference mDatabaseReference;
     Fragment fragment = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,17 +34,33 @@ public class HomePage extends AppCompatActivity {
 
         // Binding
         ButterKnife.bind(this);
-        BottomNavigationView bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottom_navigation);
+        createNavigation();
 
-        fragment = new HomeFragment();
+        fragment = new ManagerPanelFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.contentContainer, fragment).addToBackStack(null).commit();
 
+        //get firebase user
+        FirebaseUser user = mFirebaseAuth.getInstance().getCurrentUser();
+
+        //get reference
+        mDatabaseReference = FirebaseDatabase.getInstance().getReference("users").child(user.getUid());
+        //IMPORTANT: .getReference(user.getUid()) will not work although user.getUid() is unique. You need a full path!
+
+
+    }
+
+    public void createNavigation(){
+
+        BottomNavigationView bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottom_navigation);
 
         // Listener to display the correct information according to tab that is selected.
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch(item.getItemId()){
+                    case R.id.tab_manager:
+                        fragment = new ManagerPanelFragment();
+                        break;
                     case R.id.tab_home:
                         fragment = new HomeFragment();
                         break;
@@ -50,12 +70,10 @@ public class HomePage extends AppCompatActivity {
                     case R.id.tab_time_off:
                         fragment = new TimeOffFragment();
                         break;
-                    case R.id.tab_notification:
-                        fragment = new NotificationFragment();
-                        break;
+//                    case R.id.tab_notification:
+//                        fragment = new NotificationFragment();
+//                        break;
                     case R.id.tab_logout:
-//                        fragment = new HomeFragment();
-
                         snackbar.make(findViewById(android.R.id.content), "Are you sure you want to logout?",
                                 Snackbar.LENGTH_LONG).setAction("Yes", new View.OnClickListener() {
                             @Override
@@ -65,16 +83,32 @@ public class HomePage extends AppCompatActivity {
                                 finish();
                             }
                         }).setActionTextColor(getResources().getColor(R.color.colorPrimary)).show();
-
                         break;
                     default:
-                        fragment = new HomeFragment();
+                        fragment = new ManagerPanelFragment();
                 }
                 getSupportFragmentManager().beginTransaction().replace(R.id.contentContainer, fragment).addToBackStack(null).commit();
                 return true;
             }
 
         });
+
+//        mDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//
+//                final User tempUser = new User();
+//                final String userRole = tempUser.getUserRole();
+//                final String employee = "Employee";
+//                final String manager = "Manager";
+//
+//                }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
 
     }
     

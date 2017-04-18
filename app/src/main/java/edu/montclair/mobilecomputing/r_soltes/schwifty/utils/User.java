@@ -6,16 +6,17 @@ package edu.montclair.mobilecomputing.r_soltes.schwifty.utils;
 
 public class User {
 
-    private String username, uid, email;
+    private String username, uid, email, userRole;
 
     public User(){
 
     }
 
-    public User(String username, String email, String uid) {
+    public User(String username, String email, String uid, String userRole) {
         this.username = username;
         this.uid = uid;
         this.email = email;
+        this.userRole = userRole;
 
     }
 
@@ -41,5 +42,13 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(String userRole) {
+        this.userRole = userRole;
     }
 }
