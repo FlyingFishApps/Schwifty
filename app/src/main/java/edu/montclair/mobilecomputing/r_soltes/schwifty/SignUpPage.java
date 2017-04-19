@@ -21,8 +21,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -81,7 +84,8 @@ public class SignUpPage extends AppCompatActivity implements View.OnClickListene
                 break;
             case R.id.su_signup_btn:
                 if(!TextUtils.isEmpty(inputUsername.getText().toString())){
-                    signupUser(inputEmail.getText().toString().trim(),inputPass.getText().toString().trim());
+//                    signupUser(inputEmail.getText().toString().trim(),inputPass.getText().toString().trim());
+                    checkUsername();
                 }else{
                     inputUsername.setError("Please enter a username");
                 }
@@ -97,9 +101,31 @@ public class SignUpPage extends AppCompatActivity implements View.OnClickListene
         }
     }
 
+    private void checkUsername(){
+
+        mDatabaseReference.child("users").child(inputUsername.getText().toString().trim()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    inputUsername.setError("Username already exists.");
+                }else{
+                    signupUser(inputEmail.getText().toString().trim(),inputPass.getText().toString().trim());
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
     private void signupUser(final String email, String password) {
 
         mprogressBar.setVisibility(View.VISIBLE);
+
+
         mFirebaseAuth.createUserWithEmailAndPassword(email,password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -129,7 +155,7 @@ public class SignUpPage extends AppCompatActivity implements View.OnClickListene
     private void createNewUser(String name, String email, String userId, String userRole) {
         User user = new User(name, email, userId, userRole);
 
-        mDatabaseReference.child("users").child(userId).setValue(user);
+        mDatabaseReference.child("users").child(name).setValue(user);
     }
 
 }
