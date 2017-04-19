@@ -19,15 +19,19 @@
             android:layout_alignParentTop="true"
             android:gravity="center"/>
 
-        <ListView
-            android:id="@+id/job_list"
+
+        <Button
+            android:layout_below="@id/manager_panel_tv"
+            android:id="@+id/create_business_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_below="@+id/manager_panel_tv"
             android:layout_centerHorizontal="true"
-            />
+            android:text="@string/create_business_btn"
+            android:background="#4286f4"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:padding="10dp"/>
 
     </RelativeLayout>
+
 
 </FrameLayout>
