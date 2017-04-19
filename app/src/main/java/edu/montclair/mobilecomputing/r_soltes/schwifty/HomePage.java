@@ -20,13 +20,15 @@ import edu.montclair.mobilecomputing.r_soltes.schwifty.fragments.HomeFragment;
 import edu.montclair.mobilecomputing.r_soltes.schwifty.fragments.ManagerPanelFragment;
 import edu.montclair.mobilecomputing.r_soltes.schwifty.fragments.ScheduleFragment;
 import edu.montclair.mobilecomputing.r_soltes.schwifty.fragments.TimeOffFragment;
+import edu.montclair.mobilecomputing.r_soltes.schwifty.utils.schwiftyInterface;
 
-public class HomePage extends AppCompatActivity {
+public class HomePage extends AppCompatActivity implements schwiftyInterface {
 
     public Snackbar snackbar;
     private FirebaseAuth mFirebaseAuth;
     private DatabaseReference mDatabaseReference;
     Fragment fragment = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +37,8 @@ public class HomePage extends AppCompatActivity {
         // Binding
         ButterKnife.bind(this);
         createNavigation();
+
+
 
         fragment = new ManagerPanelFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.contentContainer, fragment).addToBackStack(null).commit();
@@ -49,15 +53,15 @@ public class HomePage extends AppCompatActivity {
 
     }
 
-    public void createNavigation(){
+    public void createNavigation() {
 
-        BottomNavigationView bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottom_navigation);
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
 
         // Listener to display the correct information according to tab that is selected.
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch(item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.tab_manager:
                         fragment = new ManagerPanelFragment();
                         break;
@@ -92,24 +96,10 @@ public class HomePage extends AppCompatActivity {
             }
 
         });
-
-//        mDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//
-//                final User tempUser = new User();
-//                final String userRole = tempUser.getUserRole();
-//                final String employee = "Employee";
-//                final String manager = "Manager";
-//
-//                }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
-
     }
-    
+
+    @Override
+    public void startMyIntent(Intent i) {
+        startActivity(i);
+    }
 }

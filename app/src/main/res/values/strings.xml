@@ -18,9 +18,16 @@
     <string name="fp_signin">Sign In</string>
     <string name="login_username_hint">Username</string>
     <string name="su_userRole">User Type</string>
+    <string name="create_business_btn">Create Business</string>
     <string-array name="user_role_array">
         <item>Employee</item>
         <item>Manager</item>
     </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="cb_bussiness_name_hint">Business Name</string>
+    <string name="create_bussiness_tv">Create Bussiness</string>
+    <string name="cb_create_btn">Create</string>
 
 </resources>
