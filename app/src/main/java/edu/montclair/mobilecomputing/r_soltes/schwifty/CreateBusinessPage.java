@@ -67,11 +67,11 @@ public class CreateBusinessPage extends AppCompatActivity implements View.OnClic
 
         Random rnd = new Random();
         int n = 100000 + rnd.nextInt(900000);
-        String bID = String.valueOf(n);
+        String bId = String.valueOf(n);
 
         mprogressBar.setVisibility(View.VISIBLE);
 
-        Business business = new Business(name,bID);
+        Business business = new Business(name,bId);
         mDatabaseReference.child("businesses").child(name).setValue(business);
         businessName.getText().clear();
 
