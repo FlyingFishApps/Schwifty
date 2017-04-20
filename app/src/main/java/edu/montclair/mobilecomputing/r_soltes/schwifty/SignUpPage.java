@@ -84,8 +84,8 @@ public class SignUpPage extends AppCompatActivity implements View.OnClickListene
                 break;
             case R.id.su_signup_btn:
                 if(!TextUtils.isEmpty(inputUsername.getText().toString())){
-//                    signupUser(inputEmail.getText().toString().trim(),inputPass.getText().toString().trim());
-                    checkUsername();
+                    signupUser(inputEmail.getText().toString().trim(),inputPass.getText().toString().trim());
+//                    checkUsername();
                 }else{
                     inputUsername.setError("Please enter a username");
                 }
@@ -155,7 +155,7 @@ public class SignUpPage extends AppCompatActivity implements View.OnClickListene
     private void createNewUser(String name, String email, String userId, String userRole) {
         User user = new User(name, email, userId, userRole);
 
-        mDatabaseReference.child("users").child(name).setValue(user);
+        mDatabaseReference.child("users").child(userId).setValue(user);
     }
 
 }

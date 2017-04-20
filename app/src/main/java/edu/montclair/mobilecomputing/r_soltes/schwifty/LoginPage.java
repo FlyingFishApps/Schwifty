@@ -18,6 +18,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,7 +35,10 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
     RelativeLayout activity_login_page;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-    public static final String TAG = "";
+    private DatabaseReference mDatabaseReference, userRef;
+    private FirebaseDatabase mFirebaseDatabase;
+
+    public static final String TAG = "CURRENT_USER_INFO";
 
 
     public Snackbar snackbar;
@@ -53,6 +58,7 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
 
         // Init Firebase Auth
         mFirebaseAuth = FirebaseAuth.getInstance();
+
 
         // Check if user is signed in
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -123,6 +129,7 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
 
                             }
                         }else{
+
                             startActivity(new Intent(LoginPage.this, HomePage.class));
                         }
                         }

@@ -29,5 +29,6 @@
     <string name="cb_bussiness_name_hint">Business Name</string>
     <string name="create_bussiness_tv">Create Bussiness</string>
     <string name="cb_create_btn">Create</string>
+    <string name="fragment_error">Not Available To Employees</string>
 
 </resources>
