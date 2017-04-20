@@ -12,9 +12,13 @@ import android.widget.RelativeLayout;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
 import java.util.Random;
 
 import butterknife.BindView;
@@ -43,6 +47,8 @@ public class CreateBusinessPage extends AppCompatActivity implements View.OnClic
         // Firebase Init
         mFirebaseAuth = FirebaseAuth.getInstance();
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
+
+        FirebaseUser user = mFirebaseAuth.getInstance().getCurrentUser();
     }
 
     @Override
@@ -50,7 +56,8 @@ public class CreateBusinessPage extends AppCompatActivity implements View.OnClic
         switch (view.getId()) {
             case R.id.cb_create_btn:
                 if(!TextUtils.isEmpty(businessName.getText().toString().trim())){
-                    createBusiness(businessName.getText().toString().trim());
+//                    createBusiness(businessName.getText().toString().trim());
+                    checkBusiness();
                     snackbar.make(activity_create_business_page, "Business Created!", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                 }else{
@@ -71,14 +78,41 @@ public class CreateBusinessPage extends AppCompatActivity implements View.OnClic
         String bId = String.valueOf(n);
 
         mprogressBar.setVisibility(View.VISIBLE);
-        FirebaseUser user = mFirebaseAuth.getInstance().getCurrentUser();
 
+        FirebaseUser user = mFirebaseAuth.getInstance().getCurrentUser();
         String bOwner = user.getUid().toString();
         Business business = new Business(name,bId, bOwner);
         mDatabaseReference.child("businesses").child(name).setValue(business);
-        businessName.getText().clear();
 
+        HashMap<String, String> employees = new HashMap();
+
+        employees.put(user.getUid(), user.getUid());
+
+        mDatabaseReference.child("businesses").child(name).child("List Of Employees").setValue(employees);
+
+        businessName.getText().clear();
         mprogressBar.setVisibility(View.GONE);
+
+    }
+
+    private void checkBusiness(){
+
+        mDatabaseReference.child("businesses").child(businessName.getText().toString().trim()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    businessName.getText().clear();
+                    businessName.setError("Business already exists.");
+                }else{
+                    createBusiness(businessName.getText().toString().trim());
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
     }
 }

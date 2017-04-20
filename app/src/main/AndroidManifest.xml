@@ -19,7 +19,8 @@
         <activity android:name=".SignUpPage" />
         <activity android:name=".HomePage" />
         <activity android:name=".ForgotPassPage" />
-        <activity android:name=".CreateBusinessPage"></activity>
+        <activity android:name=".CreateBusinessPage" />
+        <activity android:name=".AddEmployeePage"></activity>
     </application>
 
 </manifest>
