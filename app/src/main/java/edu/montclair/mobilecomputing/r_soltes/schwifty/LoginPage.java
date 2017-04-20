@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -31,6 +32,8 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
     @BindView(R.id.lp_forgot_pass_btn) TextView forgotpassBtn;
     @BindView(R.id.lp_login_email) EditText inputEmail;
     @BindView(R.id.lp_login_password) EditText inputPass;
+    @BindView(R.id.lpProgressBar) ProgressBar mprogressBar;
+
 
     RelativeLayout activity_login_page;
     private FirebaseAuth mFirebaseAuth;
@@ -108,6 +111,8 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
 
     private void loginUser(final String email, final String password) {
 
+        mprogressBar.setVisibility(View.VISIBLE);
+
         if(TextUtils.isEmpty(email)){
             snackbar.make(activity_login_page, "Please enter an email address",
                     Snackbar.LENGTH_SHORT).setAction("Action", null).show();
@@ -136,6 +141,7 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
                     });
         }
 
+        mprogressBar.setVisibility(View.GONE);
     }
 
     @Override

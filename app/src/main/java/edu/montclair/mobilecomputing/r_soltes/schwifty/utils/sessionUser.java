@@ -56,6 +56,10 @@ public class sessionUser {
     public static final String KEY_SESSION_USEREMAIL="";
     public static final String KEY_SESSION_USERROLE="";
 
+    public static String getKeySessionUsername() {
+        return KEY_SESSION_USERNAME;
+    }
+
     // Constructor
     public sessionUser(Context context){
         this._context = context;

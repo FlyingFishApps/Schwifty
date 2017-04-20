@@ -11,6 +11,14 @@
     android:paddingLeft="16dp"
     tools:context="edu.montclair.mobilecomputing.r_soltes.schwifty.ForgotPassPage">
 
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    <!-- App Logo -->
     <ImageView
         android:id="@+id/fp_logo"
         android:layout_alignParentTop="true"
@@ -21,8 +29,7 @@
         tools:layout_editor_absoluteY="0dp"
         tools:layout_editor_absoluteX="0dp" />
 
-
-
+    <!-- Forgot Pass Email -->
     <android.support.design.widget.TextInputLayout
         android:layout_below="@+id/fp_logo"
         android:id="@+id/fp_input_email"
@@ -43,6 +50,7 @@
 
     </android.support.design.widget.TextInputLayout>
 
+    <!-- Forgot Pass Button -->
     <Button
         android:layout_below="@+id/fp_input_email"
         android:id="@+id/fp_reset_btn"
@@ -52,6 +60,7 @@
         android:background="#4286f4"
         style="@style/Widget.AppCompat.Button.Colored"/>
 
+    <!-- Sign Up Button -->
     <TextView
         android:layout_below="@+id/fp_reset_btn"
         android:id="@+id/fp_signin_btn"
@@ -64,6 +73,7 @@
         android:layout_height="wrap_content"
         android:text="@string/fp_signin"/>
 
+    <!-- OR -->
     <LinearLayout
         android:layout_below="@+id/fp_signin_btn"
         android:id="@+id/fp_layout_or"
@@ -94,6 +104,7 @@
 
     </LinearLayout>
 
+    <!-- Sign In Button -->
     <TextView
         android:layout_below="@+id/fp_layout_or"
         android:id="@+id/fp_sign_up_btn"
@@ -106,6 +117,7 @@
         android:layout_height="wrap_content"
         android:text="@string/lp_sign_up"/>
 
+    <!-- Progress Bar -->
     <LinearLayout
         android:layout_below="@+id/fp_sign_up_btn"
         android:orientation="horizontal"
@@ -120,6 +132,8 @@
             android:layout_gravity="center|bottom"
             android:layout_marginBottom="20dp"
             android:visibility="gone" />
+
+    </LinearLayout>
 
     </LinearLayout>
 
