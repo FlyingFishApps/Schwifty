@@ -11,6 +11,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -70,8 +71,10 @@ public class CreateBusinessPage extends AppCompatActivity implements View.OnClic
         String bId = String.valueOf(n);
 
         mprogressBar.setVisibility(View.VISIBLE);
+        FirebaseUser user = mFirebaseAuth.getInstance().getCurrentUser();
 
-        Business business = new Business(name,bId);
+        String bOwner = user.getUid().toString();
+        Business business = new Business(name,bId, bOwner);
         mDatabaseReference.child("businesses").child(name).setValue(business);
         businessName.getText().clear();
 
