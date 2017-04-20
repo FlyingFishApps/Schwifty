@@ -11,6 +11,13 @@
     android:paddingLeft="16dp"
     tools:context="edu.montclair.mobilecomputing.r_soltes.schwifty.AddEmployeePage">
 
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
     <!-- App Logo Image -->
     <ImageView
         android:id="@+id/ae_logo"
@@ -100,5 +107,8 @@
             android:visibility="gone" />
 
     </LinearLayout>
+
+    </LinearLayout>
+
 
 </RelativeLayout>

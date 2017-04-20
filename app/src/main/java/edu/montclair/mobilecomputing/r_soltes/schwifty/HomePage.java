@@ -63,7 +63,6 @@ public class HomePage extends AppCompatActivity implements schwiftyInterface {
         mDatabaseReference = FirebaseDatabase.getInstance().getReference("users").child(user.getUid());
         //IMPORTANT: .getReference(user.getUid()) will not work although user.getUid() is unique. You need a full path!
 
-
         final String uid = user.getUid().toString();
         mDatabaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://schwifty-33650.firebaseio.com/");
         userRef = mDatabaseReference.child("users");
