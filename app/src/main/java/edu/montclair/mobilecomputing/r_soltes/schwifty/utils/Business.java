@@ -1,20 +1,25 @@
 package edu.montclair.mobilecomputing.r_soltes.schwifty.utils;
 
+import java.util.ArrayList;
+
 /**
  * Created by ryansoltes on 4/18/17.
  */
 
 public class Business {
 
-    private String bName, bId;
+    private String bName, bId, bOwner;
+    private ArrayList<String> listOfEmp = new ArrayList<>();
 
     public Business(){
 
     }
 
-    public Business(String bName, String bId) {
+    public Business(String bName, String bId, String bOwner, ArrayList<String> listOfEmp) {
         this.bName = bName;
         this.bId = bId;
+        this.bOwner = bOwner;
+        this.listOfEmp = listOfEmp;
 
     }
 
@@ -26,11 +31,19 @@ public class Business {
         this.bName = bName;
     }
 
-    public String getBid() {
+    public String getbId() {
         return bId;
     }
 
-    public void setBid(String bid) {
-        this.bId = bid;
+    public void setbId(String bId) {
+        this.bId = bId;
+    }
+
+    public String getbOwner() {
+        return bOwner;
+    }
+
+    public void setbOwner(String bOwner) {
+        this.bOwner = bOwner;
     }
 }
