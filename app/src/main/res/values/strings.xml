@@ -30,5 +30,11 @@
     <string name="create_bussiness_tv">Create Bussiness</string>
     <string name="cb_create_btn">Create</string>
     <string name="fragment_error">Not Available To Employees</string>
+    <string name="add_employee_tv">Add Employee</string>
+    <string name="ae_BusinessName">Business Name</string>
+    <string name="ae_add_employee_btn">Add Employee</string>
+    <string name="employee_name_hint">Employee User ID</string>
+    <string name="business_name_hint">Business Name</string>
+    <string name="add_employee_btn">Add Employee</string>
 
 </resources>

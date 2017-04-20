@@ -1,7 +1,5 @@
 package edu.montclair.mobilecomputing.r_soltes.schwifty.utils;
 
-import java.util.ArrayList;
-
 /**
  * Created by ryansoltes on 4/18/17.
  */
@@ -9,17 +7,19 @@ import java.util.ArrayList;
 public class Business {
 
     private String bName, bId, bOwner;
-    private ArrayList<String> listOfEmp = new ArrayList<>();
 
     public Business(){
 
     }
 
-    public Business(String bName, String bId, String bOwner, ArrayList<String> listOfEmp) {
+    public Business(String bName, String bId, String bOwner) {
         this.bName = bName;
         this.bId = bId;
         this.bOwner = bOwner;
-        this.listOfEmp = listOfEmp;
+
+    }
+
+    public void updateBusiness(){
 
     }
 

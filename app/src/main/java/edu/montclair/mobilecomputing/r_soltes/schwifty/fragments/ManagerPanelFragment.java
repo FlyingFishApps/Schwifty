@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import butterknife.BindView;
+import edu.montclair.mobilecomputing.r_soltes.schwifty.AddEmployeePage;
 import edu.montclair.mobilecomputing.r_soltes.schwifty.CreateBusinessPage;
 import edu.montclair.mobilecomputing.r_soltes.schwifty.R;
 import edu.montclair.mobilecomputing.r_soltes.schwifty.utils.schwiftyInterface;
@@ -19,7 +20,7 @@ import edu.montclair.mobilecomputing.r_soltes.schwifty.utils.schwiftyInterface;
 public class ManagerPanelFragment extends Fragment implements View.OnClickListener {
 
     @BindView(R.id.create_business_btn) Button createBusinessBtn;
-//    private Button createBusinessBtn;
+    @BindView(R.id.add_employee_btn) Button addEmployeeBtn;
 
     public ManagerPanelFragment(){
         // Empty required
@@ -36,16 +37,15 @@ public class ManagerPanelFragment extends Fragment implements View.OnClickListen
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-//        ButterKnife.bind(getActivity());
 
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_manager_panel, container, false);
 
         createBusinessBtn = (Button) view.findViewById(R.id.create_business_btn);
+        addEmployeeBtn = (Button) view.findViewById(R.id.add_employee_btn);
         createBusinessBtn.setOnClickListener(this);
-
-
+        addEmployeeBtn.setOnClickListener(this);
 
         return view;
 
@@ -59,8 +59,12 @@ public class ManagerPanelFragment extends Fragment implements View.OnClickListen
 
         switch (view.getId()) {
             case R.id.create_business_btn:
-                Intent intent = new Intent(parentActivity, CreateBusinessPage.class);
-                ((schwiftyInterface)parentActivity).startMyIntent(intent);
+                Intent intent0 = new Intent(parentActivity, CreateBusinessPage.class);
+                ((schwiftyInterface)parentActivity).startMyIntent(intent0);
+                break;
+            case R.id.add_employee_btn:
+                Intent intent1 = new Intent(parentActivity, AddEmployeePage.class);
+                ((schwiftyInterface)parentActivity).startMyIntent(intent1);
                 break;
             default:
                 throw new RuntimeException("Unknown button ID");
