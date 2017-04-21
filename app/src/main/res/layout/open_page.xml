@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:paddingTop="125dp"
+    android:background="@android:color/white"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Lets Get Schwifty!"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:textSize="75dp"
+        android:textStyle="italic" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="22dp" />
+    <Button
+        android:id="@+id/button_schwift"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:onClick="mButton"
+        android:layout_gravity="center"
+        android:background="@drawable/schwiftylogoround" />
+</LinearLayout>
