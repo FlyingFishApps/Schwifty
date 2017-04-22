@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textColor="@color/colorPrimary"
-        android:text="@string/create_bussiness_tv"
+        android:text="@string/create_business_tv"
         android:textSize="40dp"/>
 
     <!-- Username Input -->
