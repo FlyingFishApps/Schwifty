@@ -4,30 +4,51 @@
     android:layout_height="match_parent"
     tools:context="edu.montclair.mobilecomputing.r_soltes.schwifty.fragments.ScheduleFragment">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/job_list_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:gravity="center"
+            android:padding="10dp"
             android:text="@string/fragment_schedule"
             android:textColor="@color/colorPrimary"
-            android:textSize="40dp"
-            android:padding="10dp"
-            android:layout_alignParentTop="true"
-            android:gravity="center"/>
+            android:textSize="40dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/shiftBtn_FS"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:text="Shift"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/releaseBtnFS"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:text="Release"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
 
         <ListView
-            android:id="@+id/job_list"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_below="@+id/job_list_tv"
-            android:layout_centerHorizontal="true"
-            />
+                android:id="@+id/job_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_below="@+id/job_list_tv"
+                android:layout_centerHorizontal="true" />
 
-    </RelativeLayout>
+    </LinearLayout>
 
 </FrameLayout>
