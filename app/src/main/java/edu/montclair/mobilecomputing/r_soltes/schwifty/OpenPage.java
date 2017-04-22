@@ -26,8 +26,8 @@ public class OpenPage extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent shift = new Intent(OpenPage.this, edu.montclair.mobilecomputing.r_soltes.schwifty.LoginPage.class);
-                startActivity(shift);
+                Intent shifty = new Intent(OpenPage.this, edu.montclair.mobilecomputing.r_soltes.schwifty.LoginPage.class);
+                startActivity(shifty);
             }
         });
     }
