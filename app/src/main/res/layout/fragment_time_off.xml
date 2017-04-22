@@ -4,30 +4,83 @@
     android:layout_height="match_parent"
     tools:context="edu.montclair.mobilecomputing.r_soltes.schwifty.fragments.TimeOffFragment">
 
-    <RelativeLayout
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/job_list_tv"
-            android:layout_width="match_parent"
+        <EditText
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/fragment_time_off"
-            android:textColor="@color/colorPrimary"
-            android:textSize="40dp"
-            android:padding="10dp"
-            android:layout_alignParentTop="true"
-            android:gravity="center"/>
+            android:layout_marginBottom="20sp"
+            android:inputType="text"
+            android:id="@+id/emp_Name"
+            android:hint="Enter your name"/>
 
-        <ListView
-            android:id="@+id/job_list"
+        <Space
+            android:layout_width="fill_parent"
+            android:layout_height="10dp" />
+
+        <Button
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:background="#4286f4"
+            android:id="@+id/picDate"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Select Start Date"
+            android:onClick="datePicker"/>
+        <Space
+            android:layout_width="fill_parent"
+            android:layout_height="10dp" />
+        <TextView
+            android:layout_below="@+id/picDate"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/showDate"
+            android:textSize="18dp"/>
+
+        <Button
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:background="#4286f4"
+            android:id="@+id/picDate2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Select End Date"
+            android:onClick="datePicker2"/>
+        <Space
+            android:layout_width="fill_parent"
+            android:layout_height="10dp" />
+        <TextView
+            android:layout_below="@+id/picDate2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/showDate2"
+            android:textSize="18dp"/>
+
+        <Space
+            android:layout_width="fill_parent"
+            android:layout_height="10dp" />
+
+        <!-- Line below is for the dropdown-->
+        <Spinner
+            android:id="@+id/timeoff_spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_below="@+id/job_list_tv"
-            android:layout_centerHorizontal="true"
-            />
+            android:layout_marginBottom="20sp"
+            android:entries="@array/reasons_array"/>
 
-    </RelativeLayout>
+        <Space
+            android:layout_width="fill_parent"
+            android:layout_height="10dp" />
+
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_Reg"
+            android:text="Register"
+            android:backgroundTint="#0FFF"/>
+
+    </LinearLayout>
 
 </FrameLayout>
