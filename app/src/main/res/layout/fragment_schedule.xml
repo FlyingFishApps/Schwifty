@@ -28,26 +28,26 @@
             <Button
                 android:id="@+id/shiftBtn_FS"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Shift"
-                android:layout_height="wrap_content" />
+                android:text="Shift" />
 
             <Button
                 android:id="@+id/releaseBtnFS"
-                android:layout_weight="1"
                 android:layout_width="match_parent"
-                android:text="Release"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Release" />
 
         </LinearLayout>
 
         <ListView
-                android:id="@+id/job_list"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_below="@+id/job_list_tv"
-                android:layout_centerHorizontal="true" />
+            android:id="@+id/job_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@+id/job_list_tv"
+            android:layout_centerHorizontal="true" />
 
     </LinearLayout>
 
