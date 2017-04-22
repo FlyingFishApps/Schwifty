@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginPage">
+        <activity android:name=".OpenPage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,7 +20,11 @@
         <activity android:name=".HomePage" />
         <activity android:name=".ForgotPassPage" />
         <activity android:name=".CreateBusinessPage" />
-        <activity android:name=".AddEmployeePage"></activity>
+        <activity android:name=".AddEmployeePage" />
+        <activity
+            android:name=".LoginPage"
+            android:label="@string/title_activity_open_page"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

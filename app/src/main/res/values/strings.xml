@@ -36,5 +36,6 @@
     <string name="employee_name_hint">Employee User ID</string>
     <string name="business_name_hint">Business Name</string>
     <string name="add_employee_btn">Add Employee</string>
+    <string name="title_activity_open_page">OpenPage</string>
 
 </resources>
