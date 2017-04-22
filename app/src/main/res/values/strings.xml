@@ -23,6 +23,13 @@
         <item>Employee</item>
         <item>Manager</item>
     </string-array>
+    <string-array name="reasons_array">
+        <item>Select reason for time off</item>
+        <item>Bereavement</item>
+        <item>Jury Duty</item>
+        <item>PTO</item>
+        <item>Unpaid Request</item>
+    </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
