@@ -44,8 +44,8 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener {
 
         switch (view.getId()) {
             case R.id.releaseBtnFS:
-                Intent intent0 = new Intent(parentActivity, CreateBusinessPage.class);
-                ((schwiftyInterface)parentActivity).startMyIntent(intent0);
+                Intent intent = new Intent(parentActivity, TimeOffFragment.class);
+                ((schwiftyInterface)parentActivity).startMyIntent(intent);
                 break;
             case R.id.shiftBtn_FS:
                 Intent intent1 = new Intent(parentActivity, AddEmployeePage.class);
