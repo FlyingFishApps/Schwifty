@@ -131,10 +131,8 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
                             if(TextUtils.isEmpty(password) || password.length() < 6){
                                 snackbar.make(activity_login_page, "Password length be atleast 6 characters",
                                         Snackbar.LENGTH_SHORT).setAction("Action", null).show();
-
                             }
                         }else{
-
                             startActivity(new Intent(LoginPage.this, HomePage.class));
                         }
                         }
