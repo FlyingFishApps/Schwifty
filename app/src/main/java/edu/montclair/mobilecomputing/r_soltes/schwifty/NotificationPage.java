@@ -1,67 +1,48 @@
-package edu.montclair.mobilecomputing.r_soltes.schwifty.fragments;
+package edu.montclair.mobilecomputing.r_soltes.schwifty;
 
-import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
-import android.os.Bundle;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.ShareCompat;
-import android.view.LayoutInflater;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RemoteViews;
+import android.widget.RelativeLayout;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-import java.util.HashMap;
 import java.util.Random;
 
-import edu.montclair.mobilecomputing.r_soltes.schwifty.R;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import edu.montclair.mobilecomputing.r_soltes.schwifty.utils.Notifications;
 
-import static android.content.Context.NOTIFICATION_SERVICE;
-import static edu.montclair.mobilecomputing.r_soltes.schwifty.R.layout.fragment_notification;
+public class NotificationPage extends AppCompatActivity {
 
-
-public class NotificationFragment extends Fragment {
-
-    EditText title;
-    EditText message;
+    @BindView(R.id.noti_title) EditText title;
+    @BindView(R.id.noti_message) EditText message;
+    @BindView(R.id.noti_button) Button notiBtn;
     private static final int TAG_SIMPLE_NOTIFICATION = 1;
     Snackbar snackbar;
     private DatabaseReference mDatabaseReference;
     private FirebaseAuth mFirebaseAuth;
-
-
-    public NotificationFragment(){
-        // Empty Required
-    }
+    RelativeLayout activity_notification_page;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_notification_page);
 
-
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(fragment_notification, container, false);
-        title = (EditText)view.findViewById(R.id.noti_title);
-        message = (EditText)view.findViewById(R.id.noti_message);
-        Button simple = (Button)view.findViewById(R.id.noti_button);
-        simple.setOnClickListener(new View.OnClickListener() {
+        ButterKnife.bind(this);
+        activity_notification_page = (RelativeLayout)findViewById(R.id.activity_notification_page);
+        notiBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showSimpleNotification();
@@ -70,22 +51,21 @@ public class NotificationFragment extends Fragment {
         });
 
 
-        return view;
     }
     private PendingIntent pendingIntentForNotification() {
         //Create the intent you want to show when the notification is clicked
-        Intent intent = new Intent(getActivity(), NotificationFragment.class);
+        Intent intent = new Intent(NotificationPage.this, NotificationPage.class);
 
         //Add any extras (in this case, that you want to relaunch this fragment)
 
 
         //This will hold the intent you've created until the notification is tapped.
-        PendingIntent pendingIntent = PendingIntent.getActivity(getActivity(), 1, intent, 0);
+        PendingIntent pendingIntent = PendingIntent.getActivity(NotificationPage.this, 1, intent, 0);
         return pendingIntent;
     }
     private void showSimpleNotification() {
         //Use the NotificationCompat compatibility library in order to get gingerbread support.
-        Notification notification = new NotificationCompat.Builder(getActivity())
+        Notification notification = new NotificationCompat.Builder(NotificationPage.this)
                 //Title of the notification
                 .setContentTitle(title.getText().toString().trim())
                 //Content of the notification once opened
@@ -106,7 +86,7 @@ public class NotificationFragment extends Fragment {
 
         //Grab the NotificationManager and post the notification
         NotificationManager notificationManager = (NotificationManager)
-                getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+                NotificationPage.this.getSystemService(Context.NOTIFICATION_SERVICE);
 
         //Set a tag so that the same notification doesn't get reposted over and over again and
         //you can grab it again later if you need to.
@@ -125,12 +105,11 @@ public class NotificationFragment extends Fragment {
         Notifications notification = new Notifications(nTitle,nBody,nId);
 
         mDatabaseReference.child("notifications").child(nId).setValue(notification);
-        snackbar.make(getView(), "Employee Added!", Snackbar.LENGTH_LONG)
+        snackbar.make(activity_notification_page, "Employee Added!", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
         title.getText().clear();
         message.getText().clear();
 //        mprogressBar.setVisibility(View.GONE);
 
     }
-
 }

@@ -24,7 +24,13 @@
         <activity
             android:name=".LoginPage"
             android:label="@string/title_activity_open_page"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".ErrorPage" />
+        <activity android:name=".ManagerPanelPage" />
+        <activity android:name=".SchedulePage" />
+        <activity android:name=".TimeOffPage" />
+        <activity android:name=".NotificationPage" />
+        <activity android:name=".JobListPage"></activity>
     </application>
 
 </manifest>
