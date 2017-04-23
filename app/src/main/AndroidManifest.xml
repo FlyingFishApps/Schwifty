@@ -30,7 +30,8 @@
         <activity android:name=".SchedulePage" />
         <activity android:name=".TimeOffPage" />
         <activity android:name=".NotificationPage" />
-        <activity android:name=".JobListPage"></activity>
+        <activity android:name=".JobListPage" />
+        <activity android:name=".ProfilePage"></activity>
     </application>
 
 </manifest>
