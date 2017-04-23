@@ -1,8 +1,11 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="edu.montclair.mobilecomputing.r_soltes.schwifty.fragments.TimeOffFragment">
+    tools:context="edu.montclair.mobilecomputing.r_soltes.schwifty.TimeOffPage">
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -89,5 +92,4 @@
             android:text="Submmit TimeOff" />
 
     </LinearLayout>
-
-</FrameLayout>
+</RelativeLayout>
