@@ -1,5 +1,6 @@
 package edu.montclair.mobilecomputing.r_soltes.schwifty;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -146,5 +147,11 @@ public class AddEmployeePage extends AppCompatActivity implements View.OnClickLi
 
             }
         });
+    }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(AddEmployeePage.this, HomePage.class);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        startActivity(intent);
     }
 }

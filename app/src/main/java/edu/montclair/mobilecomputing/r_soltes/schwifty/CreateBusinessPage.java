@@ -1,5 +1,6 @@
 package edu.montclair.mobilecomputing.r_soltes.schwifty;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -114,5 +115,11 @@ public class CreateBusinessPage extends AppCompatActivity implements View.OnClic
             }
         });
 
+    }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(CreateBusinessPage.this, ManagerPanelPage.class);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        startActivity(intent);
     }
 }

@@ -244,4 +244,10 @@ public class HomePage extends AppCompatActivity implements schwiftyInterface, Vi
         }
 
     }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(HomePage.this, HomePage.class);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        startActivity(intent);
+    }
 }
