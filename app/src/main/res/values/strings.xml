@@ -56,5 +56,6 @@
     <string name="noti_title">Notification Title</string>
     <string name="noti_message">Notification Body</string>
     <string name="notification_send_btn">Send Notification</string>
+    <string name="nav_profile">Profile</string>
 
 </resources>
