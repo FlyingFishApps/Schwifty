@@ -26,6 +26,7 @@ import edu.montclair.mobilecomputing.r_soltes.schwifty.utils.sessionUser;
 
 public class HomePage extends AppCompatActivity implements View.OnClickListener {
 
+    @BindView(R.id.nav_profile) Button profileBtn;
     @BindView(R.id.nav_manager_panel) Button managerPanelBtn;
     @BindView(R.id.nav_job_list) Button jobListBtn;
     @BindView(R.id.nav_schedule) Button scheduleBtn;
@@ -47,6 +48,7 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener 
         // Binding
         ButterKnife.bind(this);
 
+        profileBtn.setOnClickListener(this);
         managerPanelBtn.setOnClickListener(this);
         jobListBtn.setOnClickListener(this);
         scheduleBtn.setOnClickListener(this);
@@ -82,6 +84,10 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener 
     public void onClick(View view) {
 
         switch (view.getId()) {
+            case R.id.nav_profile:
+                startActivity(new Intent(HomePage.this, ProfilePage.class));
+                finish();
+                break;
             case R.id.nav_manager_panel:
                 FirebaseUser user = mFirebaseAuth.getInstance().getCurrentUser();
 
