@@ -17,6 +17,7 @@ import android.widget.RelativeLayout;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Random;
 
@@ -31,7 +32,7 @@ public class NotificationPage extends AppCompatActivity {
     @BindView(R.id.noti_button) Button notiBtn;
     private static final int TAG_SIMPLE_NOTIFICATION = 1;
     Snackbar snackbar;
-    private DatabaseReference mDatabaseReference;
+    private DatabaseReference mDatabaseReference, notifRef;
     private FirebaseAuth mFirebaseAuth;
     RelativeLayout activity_notification_page;
 
@@ -99,17 +100,15 @@ public class NotificationPage extends AppCompatActivity {
         int n = 100000 + rnd.nextInt(900000);
         String nId = String.valueOf(n);
 
-//        mprogressBar.setVisibility(View.VISIBLE);
-
-
         Notifications notification = new Notifications(nTitle,nBody,nId);
 
+        mDatabaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://schwifty-33650.firebaseio.com/");
+        notifRef = mDatabaseReference.child("notifications");
         mDatabaseReference.child("notifications").child(nId).setValue(notification);
-        snackbar.make(activity_notification_page, "Employee Added!", Snackbar.LENGTH_LONG)
+        snackbar.make(activity_notification_page, "Notification Sent!", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
         title.getText().clear();
         message.getText().clear();
-//        mprogressBar.setVisibility(View.GONE);
 
     }
     @Override
