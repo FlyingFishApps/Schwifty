@@ -37,4 +37,10 @@ public class SchedulePage extends AppCompatActivity implements View.OnClickListe
 
         }
     }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(SchedulePage.this, HomePage.class);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        startActivity(intent);
+    }
 }

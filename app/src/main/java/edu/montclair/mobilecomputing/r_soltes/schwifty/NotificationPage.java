@@ -112,4 +112,10 @@ public class NotificationPage extends AppCompatActivity {
 //        mprogressBar.setVisibility(View.GONE);
 
     }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(NotificationPage.this, HomePage.class);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        startActivity(intent);
+    }
 }

@@ -2,6 +2,7 @@ package edu.montclair.mobilecomputing.r_soltes.schwifty;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Intent;
 import android.icu.text.DateFormat;
 import android.icu.util.Calendar;
 import android.icu.util.GregorianCalendar;
@@ -72,6 +73,12 @@ public class TimeOffPage extends AppCompatActivity {
                     (DatePickerDialog.OnDateSetListener)
                             getActivity(), year, month, day);
         }
+    }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(TimeOffPage.this, SchedulePage.class);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        startActivity(intent);
     }
 
 }

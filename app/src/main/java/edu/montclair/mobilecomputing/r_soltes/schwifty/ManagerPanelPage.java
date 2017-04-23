@@ -41,4 +41,10 @@ public class ManagerPanelPage extends AppCompatActivity implements View.OnClickL
 
         }
     }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(ManagerPanelPage.this, HomePage.class);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        startActivity(intent);
+    }
 }
