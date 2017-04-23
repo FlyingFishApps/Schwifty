@@ -52,5 +52,9 @@
     <string name="nav_notifications">Notifications</string>
     <string name="nav_logout">Logout</string>
     <string name="nav_job_list">Job List</string>
+    <string name="notification_tv">Notifications</string>
+    <string name="noti_title">Notification Title</string>
+    <string name="noti_message">Notification Body</string>
+    <string name="notification_send_btn">Send Notification</string>
 
 </resources>

@@ -8,35 +8,77 @@
     tools:context="edu.montclair.mobilecomputing.r_soltes.schwifty.NotificationPage">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/noti_title"
+    <TextView
+        android:id="@+id/notification_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="@string/notification_tv"
+        android:textColor="@color/colorPrimary"
+        android:textSize="40dp" />
+
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="@android:style/TextAppearance.StatusBar.EventContent"
-            android:hint="Enter the title of your notification"
-            android:inputType="text" />
+            android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/noti_message"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="@android:style/TextAppearance.StatusBar.EventContent"
-            android:hint="Enter the body of your note"
-            android:maxLength="2000"
-            android:inputType="text"/>
+            <!-- Notificaton Title -->
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/noti_title_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/notification_tv">
 
-        <Button
-            android:id="@+id/noti_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#4286f4"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:text="Submit"
-            android:layout_gravity="center"/>
+                <EditText
+                    android:id="@+id/noti_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/noti_title"
+                    android:inputType="textCapWords"
+                    android:maxLines="1"
+
+                    />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <!-- Notification Body -->
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/noti_message_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/noti_title_input"
+                android:paddingBottom="10dp">
+
+
+                <EditText
+                    android:id="@+id/noti_message"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/noti_message"
+                    android:inputType="text"
+                    />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <!-- Send Button -->
+            <Button
+                android:id="@+id/noti_button"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/noti_message_input"
+                android:background="#4286f4"
+                android:text="@string/notification_send_btn"
+                android:layout_gravity="center"
+                android:padding="5dp"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 

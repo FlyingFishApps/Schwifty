@@ -71,10 +71,11 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     // User is signed in
-                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+                    startActivity(new Intent(LoginPage.this, HomePage.class));
+                    finish();
                 } else {
                     // User is signed out
-                    Log.d(TAG, "onAuthStateChanged:signed_out");
+                    
                 }
             }
         };
@@ -131,10 +132,8 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
                             if(TextUtils.isEmpty(password) || password.length() < 6){
                                 snackbar.make(activity_login_page, "Password length be atleast 6 characters",
                                         Snackbar.LENGTH_SHORT).setAction("Action", null).show();
-
                             }
                         }else{
-
                             startActivity(new Intent(LoginPage.this, HomePage.class));
                         }
                         }

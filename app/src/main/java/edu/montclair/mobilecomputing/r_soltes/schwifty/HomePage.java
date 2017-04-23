@@ -58,9 +58,6 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener 
         // Get Firebase user
         FirebaseUser user = mFirebaseAuth.getInstance().getCurrentUser();
 
-        // Get Reference to users
-//        mDatabaseReference = FirebaseDatabase.getInstance().getReference("users").child(user.getUid());
-
         final String uid = user.getUid().toString();
         mDatabaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://schwifty-33650.firebaseio.com/");
         userRef = mDatabaseReference.child("users");
@@ -70,7 +67,6 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener 
 
                 String username = dataSnapshot.child(uid).child("username").getValue().toString();
                 usernameTv.setText(username);
-
 
             }
 
