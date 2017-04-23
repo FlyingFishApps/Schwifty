@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.ShareCompat;
@@ -18,9 +19,22 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RemoteViews;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
+import java.util.Random;
+
 import edu.montclair.mobilecomputing.r_soltes.schwifty.R;
+import edu.montclair.mobilecomputing.r_soltes.schwifty.utils.Notifications;
 
 import static android.content.Context.NOTIFICATION_SERVICE;
+import static edu.montclair.mobilecomputing.r_soltes.schwifty.R.layout.fragment_notification;
 
 
 public class NotificationFragment extends Fragment {
@@ -28,6 +42,10 @@ public class NotificationFragment extends Fragment {
     EditText title;
     EditText message;
     private static final int TAG_SIMPLE_NOTIFICATION = 1;
+    Snackbar snackbar;
+    private DatabaseReference mDatabaseReference;
+    private FirebaseAuth mFirebaseAuth;
+
 
     public NotificationFragment(){
         // Empty Required
@@ -39,7 +57,7 @@ public class NotificationFragment extends Fragment {
 
 
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_notification, container, false);
+        View view = inflater.inflate(fragment_notification, container, false);
         title = (EditText)view.findViewById(R.id.noti_title);
         message = (EditText)view.findViewById(R.id.noti_message);
         Button simple = (Button)view.findViewById(R.id.noti_button);
@@ -47,6 +65,7 @@ public class NotificationFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 showSimpleNotification();
+                createNotification(title.getText().toString().trim(),message.getText().toString().trim());
             }
         });
 
@@ -94,5 +113,24 @@ public class NotificationFragment extends Fragment {
         notificationManager.notify(TAG_SIMPLE_NOTIFICATION, notification);
     }
 
+    private void createNotification(String nTitle, String nBody) {
+
+        Random rnd = new Random();
+        int n = 100000 + rnd.nextInt(900000);
+        String nId = String.valueOf(n);
+
+//        mprogressBar.setVisibility(View.VISIBLE);
+
+
+        Notifications notification = new Notifications(nTitle,nBody,nId);
+
+        mDatabaseReference.child("notifications").child(nId).setValue(notification);
+        snackbar.make(getView(), "Employee Added!", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show();
+        title.getText().clear();
+        message.getText().clear();
+//        mprogressBar.setVisibility(View.GONE);
+
+    }
 
 }
