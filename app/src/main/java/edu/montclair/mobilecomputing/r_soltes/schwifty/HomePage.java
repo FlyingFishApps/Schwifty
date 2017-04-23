@@ -1,6 +1,7 @@
 package edu.montclair.mobilecomputing.r_soltes.schwifty;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -18,6 +19,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+
 import butterknife.ButterKnife;
 import edu.montclair.mobilecomputing.r_soltes.schwifty.fragments.ErrorFragment;
 import edu.montclair.mobilecomputing.r_soltes.schwifty.fragments.HomeFragment;
@@ -32,7 +35,11 @@ public class HomePage extends AppCompatActivity implements schwiftyInterface {
     public Snackbar snackbar;
     private FirebaseAuth mFirebaseAuth;
     private DatabaseReference mDatabaseReference, userRef;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
     Fragment fragment = null;
+    public sessionUser session;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +52,9 @@ public class HomePage extends AppCompatActivity implements schwiftyInterface {
         fragment = new HomeFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.contentContainer, fragment).addToBackStack(null).commit();
 
+        session = new sessionUser(getApplicationContext());
+
+
         //get firebase user
         FirebaseUser user = mFirebaseAuth.getInstance().getCurrentUser();
 
@@ -52,7 +62,6 @@ public class HomePage extends AppCompatActivity implements schwiftyInterface {
         //get reference
         mDatabaseReference = FirebaseDatabase.getInstance().getReference("users").child(user.getUid());
         //IMPORTANT: .getReference(user.getUid()) will not work although user.getUid() is unique. You need a full path!
-
 
         final String uid = user.getUid().toString();
         mDatabaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://schwifty-33650.firebaseio.com/");
@@ -64,13 +73,11 @@ public class HomePage extends AppCompatActivity implements schwiftyInterface {
                 String userRole = dataSnapshot.child(uid).child("userRole").getValue().toString();
                 String username = dataSnapshot.child(uid).child("username").getValue().toString();
                 String userEmail = dataSnapshot.child(uid).child("email").getValue().toString();
-                sessionUser currentUser = new sessionUser();
-                currentUser.setuId(uid);
-                currentUser.setUserRole(userRole.toString());
-                currentUser.setName(username.toString());
-                currentUser.setEmail(userEmail.toString());
-                System.out.println(currentUser.getUserRole());
-                if(currentUser.getUserRole().equals("Manager")){
+
+                session.createSessionUser(userEmail,uid,username,userRole);
+                HashMap<String, String> currentUser = session.getUserDetails();
+
+                if(currentUser.get(sessionUser.KEY_SESSION_USERROLE).equals("Manager")){
                     createManagerNavigation();
                 }else{
                     createNavigation();
@@ -118,6 +125,7 @@ public class HomePage extends AppCompatActivity implements schwiftyInterface {
                             @Override
                             public void onClick(View v) {
                                 mFirebaseAuth.getInstance().signOut();
+                                session.logoutUser();
                                 startActivity(new Intent(HomePage.this, LoginPage.class));
                                 finish();
                             }
@@ -163,6 +171,7 @@ public class HomePage extends AppCompatActivity implements schwiftyInterface {
                             @Override
                             public void onClick(View v) {
                                 mFirebaseAuth.getInstance().signOut();
+                                session.logoutUser();
                                 startActivity(new Intent(HomePage.this, LoginPage.class));
                                 finish();
                             }
