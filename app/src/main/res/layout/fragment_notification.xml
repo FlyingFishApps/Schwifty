@@ -2,32 +2,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingTop="40dp"
     tools:context="edu.montclair.mobilecomputing.r_soltes.schwifty.fragments.NotificationFragment">
 
-    <RelativeLayout
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/job_list_tv"
+        <EditText
+            android:id="@+id/noti_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/fragment_notification"
-            android:textColor="@color/colorPrimary"
-            android:textSize="40dp"
-            android:padding="10dp"
-            android:layout_alignParentTop="true"
-            android:gravity="center"/>
+            android:textAppearance="@android:style/TextAppearance.StatusBar.EventContent"
+            android:hint="Enter the title of your notification"
+            android:inputType="text" />
 
-        <ListView
-            android:id="@+id/job_list"
+        <EditText
+            android:id="@+id/noti_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="@android:style/TextAppearance.StatusBar.EventContent"
+            android:hint="Enter the body of your note"
+            android:maxLength="2000"
+            android:inputType="text"/>
+
+        <Button
+            android:id="@+id/noti_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_below="@+id/job_list_tv"
-            android:layout_centerHorizontal="true"
-            />
+            android:background="#4286f4"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:text="Submit"
+            android:layout_gravity="center"/>
 
-    </RelativeLayout>
+    </LinearLayout>
 
 </FrameLayout>

@@ -25,6 +25,7 @@ import butterknife.ButterKnife;
 import edu.montclair.mobilecomputing.r_soltes.schwifty.fragments.ErrorFragment;
 import edu.montclair.mobilecomputing.r_soltes.schwifty.fragments.HomeFragment;
 import edu.montclair.mobilecomputing.r_soltes.schwifty.fragments.ManagerPanelFragment;
+import edu.montclair.mobilecomputing.r_soltes.schwifty.fragments.NotificationFragment;
 import edu.montclair.mobilecomputing.r_soltes.schwifty.fragments.ScheduleFragment;
 import edu.montclair.mobilecomputing.r_soltes.schwifty.fragments.TimeOffFragment;
 import edu.montclair.mobilecomputing.r_soltes.schwifty.utils.schwiftyInterface;
@@ -157,7 +158,7 @@ public class HomePage extends AppCompatActivity implements schwiftyInterface {
                         fragment = new HomeFragment();
                         break;
                     case R.id.tab_schedule:
-                        fragment = new ScheduleFragment();
+                        fragment = new NotificationFragment();
                         break;
                     case R.id.tab_time_off:
                         fragment = new TimeOffFragment();
