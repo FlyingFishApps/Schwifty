@@ -21,6 +21,16 @@ import edu.montclair.mobilecomputing.r_soltes.schwifty.R;
 
 
 public class TimeOffFragment extends Fragment implements DatePickerDialog.OnDateSetListener{
+<<<<<<< HEAD
+=======
+=======
+<<<<<<< HEAD
+public class TimeOffFragment extends Fragment implements DatePickerDialog.OnDateSetListener{
+=======
+public class TimeOffFragment extends Fragment {
+>>>>>>> origin/UI-branch
+>>>>>>> origin/UI-branch
+>>>>>>> origin/UI-branch
 
     public TimeOffFragment() {
         // Empty Required
@@ -35,7 +45,17 @@ public class TimeOffFragment extends Fragment implements DatePickerDialog.OnDate
         //lines of code below creates the dropdown to select your major
 
         Spinner s = (Spinner) view.findViewById(R.id.timeoff_spinner);
+<<<<<<< HEAD
 
+=======
+=======
+<<<<<<< HEAD
+        Spinner s = (Spinner) view.findViewById(R.id.timeoff_spinner);
+=======
+        Spinner s = (Spinner) View.findViewById(R.id.timeoff_spinner);
+>>>>>>> origin/UI-branch
+>>>>>>> origin/UI-branch
+>>>>>>> origin/UI-branch
         s.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -50,6 +70,8 @@ public class TimeOffFragment extends Fragment implements DatePickerDialog.OnDate
         });
         return view;
     }
+
+
 
 
     private void setDate(final Calendar calendar) {
@@ -76,6 +98,8 @@ public class TimeOffFragment extends Fragment implements DatePickerDialog.OnDate
                             getActivity(), year, month, day);
         }
     }
+
+
 
 
 }

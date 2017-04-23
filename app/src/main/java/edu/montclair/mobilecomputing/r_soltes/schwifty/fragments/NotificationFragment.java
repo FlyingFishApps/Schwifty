@@ -1,6 +1,5 @@
 package edu.montclair.mobilecomputing.r_soltes.schwifty.fragments;
 
-import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -27,7 +26,7 @@ public class NotificationFragment extends Fragment {
 
     EditText title;
     EditText message;
-    private static final int TAG_SIMPLE_NOTIFICATION = 1;
+
 
     public NotificationFragment(){
         // Empty Required
@@ -40,58 +39,54 @@ public class NotificationFragment extends Fragment {
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_notification, container, false);
-        title = (EditText)view.findViewById(R.id.noti_title);
-        message = (EditText)view.findViewById(R.id.noti_message);
-        Button simple = (Button)view.findViewById(R.id.noti_button);
-        simple.setOnClickListener(new View.OnClickListener() {
+
+
+        title = (EditText)getView().findViewById(R.id.noti_title);
+        message = (EditText)getView().findViewById(R.id.noti_message);
+        Button submit = (Button)getView().findViewById(R.id.noti_button);
+
+        submit.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                showSimpleNotification();
+            public void onClick(View v) {
+                String title1=title.getText().toString().trim();
+                String body=message.getText().toString().trim();
+
+                NotificationManager notif=(NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+                Notification notify=new Notification.Builder
+                        (getApplicationContext()).setContentTitle(title).setContentText(body).
+                        setContentTitle(subject).setSmallIcon(R.drawable.abc).build();
+
+                notify.flags |= Notification.FLAG_AUTO_CANCEL;
+                notif.notify(0, notify);
+
             }
         });
 
 
+
+
+
+
+
         return view;
     }
-    private PendingIntent pendingIntentForNotification() {
-        //Create the intent you want to show when the notification is clicked
-        Intent intent = new Intent(getActivity(), NotificationFragment.class);
-
-        //Add any extras (in this case, that you want to relaunch this fragment)
 
 
-        //This will hold the intent you've created until the notification is tapped.
-        PendingIntent pendingIntent = PendingIntent.getActivity(getActivity(), 1, intent, 0);
-        return pendingIntent;
-    }
-    private void showSimpleNotification() {
-        //Use the NotificationCompat compatibility library in order to get gingerbread support.
-        Notification notification = new NotificationCompat.Builder(getActivity())
-                //Title of the notification
-                .setContentTitle(title.getText().toString().trim())
-                //Content of the notification once opened
-                .setContentText(message.getText().toString().trim())
-                //This bit will show up in the notification area in devices that support that
-                //Icon that shows up in the notification area
+    public void performHeadsUp(View view){
+        Intent intent = new Intent(NotificationFragment.this, NotificationFragment.class);
+        PendingIntent pi = PendingIntent.getActivity(NotificationFragment.this, 0,intent,0);
+        Notification.Builder builder = new Notification.Builder(this);
+
+        builder.setContentTitle("Title")
+                .setContentText("the text")
                 .setSmallIcon(R.mipmap.ic_launcher)
-                //Icon that shows up in the drawer
                 .setLargeIcon(BitmapFactory.decodeResource(getResources(),R.mipmap.ic_launcher))
-                //Set the intent
-                .setContentIntent(pendingIntentForNotification())
-                //Build the notification with all the stuff you've just set.
-                .build();
+                .setContentIntent(pi)
+                .setVibrate(new long[]{Notification.DEFAULT_VIBRATE})
+                .setPriority(Notification.PRIORITY_MAX);
 
-        //Add the auto-cancel flag to make it dismiss when clicked on
-        //This is a bitmask value so you have to pipe-equals it.
-        notification.flags |= Notification.FLAG_AUTO_CANCEL;
+        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
-        //Grab the NotificationManager and post the notification
-        NotificationManager notificationManager = (NotificationManager)
-                getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
-
-        //Set a tag so that the same notification doesn't get reposted over and over again and
-        //you can grab it again later if you need to.
-        notificationManager.notify(TAG_SIMPLE_NOTIFICATION, notification);
     }
 
 
