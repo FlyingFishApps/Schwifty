@@ -76,7 +76,7 @@ public class TimeOffPage extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(TimeOffPage.this, SchedulePage.class);
+        Intent intent = new Intent(TimeOffPage.this, HomePage.class);
         intent.addCategory(Intent.CATEGORY_HOME);
         startActivity(intent);
     }

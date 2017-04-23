@@ -150,7 +150,7 @@ public class AddEmployeePage extends AppCompatActivity implements View.OnClickLi
     }
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(AddEmployeePage.this, ManagerPanelPage.class);
+        Intent intent = new Intent(AddEmployeePage.this, HomePage.class);
         intent.addCategory(Intent.CATEGORY_HOME);
         startActivity(intent);
     }
