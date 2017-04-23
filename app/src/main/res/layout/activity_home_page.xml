@@ -71,7 +71,7 @@
                         android:layout_marginBottom="30dp"
                         android:background="#4286f4"
                         android:text="@string/nav_profile"
-                        android:layout_marginLeft="25dp"
+                        android:layout_marginLeft="20dp"
                         android:padding="10dp"/>
 
                     <Button
@@ -100,7 +100,7 @@
                         android:background="#4286f4"
                         style="@style/Widget.AppCompat.Button.Colored"
                         android:layout_marginBottom="30dp"
-                        android:layout_marginLeft="25dp"
+                        android:layout_marginLeft="20dp"
                         android:padding="10dp"/>
 
                     <Button
@@ -129,7 +129,7 @@
                         style="@style/Widget.AppCompat.Button.Colored"
                         android:layout_marginBottom="30dp"
                         android:padding="10dp"
-                        android:layout_marginLeft="25dp"/>
+                        android:layout_marginLeft="20dp"/>
 
                     <Button
                         android:id="@+id/nav_notifications"
