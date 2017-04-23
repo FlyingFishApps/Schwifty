@@ -66,19 +66,20 @@
 
             </android.support.design.widget.TextInputLayout>
 
+            <!-- Send Button -->
             <Button
                 android:id="@+id/noti_button"
+                style="@style/Widget.AppCompat.Button.Colored"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/noti_message_input"
                 android:background="#4286f4"
-                style="@style/Widget.AppCompat.Button.Colored"
                 android:text="@string/notification_send_btn"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                android:padding="5dp"/>
 
         </LinearLayout>
 
     </LinearLayout>
-
-
-
+    
 </RelativeLayout>
