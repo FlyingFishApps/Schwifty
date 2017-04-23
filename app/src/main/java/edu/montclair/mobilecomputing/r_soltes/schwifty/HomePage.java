@@ -68,7 +68,6 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener 
                 String username = dataSnapshot.child(uid).child("username").getValue().toString();
                 usernameTv.setText(username);
 
-
             }
 
             @Override
