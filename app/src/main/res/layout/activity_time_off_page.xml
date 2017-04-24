@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/activity_time_off_page"
     tools:context="edu.montclair.mobilecomputing.r_soltes.schwifty.TimeOffPage">
 
 
@@ -99,5 +100,14 @@
             android:background="#4286f4"
             android:text="Submit TimeOff" />
 
+        <ListView
+            android:id="@+id/noti_list1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:visibility="gone"
+            android:stackFromBottom="false"
+            android:transcriptMode="alwaysScroll" />
     </LinearLayout>
 </RelativeLayout>
