@@ -134,6 +134,10 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener 
                 startActivity(new Intent(HomePage.this, TimeOffPage.class));
                 finish();
                 break;
+            case R.id.how_to:
+                startActivity(new Intent(HomePage.this, HowToUsePage.class));
+                finish();
+                break;
             case R.id.nav_notifications:
                 startActivity(new Intent(HomePage.this, NotificationPage.class));
                 finish();
