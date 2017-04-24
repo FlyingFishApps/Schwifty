@@ -32,7 +32,8 @@
         <activity android:name=".TimeOffPage" />
         <activity android:name=".NotificationPage" />
         <activity android:name=".JobListPage" />
-        <activity android:name=".ProfilePage"></activity>
+        <activity android:name=".ProfilePage" />
+        <activity android:name=".HowToUsePage"></activity>
     </application>
 
 </manifest>
