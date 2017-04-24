@@ -13,22 +13,21 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 import static android.R.attr.button;
 
 public class HowToUsePage extends AppCompatActivity {
 
-    Button button;
-    TextView textview;
+    @BindView(R.id.how_to) Button button;
+    @BindView(R.id.how) TextView textview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_how_to_use_page);
-
-        button = (Button) findViewById(R.id.how_to);
-
-
-        textview = (TextView) findViewById(R.id.how);
+        ButterKnife.bind(this);
 
         textview.setMovementMethod(new ScrollingMovementMethod());
 
@@ -41,9 +40,7 @@ public class HowToUsePage extends AppCompatActivity {
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
 
         if (is != null) {
-
-            try {
-
+            try{
                 while ((data = reader.readLine()) != null) {
                     sBuffer.append(data + "\n" + "\t");
                 }
@@ -51,19 +48,18 @@ public class HowToUsePage extends AppCompatActivity {
                 textview.setText(sBuffer);
                 is.close();
 
-            } catch (Exception e) {
+            }catch (Exception e){
                 e.printStackTrace();
             }
         }
     }
 
-    public void mButton(View view) {
+    public void mButton(View view){
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent shifty = new Intent(HowToUsePage.this, edu.montclair.mobilecomputing.r_soltes.schwifty.HowToUsePage.class);
                 startActivity(shifty);
-
             }
 
         });
