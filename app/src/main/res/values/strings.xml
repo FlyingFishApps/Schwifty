@@ -56,5 +56,12 @@
     <string name="noti_title">Notification Title</string>
     <string name="noti_message">Notification Body</string>
     <string name="notification_send_btn">Send Notification</string>
+    <string name="nav_profile">Profile</string>
+    <string name="profile_tv">Profile</string>
+    <string name="profile_tv_2">User Information</string>
+    <string name="prof_username">Username:</string>
+    <string name="prof_email">Email:</string>
+    <string name="prof_userID">User ID:</string>
+    <string name="prof_userRole">User Role:</string>
 
 </resources>

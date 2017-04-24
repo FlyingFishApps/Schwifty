@@ -28,7 +28,7 @@
             android:text=""/>
 
         <LinearLayout
-            android:layout_below="@+id/su_forgot_pass_btn"
+            android:layout_below="@+id/hp_username_tv"
             android:id="@+id/su_layout_or"
             android:orientation="horizontal"
             android:gravity="center"
@@ -56,70 +56,113 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_gravity="center">
 
-            <Button
-                android:id="@+id/nav_manager_panel"
-                style="@style/Widget.AppCompat.Button.Colored"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="30dp"
-                android:background="#4286f4"
-                android:text="@string/nav_manager_panel" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center">
 
-            <Button
-                android:id="@+id/nav_job_list"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/nav_job_list"
-                android:background="#4286f4"
-                style="@style/Widget.AppCompat.Button.Colored"
-                android:layout_marginBottom="30dp"/>
+                    <Button
+                        android:id="@+id/nav_profile"
+                        style="@style/Widget.AppCompat.Button.Colored"
+                        android:layout_width="140dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="30dp"
+                        android:background="#4286f4"
+                        android:text="@string/nav_profile"
+                        android:layout_marginLeft="20dp"
+                        android:padding="10dp"/>
 
-            <Button
-                android:id="@+id/nav_schedule"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/nav_schedule"
-                android:background="#4286f4"
-                style="@style/Widget.AppCompat.Button.Colored"
-                android:layout_marginBottom="30dp"/>
+                    <Button
+                        android:id="@+id/nav_manager_panel"
+                        style="@style/Widget.AppCompat.Button.Colored"
+                        android:layout_width="140dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="30dp"
+                        android:background="#4286f4"
+                        android:text="@string/nav_manager_panel"
+                        android:layout_marginLeft="5dp"
+                        android:padding="10dp"/>
 
-            <Button
-                android:id="@+id/nav_time_off"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/nav_time_off"
-                android:background="#4286f4"
-                style="@style/Widget.AppCompat.Button.Colored"
-                android:layout_marginBottom="30dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center">
 
-            <Button
-                android:id="@+id/nav_notifications"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/nav_notifications"
-                android:background="#4286f4"
-                style="@style/Widget.AppCompat.Button.Colored"
-                android:layout_marginBottom="30dp"/>
+                    <Button
+                        android:id="@+id/nav_job_list"
+                        android:layout_width="140dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/nav_job_list"
+                        android:background="#4286f4"
+                        style="@style/Widget.AppCompat.Button.Colored"
+                        android:layout_marginBottom="30dp"
+                        android:layout_marginLeft="20dp"
+                        android:padding="10dp"/>
 
-            <Button
-                android:id="@+id/nav_logout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/nav_logout"
-                android:background="#4286f4"
-                style="@style/Widget.AppCompat.Button.Colored"
-                android:layout_marginBottom="30dp"/>
+                    <Button
+                        android:id="@+id/nav_schedule"
+                        android:layout_width="140dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/nav_schedule"
+                        android:background="#4286f4"
+                        style="@style/Widget.AppCompat.Button.Colored"
+                        android:layout_marginBottom="30dp"
+                        android:layout_marginLeft="5dp"
+                        android:padding="10dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center">
 
-        </LinearLayout>
+                    <Button
+                        android:id="@+id/nav_time_off"
+                        android:layout_width="140dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/nav_time_off"
+                        android:background="#4286f4"
+                        style="@style/Widget.AppCompat.Button.Colored"
+                        android:layout_marginBottom="30dp"
+                        android:padding="10dp"
+                        android:layout_marginLeft="20dp"/>
+
+                    <Button
+                        android:id="@+id/nav_notifications"
+                        android:layout_width="140dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/nav_notifications"
+                        android:background="#4286f4"
+                        style="@style/Widget.AppCompat.Button.Colored"
+                        android:layout_marginBottom="30dp"
+                        android:padding="10dp"
+                        android:layout_marginLeft="5dp"/>
+                </LinearLayout>
+
+                    <Button
+                        android:id="@+id/nav_logout"
+                        android:layout_width="140dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/nav_logout"
+                        android:background="#4286f4"
+                        style="@style/Widget.AppCompat.Button.Colored"
+                        android:layout_marginBottom="30dp"
+                        android:padding="10dp"
+                        android:layout_gravity="center"/>
+
+
+
+
+
+
+
 
     </LinearLayout>
 
-    
+
 </LinearLayout>
 
