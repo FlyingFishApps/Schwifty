@@ -66,9 +66,7 @@ public class HowToUsePage extends AppCompatActivity {
 
             }
 
-        }
-        );
-
+        });
     }
 
     @Override

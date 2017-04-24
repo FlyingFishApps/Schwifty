@@ -80,7 +80,7 @@
                         android:layout_width="140dp"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="30dp"
-                        android:layout_marginLeft="40dp"
+                        android:layout_marginLeft="10dp"
                         android:background="#4286f4"
                         android:padding="10dp"
                         android:text="@string/nav_manager_panel" />
@@ -111,7 +111,7 @@
                         android:background="#4286f4"
                         style="@style/Widget.AppCompat.Button.Colored"
                         android:layout_marginBottom="30dp"
-                        android:layout_marginLeft="40dp"
+                        android:layout_marginLeft="10dp"
                         android:padding="10dp"/>
                 </LinearLayout>
                 <LinearLayout
@@ -140,7 +140,7 @@
                         style="@style/Widget.AppCompat.Button.Colored"
                         android:layout_marginBottom="30dp"
                         android:padding="10dp"
-                        android:layout_marginLeft="40dp"/>
+                        android:layout_marginLeft="10dp"/>
                 </LinearLayout>
 
         <Button
