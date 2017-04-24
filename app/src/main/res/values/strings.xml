@@ -45,5 +45,28 @@
     <string name="business_name_hint">Business Name</string>
     <string name="add_employee_btn">Add Employee</string>
     <string name="title_activity_open_page">OpenPage</string>
+    <string name="hp_nav">Navigation</string>
+    <string name="nav_manager_panel">Manager Panel</string>
+    <string name="nav_schedule">Schedule</string>
+    <string name="nav_time_off">Time Off Form</string>
+    <string name="nav_notifications">Notifications</string>
+    <string name="nav_logout">Logout</string>
+    <string name="nav_job_list">Job List</string>
+    <string name="notification_tv">Notifications</string>
+    <string name="noti_title">Notification Title</string>
+    <string name="noti_message">Notification Body</string>
+    <string name="notification_send_btn">Send Notification</string>
+    <string name="nav_profile">Profile</string>
+    <string name="profile_tv">Profile</string>
+    <string name="profile_tv_2">User Information</string>
+    <string name="prof_username">Username:</string>
+    <string name="prof_email">Email:</string>
+    <string name="prof_userID">User ID:</string>
+    <string name="prof_userRole">User Role:</string>
+
+    <string name="manager_notifications_MP">NOTIFICATIONS</string>
+    <string name="time_off_tv">Time-Off Request</string>
+    <string name="how_to">How To Use App</string>
+
 
 </resources>

@@ -28,7 +28,7 @@
         <!--android:id="@+id/tab_notification"-->
         <!--android:enabled="true"-->
         <!--android:icon="@drawable/ic_notification"-->
-        <!--android:title="Notification"-->
+        <!--android:title="Notifications"-->
         <!--app:showAsAction="ifRoom"/>-->
     <item
         android:id="@+id/tab_manager"
