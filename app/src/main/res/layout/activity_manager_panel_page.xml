@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="edu.montclair.mobilecomputing.r_soltes.schwifty.ManagerPanelPage">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/manager_panel_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/fragment_manager_panel"
+            android:textColor="@color/colorPrimary"
+            android:textSize="40dp"
+            android:padding="10dp"
+            android:layout_alignParentTop="true"
+            android:gravity="center"/>
+
+        <LinearLayout
+            android:layout_below="@id/manager_panel_tv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_alignParentTop="true">
+
+            <Button
+                android:id="@+id/create_business_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="@string/create_business_btn"
+                android:background="#4286f4"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:padding="10dp"
+                android:layout_marginBottom="20dp"/>
+
+            <Button
+                android:id="@+id/add_employee_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="@string/add_employee_btn"
+                android:background="#4286f4"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:padding="10dp"/>
+
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

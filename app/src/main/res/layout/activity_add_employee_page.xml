@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/activity_add_employee_page"
+    android:paddingBottom="16dp"
+    android:paddingTop="16dp"
+    android:paddingRight="16dp"
+    android:paddingLeft="16dp"
+    tools:context="edu.montclair.mobilecomputing.r_soltes.schwifty.AddEmployeePage">
+
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    <!-- App Logo Image -->
+    <ImageView
+        android:id="@+id/ae_logo"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/schwiftylogolong"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        />
+
+    <!-- Title -->
+    <TextView
+        android:layout_below="@+id/ae_logo"
+        android:id="@+id/ae_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/colorPrimary"
+        android:text="@string/add_employee_tv"
+        android:textSize="40dp"/>
+
+    <!-- User ID Input -->
+    <android.support.design.widget.TextInputLayout
+        android:layout_below="@+id/ae_tv"
+        android:id="@+id/ae_input_business_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <EditText
+            android:id="@+id/ae_business_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/business_name_hint"
+            android:inputType="textCapWords"
+            android:maxLines="1"
+
+            />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <!-- User ID Input -->
+    <android.support.design.widget.TextInputLayout
+        android:layout_below="@+id/ae_input_business_name"
+        android:id="@+id/ae_input_employee_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <EditText
+            android:id="@+id/ae_employee_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/employee_name_hint"
+            android:inputType="textCapWords"
+            android:maxLines="1"
+
+            />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <!-- Add Employee Button -->
+    <Button
+        android:layout_below="@+id/ae_input_employee_name"
+        android:id="@+id/ae_add_employee_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/ae_add_employee_btn"
+        android:background="#4286f4"
+        style="@style/Widget.AppCompat.Button.Colored"/>
+
+    <!-- Progress Bar -->
+    <LinearLayout
+        android:layout_below="@+id/ae_add_employee_btn"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ProgressBar
+            android:id="@+id/aeProgressBar"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_gravity="center|bottom"
+            android:layout_marginBottom="20dp"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

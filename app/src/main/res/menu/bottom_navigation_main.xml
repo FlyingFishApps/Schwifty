@@ -2,12 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item
-        android:id="@+id/tab_manager"
-        android:enabled="true"
-        android:icon="@drawable/ic_manager_panel"
-        android:title="Manage"
-        app:showAsAction="ifRoom"/>
+
     <item
         android:id="@+id/tab_home"
         android:enabled="true"
@@ -33,8 +28,14 @@
         <!--android:id="@+id/tab_notification"-->
         <!--android:enabled="true"-->
         <!--android:icon="@drawable/ic_notification"-->
-        <!--android:title="Notification"-->
+        <!--android:title="Notifications"-->
         <!--app:showAsAction="ifRoom"/>-->
+    <item
+        android:id="@+id/tab_manager"
+        android:enabled="true"
+        android:icon="@drawable/ic_manager_panel"
+        android:title="Manage"
+        app:showAsAction="ifRoom"/>
 
     <item
         android:id="@+id/tab_logout"

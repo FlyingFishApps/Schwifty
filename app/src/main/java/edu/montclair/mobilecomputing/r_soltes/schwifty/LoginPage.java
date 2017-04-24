@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -18,6 +19,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,11 +32,16 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
     @BindView(R.id.lp_forgot_pass_btn) TextView forgotpassBtn;
     @BindView(R.id.lp_login_email) EditText inputEmail;
     @BindView(R.id.lp_login_password) EditText inputPass;
+    @BindView(R.id.lpProgressBar) ProgressBar mprogressBar;
+
 
     RelativeLayout activity_login_page;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-    public static final String TAG = "";
+    private DatabaseReference mDatabaseReference, userRef;
+    private FirebaseDatabase mFirebaseDatabase;
+
+    public static final String TAG = "CURRENT_USER_INFO";
 
 
     public Snackbar snackbar;
@@ -54,6 +62,7 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
         // Init Firebase Auth
         mFirebaseAuth = FirebaseAuth.getInstance();
 
+
         // Check if user is signed in
         mAuthListener = new FirebaseAuth.AuthStateListener() {
 
@@ -62,10 +71,11 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     // User is signed in
-                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+                    startActivity(new Intent(LoginPage.this, HomePage.class));
+                    finish();
                 } else {
                     // User is signed out
-                    Log.d(TAG, "onAuthStateChanged:signed_out");
+                    
                 }
             }
         };
@@ -102,6 +112,8 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
 
     private void loginUser(final String email, final String password) {
 
+        mprogressBar.setVisibility(View.VISIBLE);
+
         if(TextUtils.isEmpty(email)){
             snackbar.make(activity_login_page, "Please enter an email address",
                     Snackbar.LENGTH_SHORT).setAction("Action", null).show();
@@ -120,7 +132,6 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
                             if(TextUtils.isEmpty(password) || password.length() < 6){
                                 snackbar.make(activity_login_page, "Password length be atleast 6 characters",
                                         Snackbar.LENGTH_SHORT).setAction("Action", null).show();
-
                             }
                         }else{
                             startActivity(new Intent(LoginPage.this, HomePage.class));
@@ -129,6 +140,7 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
                     });
         }
 
+        mprogressBar.setVisibility(View.GONE);
     }
 
     @Override

@@ -1,8 +1,10 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="edu.montclair.mobilecomputing.r_soltes.schwifty.fragments.ScheduleFragment">
+    tools:context="edu.montclair.mobilecomputing.r_soltes.schwifty.JobListPage">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -12,7 +14,7 @@
             android:id="@+id/job_list_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/fragment_schedule"
+            android:text="@string/fragment_home"
             android:textColor="@color/colorPrimary"
             android:textSize="40dp"
             android:padding="10dp"
@@ -30,4 +32,4 @@
 
     </RelativeLayout>
 
-</FrameLayout>
+</RelativeLayout>

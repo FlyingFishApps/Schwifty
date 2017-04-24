@@ -8,7 +8,7 @@
     <string name="lp_OR">OR</string>
     <string name="lp_sign_up">Sign Up</string>
     <string name="signup_btn">Sign Up</string>
-    <string name="su_login_btn">Login</string>
+    <string name="su_login_btn">Sign In</string>
     <string name="fragment_home">Job List</string>
     <string name="fragment_notification">Notifications</string>
     <string name="fragment_manager_panel">Manager Panel</string>
@@ -18,9 +18,51 @@
     <string name="fp_signin">Sign In</string>
     <string name="login_username_hint">Username</string>
     <string name="su_userRole">User Type</string>
+    <string name="create_business_btn">Create Business</string>
     <string-array name="user_role_array">
         <item>Employee</item>
         <item>Manager</item>
     </string-array>
+    <string-array name="reasons_array">
+        <item>Select reason for time off</item>
+        <item>Bereavement</item>
+        <item>Jury Duty</item>
+        <item>PTO</item>
+        <item>Unpaid Request</item>
+        <item>Tylers Reason</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="cb_bussiness_name_hint">Business Name</string>
+    <string name="create_bussiness_tv">Create Bussiness</string>
+    <string name="cb_create_btn">Create</string>
+    <string name="fragment_error">Not Available To Employees</string>
+    <string name="add_employee_tv">Add Employee</string>
+    <string name="ae_BusinessName">Business Name</string>
+    <string name="ae_add_employee_btn">Add Employee</string>
+    <string name="employee_name_hint">Employee User ID</string>
+    <string name="business_name_hint">Business Name</string>
+    <string name="add_employee_btn">Add Employee</string>
+    <string name="title_activity_open_page">OpenPage</string>
+    <string name="hp_nav">Navigation</string>
+    <string name="nav_manager_panel">Manager Panel</string>
+    <string name="nav_schedule">Schedule</string>
+    <string name="nav_time_off">Time Off Form</string>
+    <string name="nav_notifications">Notifications</string>
+    <string name="nav_logout">Logout</string>
+    <string name="nav_job_list">Job List</string>
+    <string name="notification_tv">Notifications</string>
+    <string name="noti_title">Notification Title</string>
+    <string name="noti_message">Notification Body</string>
+    <string name="notification_send_btn">Send Notification</string>
+    <string name="nav_profile">Profile</string>
+    <string name="profile_tv">Profile</string>
+    <string name="profile_tv_2">User Information</string>
+    <string name="prof_username">Username:</string>
+    <string name="prof_email">Email:</string>
+    <string name="prof_userID">User ID:</string>
+    <string name="prof_userRole">User Role:</string>
+    <string name="time_off_tv">Time-Off Request</string>
 
 </resources>

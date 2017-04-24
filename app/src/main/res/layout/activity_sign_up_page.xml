@@ -11,6 +11,12 @@
     android:paddingLeft="16dp"
     tools:context="edu.montclair.mobilecomputing.r_soltes.schwifty.SignUpPage">
 
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <!-- App Logo Image -->
     <ImageView
         android:id="@+id/su_logo"
@@ -186,6 +192,8 @@
             android:layout_gravity="center|bottom"
             android:layout_marginBottom="20dp"
             android:visibility="gone" />
+
+    </LinearLayout>
 
     </LinearLayout>
 

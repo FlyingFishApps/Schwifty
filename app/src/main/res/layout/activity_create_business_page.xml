@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/create_business_page"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="16dp"
+    android:paddingTop="16dp"
+    android:paddingRight="16dp"
+    android:paddingLeft="16dp"
+    tools:context="edu.montclair.mobilecomputing.r_soltes.schwifty.CreateBusinessPage">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <!-- App Logo Image -->
+    <ImageView
+        android:id="@+id/cb_logo"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/schwiftylogolong"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        />
+
+    <!-- Title -->
+    <TextView
+        android:layout_below="@+id/cb_logo"
+        android:id="@+id/cb_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/colorPrimary"
+        android:text="@string/create_bussiness_tv"
+        android:textSize="40dp"/>
+
+    <!-- Username Input -->
+    <android.support.design.widget.TextInputLayout
+        android:layout_below="@+id/cb_tv"
+        android:id="@+id/cb_input_business_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <EditText
+            android:id="@+id/cb_business_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/cb_bussiness_name_hint"
+            android:inputType="textCapWords"
+            android:maxLines="1"
+
+            />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <!-- Sign Up Button -->
+    <Button
+        android:layout_below="@+id/cb_input_business_name"
+        android:id="@+id/cb_create_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/cb_create_btn"
+        android:background="#4286f4"
+        style="@style/Widget.AppCompat.Button.Colored"/>
+
+    <!-- Progress Bar -->
+    <LinearLayout
+        android:layout_below="@+id/cb_create_btn"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ProgressBar
+            android:id="@+id/cbProgressBar"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_gravity="center|bottom"
+            android:layout_marginBottom="20dp"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

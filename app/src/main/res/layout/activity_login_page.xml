@@ -6,120 +6,154 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="16dp"
-    android:paddingTop="16dp"
-    android:paddingRight="16dp"
     android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp"
     tools:context="edu.montclair.mobilecomputing.r_soltes.schwifty.LoginPage">
 
-    <ImageView
-        android:id="@+id/lp_logo"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/schwiftylogolong"
-        android:layout_width="200dp"
-        android:layout_height="100dp"
-        />
-
-    <android.support.design.widget.TextInputLayout
-        android:layout_below="@+id/lp_logo"
-        android:id="@+id/login_input_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-
-        <EditText
-            android:id="@+id/lp_login_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/login_email_hint"
-            android:inputType="textCapWords"
-            android:maxLines="1"
-
-            />
-
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-        android:layout_below="@+id/login_input_email"
-        android:id="@+id/login_input_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="10dp">
-
-
-        <EditText
-            android:id="@+id/lp_login_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/login_password_hint"
-            android:inputType="textPassword"
-            android:maxLines="1"
-
-            />
-
-    </android.support.design.widget.TextInputLayout>
-
-    <Button
-        android:layout_below="@+id/login_input_password"
-        android:id="@+id/lp_login_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/login_btn"
-        android:background="#4286f4"
-        style="@style/Widget.AppCompat.Button.Colored"/>
-
-    <TextView
-        android:layout_below="@+id/lp_login_btn"
-        android:id="@+id/lp_forgot_pass_btn"
-        android:layout_centerHorizontal="true"
-        android:clickable="true"
-        android:textStyle="bold"
-        android:textColor="@color/colorDark"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/lp_forgot_pass"/>
-
     <LinearLayout
-        android:layout_below="@+id/lp_forgot_pass_btn"
-        android:id="@+id/lp_layout_or"
-        android:orientation="horizontal"
-        android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
-        <View
+        <!-- App Logo -->
+        <ImageView
+            android:id="@+id/lp_logo"
             android:layout_width="200dp"
-            android:layout_height="1dp"
-            android:background="#c4c8c9"
-            android:layout_margin="5dp"/>
+            android:layout_height="100dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/schwiftylogolong" />
 
+        <!-- Login Email -->
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/login_input_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lp_logo">
+
+
+            <EditText
+                android:id="@+id/lp_login_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/login_email_hint"
+                android:inputType="textCapWords"
+                android:maxLines="1"
+
+                />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <!-- Login Password -->
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/login_input_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/login_input_email"
+            android:paddingBottom="10dp">
+
+
+            <EditText
+                android:id="@+id/lp_login_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/login_password_hint"
+                android:inputType="textPassword"
+                android:maxLines="1"
+
+                />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <!-- Sign In Button -->
+        <Button
+            android:id="@+id/lp_login_btn"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/login_input_password"
+            android:background="#4286f4"
+            android:text="@string/login_btn" />
+
+        <!-- Forgot Pass Button -->
         <TextView
+            android:id="@+id/lp_forgot_pass_btn"
+            style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:text="@string/lp_OR"/>
+            android:layout_below="@+id/lp_login_btn"
+            android:layout_centerHorizontal="true"
+            android:clickable="true"
+            android:text="@string/lp_forgot_pass"
+            android:textColor="@color/colorDark"
+            android:textStyle="bold" />
 
-        <View
-            android:layout_width="200dp"
-            android:layout_height="1dp"
-            android:background="#c4c8c9"
-            android:layout_margin="5dp"/>
+        <!-- OR -->
+        <LinearLayout
+            android:id="@+id/lp_layout_or"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lp_forgot_pass_btn"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="200dp"
+                android:layout_height="1dp"
+                android:layout_margin="5dp"
+                android:background="#c4c8c9" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="@string/lp_OR" />
+
+            <View
+                android:layout_width="200dp"
+                android:layout_height="1dp"
+                android:layout_margin="5dp"
+                android:background="#c4c8c9" />
 
 
+        </LinearLayout>
 
+        <!-- Sign Up Button -->
+        <TextView
+            android:id="@+id/lp_sign_up_btn"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lp_layout_or"
+            android:layout_centerHorizontal="true"
+            android:clickable="true"
+            android:text="@string/lp_sign_up"
+            android:textColor="@color/colorDark"
+            android:textStyle="bold" />
+
+        <!-- Progress Bar -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lp_sign_up_btn"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ProgressBar
+                android:id="@+id/lpProgressBar"
+                style="@style/Widget.AppCompat.ProgressBar"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center|bottom"
+                android:layout_marginBottom="20dp"
+                android:visibility="gone" />
+
+        </LinearLayout>
     </LinearLayout>
-
-    <TextView
-        android:layout_below="@+id/lp_layout_or"
-        android:id="@+id/lp_sign_up_btn"
-        android:layout_centerHorizontal="true"
-        android:clickable="true"
-        android:textStyle="bold"
-        android:textColor="@color/colorDark"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/lp_sign_up"/>
 
 </RelativeLayout>
