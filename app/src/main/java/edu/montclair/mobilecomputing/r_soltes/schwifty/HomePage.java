@@ -34,6 +34,7 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener 
     @BindView(R.id.nav_notifications) Button notificationsBtn;
     @BindView(R.id.nav_logout) Button logoutBtn;
     @BindView(R.id.hp_username_tv) TextView usernameTv;
+    @BindView(R.id.how_to) Button howToBtn;
     public Snackbar snackbar;
     private FirebaseAuth mFirebaseAuth;
     private DatabaseReference mDatabaseReference, userRef;
@@ -55,6 +56,7 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener 
         timeOffBtn.setOnClickListener(this);
         notificationsBtn.setOnClickListener(this);
         logoutBtn.setOnClickListener(this);
+        howToBtn.setOnClickListener(this);
         session = new sessionUser(getApplicationContext());
 
         // Get Firebase user

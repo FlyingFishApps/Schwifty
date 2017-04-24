@@ -1,23 +1,31 @@
 package edu.montclair.mobilecomputing.r_soltes.schwifty;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import static android.R.attr.button;
+
 public class HowToUsePage extends AppCompatActivity {
 
+    Button button;
     TextView textview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_how_to_use_page);
+
+        button = (Button) findViewById(R.id.how_to);
 
 
         textview = (TextView) findViewById(R.id.how);
@@ -32,20 +40,44 @@ public class HowToUsePage extends AppCompatActivity {
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
 
-        if(is !=null) {
+        if (is != null) {
 
-            try{
+            try {
 
-                while((data=reader.readLine())!=null){
-                    sBuffer.append(data + "\n"+ "\t");
+                while ((data = reader.readLine()) != null) {
+                    sBuffer.append(data + "\n" + "\t");
                 }
 
                 textview.setText(sBuffer);
                 is.close();
 
-            }catch(Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
+
+    public void mButton(View view) {
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent shifty = new Intent(HowToUsePage.this, edu.montclair.mobilecomputing.r_soltes.schwifty.HowToUsePage.class);
+                startActivity(shifty);
+
+            }
+
+        }
+        );
+
+    }
+
+    @Override
+    public void onBackPressed () {
+        Intent intent = new Intent(HowToUsePage.this, HomePage.class);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        startActivity(intent);
+
+    }
+
+
 }
