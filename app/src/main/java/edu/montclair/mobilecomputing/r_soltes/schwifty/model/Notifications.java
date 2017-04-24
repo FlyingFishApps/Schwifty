@@ -1,4 +1,4 @@
-package edu.montclair.mobilecomputing.r_soltes.schwifty.utils;
+package edu.montclair.mobilecomputing.r_soltes.schwifty.model;
 
 /**
  * Created by ryansoltes on 4/23/17.

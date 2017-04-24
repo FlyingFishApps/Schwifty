@@ -76,10 +76,31 @@
                 android:background="#4286f4"
                 android:text="@string/notification_send_btn"
                 android:layout_gravity="center"
-                android:padding="5dp"/>
+                android:padding="5dp"
+                android:layout_marginBottom="20dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:baselineAligned="true">
+
+                <ListView
+                    android:id="@+id/noti_list"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:transcriptMode="alwaysScroll"
+                    android:stackFromBottom="false"
+                    />
+
+            </LinearLayout>
 
         </LinearLayout>
 
+
     </LinearLayout>
+
 
 </RelativeLayout>

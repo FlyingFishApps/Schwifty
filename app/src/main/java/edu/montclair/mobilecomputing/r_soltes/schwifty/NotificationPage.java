@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -13,28 +14,42 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import edu.montclair.mobilecomputing.r_soltes.schwifty.utils.Notifications;
+import edu.montclair.mobilecomputing.r_soltes.schwifty.model.NotificationAdapter;
+import edu.montclair.mobilecomputing.r_soltes.schwifty.model.Notifications;
 
 public class NotificationPage extends AppCompatActivity {
 
     @BindView(R.id.noti_title) EditText title;
     @BindView(R.id.noti_message) EditText message;
     @BindView(R.id.noti_button) Button notiBtn;
+    @BindView(R.id.noti_list) ListView mListView;
     private static final int TAG_SIMPLE_NOTIFICATION = 1;
     Snackbar snackbar;
     private DatabaseReference mDatabaseReference, notifRef;
     private FirebaseAuth mFirebaseAuth;
     RelativeLayout activity_notification_page;
+    NotificationAdapter mNotificationAdapter;
+    ChildEventListener mChildEventListener;
+    FirebaseAuth.AuthStateListener mAuthStateListener;
+
+
+//    ArrayList<String> listOfNotifs = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +65,45 @@ public class NotificationPage extends AppCompatActivity {
                 createNotification(title.getText().toString().trim(),message.getText().toString().trim());
             }
         });
+
+        List<Notifications> listOfNotifis = new ArrayList<>();
+        notifRef = FirebaseDatabase.getInstance().getReference("notifications");
+        mFirebaseAuth = FirebaseAuth.getInstance();
+
+        mNotificationAdapter = new NotificationAdapter(this, R.layout.notification_item, listOfNotifis);
+        mListView.setAdapter(mNotificationAdapter);
+
+        mChildEventListener = new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                Notifications notification = dataSnapshot.getValue(Notifications.class);
+                mNotificationAdapter.add(notification);
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        };
+
+        notifRef.addChildEventListener(mChildEventListener);
+
+
 
 
     }
@@ -104,7 +158,7 @@ public class NotificationPage extends AppCompatActivity {
 
         mDatabaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://schwifty-33650.firebaseio.com/");
         notifRef = mDatabaseReference.child("notifications");
-        mDatabaseReference.child("notifications").child(nId).setValue(notification);
+        mDatabaseReference.child("notifications").push().setValue(notification);
         snackbar.make(activity_notification_page, "Notification Sent!", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
         title.getText().clear();
