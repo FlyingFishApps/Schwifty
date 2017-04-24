@@ -11,17 +11,31 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
+import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class TimeOffPage extends AppCompatActivity {
+public class TimeOffPage extends AppCompatActivity implements View.OnClickListener {
+    private EditText fromDateEtxt;
+    private EditText toDateEtxt;
+    private DatePickerDialog fromDatePickerDialog;
+    private DatePickerDialog toDatePickerDialog;
+    private SimpleDateFormat dateFormatter;
 
     @BindView(R.id.timeoff_spinner) Spinner s;
     @Override
@@ -30,7 +44,11 @@ public class TimeOffPage extends AppCompatActivity {
         setContentView(R.layout.activity_time_off_page);
         ButterKnife.bind(this);
 
+        dateFormatter = new SimpleDateFormat("MM-dd-yyyy", Locale.US);
 
+        findViewsById();
+
+        setDateTimeField();
 
         //lines of code below creates the dropdown to select your major
         s.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -47,33 +65,59 @@ public class TimeOffPage extends AppCompatActivity {
         });
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
-    private void setDate(final Calendar calendar) {
-        final DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.MEDIUM);
-        ((TextView)findViewById(R.id.picDate)).setText(dateFormat.format(calendar.getTime()));
+    private void findViewsById() {
+        fromDateEtxt = (EditText) findViewById(R.id.showDate);
+        fromDateEtxt.setInputType(InputType.TYPE_NULL);
+        fromDateEtxt.requestFocus();
 
+        toDateEtxt = (EditText) findViewById(R.id.showDate2);
+        toDateEtxt.setInputType(InputType.TYPE_NULL);
     }
 
+    private void setDateTimeField() {
+        fromDateEtxt.setOnClickListener(this);
+        toDateEtxt.setOnClickListener(this);
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
-    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        Calendar cal = new GregorianCalendar(year, month, dayOfMonth);
-        setDate(cal);
+        java.util.Calendar newCalendar = java.util.Calendar.getInstance();
+        fromDatePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                java.util.Calendar newDate = java.util.Calendar.getInstance();
+                newDate.set(year, monthOfYear, dayOfMonth);
+                fromDateEtxt.setText(dateFormatter.format(newDate.getTime()));
+            }
+
+        },newCalendar.get(java.util.Calendar.YEAR), newCalendar.get(java.util.Calendar.MONTH), newCalendar.get(java.util.Calendar.DAY_OF_MONTH));
+
+        toDatePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                java.util.Calendar newDate = java.util.Calendar.getInstance();
+                newDate.set(year, monthOfYear, dayOfMonth);
+                toDateEtxt.setText(dateFormatter.format(newDate.getTime()));
+            }
+
+        },newCalendar.get(java.util.Calendar.YEAR), newCalendar.get(java.util.Calendar.MONTH), newCalendar.get(java.util.Calendar.DAY_OF_MONTH));
     }
 
-    public static class DatePickerFragment extends DialogFragment {
-        @RequiresApi(api = Build.VERSION_CODES.N)
-        public Dialog onCreateDialog(Bundle savedInstanceDate) {
-            final Calendar c = Calendar.getInstance();
-            int year = c.get(Calendar.YEAR);
-            int month = c.get(Calendar.MONTH);
-            int day = c.get(Calendar.DAY_OF_MONTH);
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.bottom_navigation_main, menu);
+        return true;
+    }
 
-            return new DatePickerDialog(getActivity(),
-                    (DatePickerDialog.OnDateSetListener)
-                            getActivity(), year, month, day);
+    @Override
+    public void onClick(View view) {
+        if(view == fromDateEtxt) {
+            fromDatePickerDialog.show();
+        } else if(view == toDateEtxt) {
+            toDatePickerDialog.show();
         }
     }
+
+
+
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(TimeOffPage.this, HomePage.class);
