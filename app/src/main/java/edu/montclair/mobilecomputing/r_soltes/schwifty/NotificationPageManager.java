@@ -6,7 +6,6 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
-import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -33,7 +32,7 @@ import butterknife.ButterKnife;
 import edu.montclair.mobilecomputing.r_soltes.schwifty.model.NotificationAdapter;
 import edu.montclair.mobilecomputing.r_soltes.schwifty.model.Notifications;
 
-public class NotificationPage extends AppCompatActivity {
+public class NotificationPageManager extends AppCompatActivity {
 
     @BindView(R.id.noti_title) EditText title;
     @BindView(R.id.noti_message) EditText message;
@@ -109,18 +108,18 @@ public class NotificationPage extends AppCompatActivity {
     }
     private PendingIntent pendingIntentForNotification() {
         //Create the intent you want to show when the notification is clicked
-        Intent intent = new Intent(NotificationPage.this, NotificationPage.class);
+        Intent intent = new Intent(NotificationPageManager.this, NotificationPageManager.class);
 
         //Add any extras (in this case, that you want to relaunch this fragment)
 
 
         //This will hold the intent you've created until the notification is tapped.
-        PendingIntent pendingIntent = PendingIntent.getActivity(NotificationPage.this, 1, intent, 0);
+        PendingIntent pendingIntent = PendingIntent.getActivity(NotificationPageManager.this, 1, intent, 0);
         return pendingIntent;
     }
     private void showSimpleNotification() {
         //Use the NotificationCompat compatibility library in order to get gingerbread support.
-        Notification notification = new NotificationCompat.Builder(NotificationPage.this)
+        Notification notification = new NotificationCompat.Builder(NotificationPageManager.this)
                 //Title of the notification
                 .setContentTitle(title.getText().toString().trim())
                 //Content of the notification once opened
@@ -141,7 +140,7 @@ public class NotificationPage extends AppCompatActivity {
 
         //Grab the NotificationManager and post the notification
         NotificationManager notificationManager = (NotificationManager)
-                NotificationPage.this.getSystemService(Context.NOTIFICATION_SERVICE);
+                NotificationPageManager.this.getSystemService(Context.NOTIFICATION_SERVICE);
 
         //Set a tag so that the same notification doesn't get reposted over and over again and
         //you can grab it again later if you need to.
@@ -167,7 +166,7 @@ public class NotificationPage extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(NotificationPage.this, HomePage.class);
+        Intent intent = new Intent(NotificationPageManager.this, HomePage.class);
         intent.addCategory(Intent.CATEGORY_HOME);
         startActivity(intent);
     }

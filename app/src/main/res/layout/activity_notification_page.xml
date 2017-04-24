@@ -5,7 +5,7 @@
     android:id="@+id/activity_notification_page"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="edu.montclair.mobilecomputing.r_soltes.schwifty.NotificationPage">
+    tools:context="edu.montclair.mobilecomputing.r_soltes.schwifty.NotificationPageManager">
 
     <LinearLayout
         android:layout_width="match_parent"
