@@ -31,8 +31,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class TimeOffPage extends AppCompatActivity implements View.OnClickListener {
-    private EditText fromDateEtxt;
-    private EditText toDateEtxt;
+    private TextView fromDateEtxt;
+    private TextView toDateEtxt;
     private DatePickerDialog fromDatePickerDialog;
     private DatePickerDialog toDatePickerDialog;
     private SimpleDateFormat dateFormatter;
@@ -66,11 +66,11 @@ public class TimeOffPage extends AppCompatActivity implements View.OnClickListen
     }
 
     private void findViewsById() {
-        fromDateEtxt = (EditText) findViewById(R.id.showDate);
+        fromDateEtxt = (TextView) findViewById(R.id.showDate);
         fromDateEtxt.setInputType(InputType.TYPE_NULL);
         fromDateEtxt.requestFocus();
 
-        toDateEtxt = (EditText) findViewById(R.id.showDate2);
+        toDateEtxt = (TextView) findViewById(R.id.showDate2);
         toDateEtxt.setInputType(InputType.TYPE_NULL);
     }
 

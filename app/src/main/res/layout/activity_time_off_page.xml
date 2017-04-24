@@ -39,7 +39,7 @@
             android:layout_width="fill_parent"
             android:layout_height="30dp" />
 
-        <EditText
+        <TextView
             android:id="@+id/showDate"
             style="@style/Widget.AppCompat.Button.Colored"
             android:background="#4286f4"
@@ -62,11 +62,11 @@
             android:layout_width="fill_parent"
             android:layout_height="30dp" />
 
-        <EditText
+        <TextView
             android:id="@+id/showDate2"
             style="@style/Widget.AppCompat.Button.Colored"
             android:background="#4286f4"
-            android:hint="Enter end Date"
+            android:hint="Enter End Date"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/picDate2"
@@ -95,7 +95,8 @@
             android:id="@+id/btn_Submit"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#0FFF"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:background="#4286f4"
             android:text="Submit TimeOff" />
 
     </LinearLayout>
