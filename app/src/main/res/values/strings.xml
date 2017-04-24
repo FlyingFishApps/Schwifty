@@ -63,6 +63,10 @@
     <string name="prof_email">Email:</string>
     <string name="prof_userID">User ID:</string>
     <string name="prof_userRole">User Role:</string>
+
+    <string name="manager_notifications_MP">NOTIFICATIONS</string>
     <string name="time_off_tv">Time-Off Request</string>
+    <string name="how_to">How To Use App</string>
+
 
 </resources>

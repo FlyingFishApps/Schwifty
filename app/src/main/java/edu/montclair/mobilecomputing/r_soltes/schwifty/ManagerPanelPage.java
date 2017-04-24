@@ -13,6 +13,7 @@ public class ManagerPanelPage extends AppCompatActivity implements View.OnClickL
 
     @BindView(R.id.create_business_btn) Button createBusinessBtn;
     @BindView(R.id.add_employee_btn) Button addEmployeeBtn;
+    @BindView(R.id.noti_manger_btn) Button manageNotiBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +21,7 @@ public class ManagerPanelPage extends AppCompatActivity implements View.OnClickL
         ButterKnife.bind(this);
         createBusinessBtn.setOnClickListener(this);
         addEmployeeBtn.setOnClickListener(this);
+        manageNotiBtn.setOnClickListener(this);
     }
     @Override
     public void onClick(View view) {
@@ -31,6 +33,10 @@ public class ManagerPanelPage extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.add_employee_btn:
                 startActivity(new Intent(ManagerPanelPage.this, AddEmployeePage.class));
+                finish();
+                break;
+            case R.id.noti_manger_btn:
+                startActivity(new Intent(ManagerPanelPage.this, ManagerNotificationPage.class));
                 finish();
                 break;
             default:
