@@ -42,8 +42,6 @@ public class AddEmployeePage extends AppCompatActivity implements View.OnClickLi
         activity_add_employee_page = (RelativeLayout)findViewById(R.id.activity_add_employee_page);
         addEmployeeBtn.setOnClickListener(this);
 
-
-
     }
 
     @Override
@@ -131,13 +129,29 @@ public class AddEmployeePage extends AppCompatActivity implements View.OnClickLi
                 businessRef.child(businessNameTxt.getText().toString()).child("List Of Employees").push().setValue(newEmployee);
 
 
-
-                snackbar.make(activity_add_employee_page, "Employee Added!", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-
                 String data = dataSnapshot.child(businessNameTxt.getText().toString()).child("bName").getValue().toString();
                 System.out.println(data);
 
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        userIdRef = mDatabaseReference.child("users");
+        userIdRef.child(employeeIdTxt.getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+
+                userIdRef.child(employeeIdTxt.getText().toString()).child("jobs").push().setValue(businessNameTxt.getText().toString());
+
+
+                snackbar.make(activity_add_employee_page, "Employee Added!", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
                 businessNameTxt.getText().clear();
                 employeeIdTxt.getText().clear();
             }

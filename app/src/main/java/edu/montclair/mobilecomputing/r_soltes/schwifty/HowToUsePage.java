@@ -53,7 +53,6 @@ public class HowToUsePage extends AppCompatActivity {
         }
     }
 
-
     @Override
     public void onBackPressed () {
         Intent intent = new Intent(HowToUsePage.this, HomePage.class);
