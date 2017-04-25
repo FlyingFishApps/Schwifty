@@ -35,7 +35,7 @@ public class JobListPage extends AppCompatActivity {
 //                final String key = userRef.child(uid).push().getKey();
 //                System.out.println(key);
                 String data = dataSnapshot.child("jobs").getValue().toString();
-                dataSnapshot.hasChildren();
+
                 System.out.println(data);
 
             }
