@@ -20,7 +20,6 @@ import static android.R.attr.button;
 
 public class HowToUsePage extends AppCompatActivity {
 
-    @BindView(R.id.how_to) Button button;
     @BindView(R.id.how) TextView textview;
 
     @Override
@@ -54,16 +53,6 @@ public class HowToUsePage extends AppCompatActivity {
         }
     }
 
-    public void mButton(View view){
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent shifty = new Intent(HowToUsePage.this, edu.montclair.mobilecomputing.r_soltes.schwifty.HowToUsePage.class);
-                startActivity(shifty);
-            }
-
-        });
-    }
 
     @Override
     public void onBackPressed () {
