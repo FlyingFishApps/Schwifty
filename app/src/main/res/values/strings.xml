@@ -67,6 +67,7 @@
     <string name="manager_notifications_MP">NOTIFICATIONS</string>
     <string name="time_off_tv">Time-Off Request</string>
     <string name="how_to">How To Use App</string>
+    <string name="noti_date">Date</string>
 
 
 </resources>
