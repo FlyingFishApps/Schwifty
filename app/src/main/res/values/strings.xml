@@ -68,6 +68,9 @@
     <string name="time_off_tv">Time-Off Request</string>
     <string name="how_to">How To Use App</string>
     <string name="noti_date">Date</string>
+    <string name="add_shift_MP">Add Shift</string>
+    <string name="create_shift_txt">Create Shift</string>
+    <string name="create_shift_btn">Schedule Shift</string>
 
 
 </resources>
