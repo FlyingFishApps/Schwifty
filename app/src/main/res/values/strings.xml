@@ -71,6 +71,7 @@
     <string name="add_shift_MP">Add Shift</string>
     <string name="create_shift_txt">Create Shift</string>
     <string name="create_shift_btn">Schedule Shift</string>
+    <string name="uid_CS">UID</string>
 
 
 </resources>
