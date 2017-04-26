@@ -14,7 +14,7 @@
         android:id="@+id/notification_date_SCI"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"/>
+        android:padding="10dp" />
 
     <LinearLayout
         android:orientation="horizontal"
