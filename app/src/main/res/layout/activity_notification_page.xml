@@ -5,28 +5,47 @@
     android:id="@+id/activity_notification_page"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="edu.montclair.mobilecomputing.r_soltes.schwifty.NotificationPage">
+    tools:context="edu.montclair.mobilecomputing.r_soltes.schwifty.NotificationPageManager">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/notification_tv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:gravity="center"
-        android:padding="10dp"
-        android:text="@string/notification_tv"
-        android:textColor="@color/colorPrimary"
-        android:textSize="40dp" />
+        <TextView
+            android:id="@+id/notification_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@string/notification_tv"
+            android:textColor="@color/colorPrimary"
+            android:textSize="40dp" />
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/noti_date_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/notification_tv">
+
+                <TextView
+                    android:id="@+id/noti_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/noti_date"
+                    android:textAlignment="center"
+                    android:inputType="textCapWords"
+                    android:maxLines="1"
+
+                    />
+
+            </android.support.design.widget.TextInputLayout>
 
             <!-- Notificaton Title -->
             <android.support.design.widget.TextInputLayout
@@ -91,9 +110,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
-                    android:transcriptMode="alwaysScroll"
                     android:stackFromBottom="false"
-                    />
+                    android:transcriptMode="alwaysScroll" />
 
             </LinearLayout>
 

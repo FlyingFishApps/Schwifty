@@ -1,0 +1,42 @@
+This page will give you a better understanding of our application and features so you can use our application without any issues.
+Profile Feature
+•	Profile panel shows users username, email, user ID, and user role.
+Job List Feature
+•	The job list panel was created with the purpose of an employee possibly having more than one job, where both businesses would use the app.
+__________________________________________________________
+For Employees Only
+
+Time Off Feature – This feature allows the employee to request time off of work.
+•	Enter Name, e.g. Captain Falcon
+•	Input start date of time requested off, e.g. 10-25-2017
+•	Input End date of time requested off, e.g. 10-31-2017
+•	Choose reasoning for request, e.g. Jury Duty
+•	Press on Submit Time off Request
+•	Data will be kept in Firebase
+
+Schedule Feature
+•	User can see when they are working
+•	Press shift to switch or remove shifts
+•	Press Release to release shift
+___________________________________________________________
+For Managers Only
+
+Manager Panel feature – here the manager will be able to create their business, add employees into the business add shifts for an employee and check time off request notifications from employees.
+
+Create Business
+•	Input the name of Business, e.g. Starbucks
+•	Add Employee to Business, input Business name then the Employees ID
+Add Shift
+•	Choose start date for the added shift, e.g. 7-25-2017
+•	Input a start time, e.g. 10:30 a.m.
+•	Input an end time, e.g. 4:30 p.m.
+•	Press on Schedule Shift
+•	Now the employee will be able to see their new shift on the schedule
+
+Notifications in Manager Panel - here the manager will be able to check request off notifications of employees.
+
+Notification Feature – In this panel the manager can let the staff know when there is a delay opening, closing, or any other important information needed right away.
+•	Input Title of Notification, e.g. Closed Tomorrow
+•	Input reason for notification, e.g. Due to inclement weather
+•	Press on Send Notification
+•	Now the notification will be sent out to the staff immediately on their device the application is on.
