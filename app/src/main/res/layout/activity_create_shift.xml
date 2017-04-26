@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/activity_create_shift"
     tools:context=".AddShiftPage">
 
 
@@ -132,7 +133,22 @@
             android:padding="10dp"
             android:text="@string/create_shift_btn" />
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:baselineAligned="true">
 
+        <ListView
+            android:id="@+id/noti_list_ACS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:stackFromBottom="false"
+            android:transcriptMode="alwaysScroll" />
+
+    </LinearLayout>
 
 </LinearLayout>
 </RelativeLayout>

@@ -1,14 +1,23 @@
 package edu.montclair.mobilecomputing.r_soltes.schwifty;
 
 import android.app.DatePickerDialog;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TimePicker;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,9 +32,10 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import edu.montclair.mobilecomputing.r_soltes.schwifty.model.NotificationAdapter;
-import edu.montclair.mobilecomputing.r_soltes.schwifty.model.Notifications;
+import edu.montclair.mobilecomputing.r_soltes.schwifty.model.ScheduleNotification;
+import edu.montclair.mobilecomputing.r_soltes.schwifty.model.ScheduleNotificationAdapter;
 
 /**
  * Created by tjame_000 on 4/25/2017.
@@ -34,16 +44,31 @@ import edu.montclair.mobilecomputing.r_soltes.schwifty.model.Notifications;
 public class AddShiftPage extends AppCompatActivity implements View.OnClickListener {
 
     EditText txtDate, txtTime, endTime, bID, uID;
+    @BindView(R.id.noti_list_ACS) ListView mListView;
     private int mYear, mMonth, mDay, mHour, mMinute;
     private Button cShiftBtn;
     private DatabaseReference mDatabaseReference, notifRef, notifRef1;
     private FirebaseAuth mFirebaseAuth;
+    private static final int TAG_SIMPLE_NOTIFICATION = 1;
+    Snackbar snackbar;
+    LinearLayout activity_create_shift;
+    @BindView(R.id.create_shift_btn) Button notiBtn4;
+    ScheduleNotificationAdapter mNotificationAdapter;
+    ChildEventListener mChildEventListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_shift);
         ButterKnife.bind(this);
+
+        notiBtn4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showSimpleNotification();
+                createNotification(uID.getText().toString().trim(),txtDate.getText().toString().trim(),txtTime.getText().toString().trim(),endTime.getText().toString().trim());
+            }
+        });
 
         bID = (EditText)findViewById(R.id.bId_CS);
         uID = (EditText)findViewById(R.id.uid_CS);
@@ -63,17 +88,17 @@ public class AddShiftPage extends AppCompatActivity implements View.OnClickListe
         mFirebaseAuth = FirebaseAuth.getInstance();
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
 
-        List<Notifications> listOfNotifis = new ArrayList<>();
-        notifRef = FirebaseDatabase.getInstance().getReference("notifications");
+        List<ScheduleNotification> listOfNotifis = new ArrayList<>();
+        notifRef = FirebaseDatabase.getInstance().getReference("users");
         mFirebaseAuth = FirebaseAuth.getInstance();
 
-        mNotificationAdapter = new NotificationAdapter(this, R.layout.notification_item, listOfNotifis);
+        mNotificationAdapter = new ScheduleNotificationAdapter(this, R.layout.schedule_notification_item, listOfNotifis);
         mListView.setAdapter(mNotificationAdapter);
 
         mChildEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Notifications notification = dataSnapshot.getValue(Notifications.class);
+                ScheduleNotification notification = dataSnapshot.getValue(ScheduleNotification.class);
                 mNotificationAdapter.add(notification);
             }
 
@@ -103,26 +128,69 @@ public class AddShiftPage extends AppCompatActivity implements View.OnClickListe
 
 
     }
-    private void createNotification(String nDate, String nTitle, String nBody) {
+    private void createNotification(String uID, String nDate, String nStartTime, String nEndTime) {
 
         Random rnd = new Random();
         int n = 100000 + rnd.nextInt(900000);
         String nId = String.valueOf(n);
 
-        Notifications notification = new Notifications(nDate,nTitle,nBody,nId);
+        ScheduleNotification notification = new ScheduleNotification(nId, uID, nDate,nStartTime,nEndTime);
 
         mDatabaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://schwifty-33650.firebaseio.com/");
         notifRef = mDatabaseReference.child("users");
         notifRef1 = mDatabaseReference.child("Schedule");
-        mDatabaseReference.child("notifications").push().setValue(notification);
-        snackbar.make(activity_notification_page, "Notification Sent!", Snackbar.LENGTH_LONG)
+        mDatabaseReference.child("Schedule").push().setValue(notification);
+        snackbar.make(activity_create_shift, "Notification Sent!", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
         mNotificationAdapter.clear();
-        title.getText().clear();
-        message.getText().clear();
+        bID.getText().clear();
+        txtTime.getText().clear();
+        endTime.getText().clear();
+        txtDate.getText().clear();
+
 
     }
 
+    private PendingIntent pendingIntentForNotification() {
+        //Create the intent you want to show when the notification is clicked
+        Intent intent = new Intent(AddShiftPage.this, AddShiftPage.class);
+
+        //Add any extras (in this case, that you want to relaunch this fragment)
+
+
+        //This will hold the intent you've created until the notification is tapped.
+        PendingIntent pendingIntent = PendingIntent.getActivity(AddShiftPage.this, 1, intent, 0);
+        return pendingIntent;
+    }
+    private void showSimpleNotification() {
+        //Use the NotificationCompat compatibility library in order to get gingerbread support.
+        Notification notification = new NotificationCompat.Builder(AddShiftPage.this)
+                //Title of the notification
+                .setContentTitle(txtDate.getText().toString().trim())
+                //Content of the notification once opened
+                .setContentText(txtTime.getText().toString().trim())
+                //This bit will show up in the notification area in devices that support that
+                //Icon that shows up in the notification area
+                .setSmallIcon(R.mipmap.ic_launcher)
+                //Icon that shows up in the drawer
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(),R.mipmap.ic_launcher))
+                //Set the intent
+                .setContentIntent(pendingIntentForNotification())
+                //Build the notification with all the stuff you've just set.
+                .build();
+
+        //Add the auto-cancel flag to make it dismiss when clicked on
+        //This is a bitmask value so you have to pipe-equals it.
+        notification.flags |= Notification.FLAG_AUTO_CANCEL;
+
+        //Grab the NotificationManager and post the notification
+        NotificationManager notificationManager = (NotificationManager)
+                AddShiftPage.this.getSystemService(Context.NOTIFICATION_SERVICE);
+
+        //Set a tag so that the same notification doesn't get reposted over and over again and
+        //you can grab it again later if you need to.
+        notificationManager.notify(TAG_SIMPLE_NOTIFICATION, notification);
+    }
 
 
     @Override

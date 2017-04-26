@@ -33,15 +33,17 @@ public class ScheduleNotificationAdapter extends ArrayAdapter<ScheduleNotificati
 
             convertView = ((Activity)getContext()).getLayoutInflater().inflate(R.layout.notification_item,parent,false);
 
-        TextView notifDate = (TextView)convertView.findViewById(R.id.notification_date);
-        TextView notifTitle = (TextView)convertView.findViewById(R.id.notification_title);
-        TextView notifBody = (TextView)convertView.findViewById(R.id.notification_body);
+        TextView notifDate = (TextView)convertView.findViewById(R.id.notification_date_SCI);
+        TextView notifuID = (TextView)convertView.findViewById(R.id.notification_uID_SCI);
+        TextView notifSTime = (TextView)convertView.findViewById(R.id.notification_start_time_SCI);
+        TextView notifETime = (TextView)convertView.findViewById(R.id.notification_end_time_SCI);
 
         ScheduleNotification notification = getItem(position);
 
+        notifuID.setText(notification.getuID());
         notifDate.setText(notification.getnDate());
-        notifTitle.setText(notification.getnTitle());
-        notifBody.setText(notification.getnBody());
+        notifSTime.setText(notification.getnStartTime());
+        notifETime.setText(notification.getnEndTime());
 
         return convertView;
 
