@@ -27,6 +27,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -53,10 +54,11 @@ public class AddShiftPage extends AppCompatActivity implements View.OnClickListe
     @BindView(R.id.in_date) EditText title;
     @BindView(R.id.create_shift_btn) Button notiBtn;
 
+    private String value;
     private int mYear, mMonth, mDay, mHour, mMinute;
     private static final int TAG_SIMPLE_NOTIFICATION = 1;
     Snackbar snackbar;
-    private DatabaseReference mDatabaseReference, notifRef;
+    private DatabaseReference mDatabaseReference, notifRef, userIdRef;
     private FirebaseAuth mFirebaseAuth;
     RelativeLayout activity_create_shift;
     ScheduleNotificationAdapter mNotificationAdapter;
@@ -75,6 +77,7 @@ public class AddShiftPage extends AppCompatActivity implements View.OnClickListe
             public void onClick(View view) {
                 showSimpleNotification();
                 createNotification(uID.getText().toString().trim(),title.getText().toString().trim(),message.getText().toString().trim(),endTime.getText().toString().trim());
+                shift();
             }
         });
 
@@ -82,14 +85,14 @@ public class AddShiftPage extends AppCompatActivity implements View.OnClickListe
         title.setOnClickListener(this);
         message.setOnClickListener(this);
         endTime.setOnClickListener(this);
-
+        value = uID.getText().toString();
 
         mFirebaseAuth = FirebaseAuth.getInstance();
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
 
 
         List<ScheduleNotification> listOfNotifis = new ArrayList<>();
-        notifRef = FirebaseDatabase.getInstance().getReference("Schedule");
+        notifRef = FirebaseDatabase.getInstance().getReference("users");
         mFirebaseAuth = FirebaseAuth.getInstance();
 
         mNotificationAdapter = new ScheduleNotificationAdapter(this, R.layout.schedule_notification_item, listOfNotifis);
@@ -180,8 +183,8 @@ public class AddShiftPage extends AppCompatActivity implements View.OnClickListe
         ScheduleNotification notification = new ScheduleNotification(uID,nDate,nId,nStartTime,nEndTime);
 
         mDatabaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://schwifty-33650.firebaseio.com/");
-        notifRef = mDatabaseReference.child("Schedule");
-        mDatabaseReference.child("Schedule").push().setValue(notification);
+        notifRef = mDatabaseReference.child("users");
+        notifRef.child(value.toString()).child(value.toString()).push().setValue(notification);
         snackbar.make(activity_create_shift, "Notification Sent!", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
         mNotificationAdapter.clear();
@@ -189,8 +192,31 @@ public class AddShiftPage extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    public void shift() {
+        mDatabaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://schwifty-33650.firebaseio.com/");
+        userIdRef = mDatabaseReference.child("users");
+        userIdRef.child(uID.getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
 
-    @Override
+
+                userIdRef.child(uID.getText().toString()).child("Schedule").push().setValue(title.getText().toString());
+
+
+                snackbar.make(activity_create_shift, "Employee Added!", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                title.getText().clear();
+                message.getText().clear();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+        @Override
     public void onClick(View v) {
 
         if (v == title) {
