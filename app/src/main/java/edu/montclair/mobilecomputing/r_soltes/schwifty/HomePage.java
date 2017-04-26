@@ -1,10 +1,8 @@
 package edu.montclair.mobilecomputing.r_soltes.schwifty;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -34,6 +32,7 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener 
     @BindView(R.id.nav_notifications) Button notificationsBtn;
     @BindView(R.id.nav_logout) Button logoutBtn;
     @BindView(R.id.hp_username_tv) TextView usernameTv;
+    @BindView(R.id.how_to) Button howToBtn;
     public Snackbar snackbar;
     private FirebaseAuth mFirebaseAuth;
     private DatabaseReference mDatabaseReference, userRef;
@@ -55,6 +54,7 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener 
         timeOffBtn.setOnClickListener(this);
         notificationsBtn.setOnClickListener(this);
         logoutBtn.setOnClickListener(this);
+        howToBtn.setOnClickListener(this);
         session = new sessionUser(getApplicationContext());
 
         // Get Firebase user
@@ -134,9 +134,43 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener 
                 startActivity(new Intent(HomePage.this, TimeOffPage.class));
                 finish();
                 break;
-            case R.id.nav_notifications:
-                startActivity(new Intent(HomePage.this, NotificationPage.class));
+            case R.id.how_to:
+                startActivity(new Intent(HomePage.this, HowToUsePage.class));
                 finish();
+                break;
+            case R.id.nav_notifications:
+                FirebaseUser user1 = mFirebaseAuth.getInstance().getCurrentUser();
+
+                final String uid1 = user1.getUid().toString();
+                mDatabaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://schwifty-33650.firebaseio.com/");
+                userRef = mDatabaseReference.child("users");
+                userRef.orderByChild("uid").equalTo(uid1).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        String userRole = dataSnapshot.child(uid1).child("userRole").getValue().toString();
+                        String username = dataSnapshot.child(uid1).child("username").getValue().toString();
+                        String userEmail = dataSnapshot.child(uid1).child("email").getValue().toString();
+
+                        session.createSessionUser(userEmail,uid1,username,userRole);
+                        HashMap<String, String> currentUser = session.getUserDetails();
+
+                        if(currentUser.get(sessionUser.KEY_SESSION_USERROLE).equals("Manager")){
+                            startActivity(new Intent(HomePage.this, NotificationPageManager.class));
+                            finish();
+                        }else{
+                            startActivity(new Intent(HomePage.this, NotificationPageEmployee.class));
+                            finish();
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
                 break;
             case R.id.nav_logout:
                 snackbar.make(findViewById(android.R.id.content), "Are you sure you want to logout?",

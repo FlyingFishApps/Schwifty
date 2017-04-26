@@ -6,14 +6,27 @@ package edu.montclair.mobilecomputing.r_soltes.schwifty.model;
 
 public class Notifications {
 
-    private String nTitle, nBody, nId;
+    private String nTitle;
+    private String nBody;
+    private String nId;
+
+    public String getnDate() {
+        return nDate;
+    }
+
+    public void setnDate(String nDate) {
+        this.nDate = nDate;
+    }
+
+    private String nDate;
 
     public Notifications(){
 
     }
 
-    public Notifications(String nTitle, String nBody, String nId) {
+    public Notifications(String nDate, String nTitle, String nBody, String nId) {
         this.nTitle = nTitle;
+        this.nDate = nDate;
         this.nBody = nBody;
         this.nId = nId;
 

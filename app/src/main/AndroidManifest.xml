@@ -30,9 +30,13 @@
         <activity android:name=".ManagerNotificationPage" />
         <activity android:name=".SchedulePage" />
         <activity android:name=".TimeOffPage" />
-        <activity android:name=".NotificationPage" />
+        <activity android:name=".NotificationPageManager" />
+        <activity android:name=".NotificationPageEmployee" />
         <activity android:name=".JobListPage" />
-        <activity android:name=".ProfilePage"></activity>
+        <activity android:name=".ProfilePage" />
+        <activity android:name=".AddShiftPage" />
+        <activity android:name=".SchwiftPage" />
+        <activity android:name=".HowToUsePage"></activity>
     </application>
 
 </manifest>

@@ -29,7 +29,7 @@ public class SchedulePage extends AppCompatActivity implements View.OnClickListe
                 finish();
                 break;
             case R.id.shiftBtn_FS:
-                startActivity(new Intent(SchedulePage.this, AddEmployeePage.class));
+                startActivity(new Intent(SchedulePage.this, SchwiftPage.class));
                 finish();
                 break;
             default:
