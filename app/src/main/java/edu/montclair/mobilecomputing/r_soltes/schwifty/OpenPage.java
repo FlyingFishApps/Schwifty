@@ -9,19 +9,23 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class OpenPage extends AppCompatActivity {
 
-    Button button;
-
+    @BindView(R.id.button_schwift) Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_open_page);
-
-        button = (Button) findViewById(R.id.button_schwift);
+        ButterKnife.bind(this);
     }
 
+    /**
+     * OnClick method thats creates an intent to move from OpenPage to Login Page
+     * **/
     public void mButton(View view) {
         button.setOnClickListener(new View.OnClickListener() {
             @Override

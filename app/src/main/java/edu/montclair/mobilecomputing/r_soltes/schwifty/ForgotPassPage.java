@@ -29,30 +29,40 @@ public class ForgotPassPage extends AppCompatActivity implements View.OnClickLis
     @BindView(R.id.progressBar) ProgressBar mprogressBar;
 
     private FirebaseAuth mFirebaseAuth;
-    Snackbar snackbar;
-    RelativeLayout activity_forgot_pass_page;
 
+    RelativeLayout activity_forgot_pass_page;
+    Snackbar snackbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_pass_page);
-        ButterKnife.bind(this);
 
+        // Bind views
+        ButterKnife.bind(this);
         activity_forgot_pass_page = (RelativeLayout)findViewById(R.id.activity_forgot_pass_page);
+
+        // Set buttons to the onClick listener
         mresetBtn.setOnClickListener(this);
         msigninBtn.setOnClickListener(this);
         msignupBtn.setOnClickListener(this);
 
+        // Get an instance of FirebaseAuth
         mFirebaseAuth = FirebaseAuth.getInstance();
     }
 
+    /**
+     * onCLick method to handle the buttons clicked on UI.
+     * If the reset password button is clicked, User is alerted that
+     * they have received an email about how to reset their password.
+     * **/
     @Override
     public void onClick(View view) {
 
         switch (view.getId()) {
             case R.id.fp_reset_btn:
 
+                // Create string from email that the user input
                 String email = minputEmail.getText().toString().trim();
 
                 if (TextUtils.isEmpty(email)) {
@@ -60,7 +70,10 @@ public class ForgotPassPage extends AppCompatActivity implements View.OnClickLis
                     return;
                 }else {
 
+                    // Show progress bar
                     mprogressBar.setVisibility(View.VISIBLE);
+
+                    // Send reset password email
                     mFirebaseAuth.sendPasswordResetEmail(email)
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
@@ -75,11 +88,11 @@ public class ForgotPassPage extends AppCompatActivity implements View.OnClickLis
                                         minputEmail.getText().clear();
                                     }
 
+                                    // Hide progress bar
                                     mprogressBar.setVisibility(View.GONE);
                                 }
                             });
                 }
-
                 break;
             case R.id.fp_sign_up_btn:
                 startActivity(new Intent(ForgotPassPage.this, SignUpPage.class));
