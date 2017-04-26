@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -42,12 +41,12 @@ public class SignUpPage extends AppCompatActivity implements View.OnClickListene
     @BindView(R.id.user_role_spinner) Spinner userRoleSpinner;
     @BindView(R.id.suProgressBar) ProgressBar mprogressBar;
 
-    RelativeLayout activity_sign_up_page;
-    public static final String TAG = SignUpPage.class.getSimpleName();
-    Snackbar snackbar;
     private FirebaseAuth mFirebaseAuth;
-    private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
+
+    RelativeLayout activity_sign_up_page;
+    Snackbar snackbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,7 +73,10 @@ public class SignUpPage extends AppCompatActivity implements View.OnClickListene
 
     }
 
-
+    /**
+     * onClick method that handles which button is clicked in the UI.
+     * Brings user to corresponding page.
+     * **/
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -85,7 +87,6 @@ public class SignUpPage extends AppCompatActivity implements View.OnClickListene
             case R.id.su_signup_btn:
                 if(!TextUtils.isEmpty(inputUsername.getText().toString())){
                     signupUser(inputEmail.getText().toString().trim(),inputPass.getText().toString().trim());
-//                    checkUsername();
                 }else{
                     inputUsername.setError("Please enter a username");
                 }
@@ -101,30 +102,15 @@ public class SignUpPage extends AppCompatActivity implements View.OnClickListene
         }
     }
 
-    private void checkUsername(){
-
-        mDatabaseReference.child("users").child(inputUsername.getText().toString().trim()).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
-                    inputUsername.setError("Username already exists.");
-                }else{
-                    signupUser(inputEmail.getText().toString().trim(),inputPass.getText().toString().trim());
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-    }
-
+    /**
+     * Method to register the user into the database.
+     * If the task is not successful, user is shown an error message.
+     * When task is successful it calls createNewUser method and clears the text field in the form.
+     * **/
     private void signupUser(final String email, String password) {
 
+        // Show progress bar to let user know system is working.
         mprogressBar.setVisibility(View.VISIBLE);
-
 
         mFirebaseAuth.createUserWithEmailAndPassword(email,password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -133,8 +119,6 @@ public class SignUpPage extends AppCompatActivity implements View.OnClickListene
                         if(!task.isSuccessful()){
                             snackbar.make(activity_sign_up_page, "Error: "+task.getException(),Snackbar.LENGTH_SHORT)
                                     .setAction("Action", null).show();
-                            Log.d(TAG, "CREATE_USER_ERROR: " + task.getException());
-
                         }else{
                             FirebaseUser user = task.getResult().getUser();
 
@@ -146,12 +130,17 @@ public class SignUpPage extends AppCompatActivity implements View.OnClickListene
                             snackbar.make(activity_sign_up_page, "User Created! ",Snackbar.LENGTH_SHORT)
                                     .setAction("Action", null).show();
                         }
+                        // Hide progress bar after process has finished.
                         mprogressBar.setVisibility(View.GONE);
                     }
                 });
 
     }
 
+    /**
+     * Method that takes user information in its parameters and creates a User object with the information.
+     * Then adds the new user object to users in the database.
+     * **/
     private void createNewUser(String name, String email, String userId, String userRole) {
         User user = new User(name, email, userId, userRole);
 
