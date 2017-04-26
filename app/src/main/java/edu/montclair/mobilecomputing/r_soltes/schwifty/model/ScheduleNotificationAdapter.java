@@ -18,9 +18,9 @@ import edu.montclair.mobilecomputing.r_soltes.schwifty.R;
  * Created by ryansoltes on 4/23/17.
  */
 
-public class NotificationAdapter extends ArrayAdapter<Notifications> {
+public class ScheduleNotificationAdapter extends ArrayAdapter<ScheduleNotification> {
 
-    public NotificationAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull List<Notifications> objects){
+    public ScheduleNotificationAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull List<ScheduleNotification> objects){
         super(context, resource, objects);
 
     }
@@ -33,15 +33,17 @@ public class NotificationAdapter extends ArrayAdapter<Notifications> {
 
             convertView = ((Activity)getContext()).getLayoutInflater().inflate(R.layout.notification_item,parent,false);
 
-        TextView notifDate = (TextView)convertView.findViewById(R.id.notification_date);
-        TextView notifTitle = (TextView)convertView.findViewById(R.id.notification_title);
-        TextView notifBody = (TextView)convertView.findViewById(R.id.notification_body);
+        TextView notifDate = (TextView)convertView.findViewById(R.id.notification_date_SCI);
+        TextView notifuID = (TextView)convertView.findViewById(R.id.notification_uID_SCI);
+        TextView notifSTime = (TextView)convertView.findViewById(R.id.notification_start_time_SCI);
+        TextView notifETime = (TextView)convertView.findViewById(R.id.notification_end_time_SCI);
 
-        Notifications notification = getItem(position);
+        ScheduleNotification notification = getItem(position);
 
+        notifuID.setText(notification.getuID());
         notifDate.setText(notification.getnDate());
-        notifTitle.setText(notification.getnTitle());
-        notifBody.setText(notification.getnBody());
+        notifSTime.setText(notification.getnStartTime());
+        notifETime.setText(notification.getnEndTime());
 
         return convertView;
 

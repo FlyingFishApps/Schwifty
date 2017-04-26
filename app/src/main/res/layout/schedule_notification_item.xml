@@ -5,13 +5,13 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/notification_date"
+        android:id="@+id/notification_uID_SCI"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"/>
+        android:padding="10dp" />
 
     <TextView
-        android:id="@+id/notification_title"
+        android:id="@+id/notification_date_SCI"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"/>
@@ -22,7 +22,13 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/notification_body"
+            android:id="@+id/notification_start_time_SCI"
+            android:padding="10dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/notification_end_time_SCI"
             android:padding="10dp"
             android:layout_width="0dp"
             android:layout_weight="1"
