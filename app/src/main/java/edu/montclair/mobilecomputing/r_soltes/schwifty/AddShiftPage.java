@@ -43,16 +43,22 @@ import edu.montclair.mobilecomputing.r_soltes.schwifty.model.ScheduleNotificatio
 
 public class AddShiftPage extends AppCompatActivity implements View.OnClickListener {
 
-    EditText txtDate, txtTime, endTime, bID, uID;
     @BindView(R.id.noti_list_ACS) ListView mListView;
+    @BindView(R.id.bId_CS) EditText bID;
+    @BindView(R.id.uid_CS) EditText uID;
+    @BindView(R.id.end_time) EditText endTime;
+    @BindView(R.id.in_time) EditText txtTime;
+    @BindView(R.id.in_date) EditText txtDate;
+    @BindView(R.id.create_shift_btn) Button notiBtn;
+
     private int mYear, mMonth, mDay, mHour, mMinute;
-    private Button cShiftBtn;
+
     private DatabaseReference mDatabaseReference, notifRef, notifRef1;
     private FirebaseAuth mFirebaseAuth;
     private static final int TAG_SIMPLE_NOTIFICATION = 1;
     Snackbar snackbar;
     LinearLayout activity_create_shift;
-    @BindView(R.id.create_shift_btn) Button notiBtn4;
+
     ScheduleNotificationAdapter mNotificationAdapter;
     ChildEventListener mChildEventListener;
 
@@ -62,7 +68,7 @@ public class AddShiftPage extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_create_shift);
         ButterKnife.bind(this);
 
-        notiBtn4.setOnClickListener(new View.OnClickListener() {
+        notiBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showSimpleNotification();
@@ -70,12 +76,7 @@ public class AddShiftPage extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        bID = (EditText)findViewById(R.id.bId_CS);
-        uID = (EditText)findViewById(R.id.uid_CS);
-        txtDate=(EditText)findViewById(R.id.in_date);
-        txtTime=(EditText)findViewById(R.id.in_time);
-        endTime=(EditText)findViewById(R.id.end_time);
-        cShiftBtn=(Button)findViewById(R.id.create_shift_btn) ;
+
 
 
         bID.setOnClickListener(this);
@@ -83,7 +84,7 @@ public class AddShiftPage extends AppCompatActivity implements View.OnClickListe
         txtDate.setOnClickListener(this);
         txtTime.setOnClickListener(this);
         endTime.setOnClickListener(this);
-        cShiftBtn.setOnClickListener(this);
+        notiBtn.setOnClickListener(this);
 
         mFirebaseAuth = FirebaseAuth.getInstance();
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
