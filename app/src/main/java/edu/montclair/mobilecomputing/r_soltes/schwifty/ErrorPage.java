@@ -11,6 +11,10 @@ public class ErrorPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_error_page);
     }
+
+    /**
+     * When back button is pressed redirects to home page
+     * **/
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(ErrorPage.this, HomePage.class);

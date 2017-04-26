@@ -49,16 +49,17 @@ public class AddShiftPage extends AppCompatActivity implements View.OnClickListe
 
     @BindView(R.id.noti_list_ACS) ListView mListView;
     @BindView(R.id.uid_CS) EditText uID;
+    @BindView(R.id.bId_CS) EditText place;
     @BindView(R.id.end_time) EditText endTime;
     @BindView(R.id.in_time) EditText message;
     @BindView(R.id.in_date) EditText title;
+    @BindView(R.id.nID_CS) EditText numID;
     @BindView(R.id.create_shift_btn) Button notiBtn;
 
     private String value;
     private int mYear, mMonth, mDay, mHour, mMinute;
-    private static final int TAG_SIMPLE_NOTIFICATION = 1;
     Snackbar snackbar;
-    private DatabaseReference mDatabaseReference, notifRef, userIdRef;
+    private DatabaseReference mDatabaseReference, notifRef, userIdRef, businessRef;
     private FirebaseAuth mFirebaseAuth;
     RelativeLayout activity_create_shift;
     ScheduleNotificationAdapter mNotificationAdapter;
@@ -74,18 +75,20 @@ public class AddShiftPage extends AppCompatActivity implements View.OnClickListe
 
         notiBtn.setOnClickListener(new View.OnClickListener() {
             @Override
+
             public void onClick(View view) {
-                showSimpleNotification();
-                createNotification(uID.getText().toString().trim(),title.getText().toString().trim(),message.getText().toString().trim(),endTime.getText().toString().trim());
-                shift();
+               createNotification("sID: "+numID.getText().toString().trim(),"nID: "+uID.getText().toString().trim(),"Date: "+title.getText().toString().trim(),"Time in: "+message.getText().toString().trim(),"Time out: "+endTime.getText().toString());
+                checkBusiness();
             }
         });
 
+        numID.setOnClickListener(this);
         uID.setOnClickListener(this);
         title.setOnClickListener(this);
         message.setOnClickListener(this);
         endTime.setOnClickListener(this);
-        value = uID.getText().toString();
+        place.setOnClickListener(this);
+
 
         mFirebaseAuth = FirebaseAuth.getInstance();
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
@@ -133,58 +136,19 @@ public class AddShiftPage extends AppCompatActivity implements View.OnClickListe
 
 
     }
-    private PendingIntent pendingIntentForNotification() {
-        //Create the intent you want to show when the notification is clicked
-        Intent intent = new Intent(AddShiftPage.this, AddShiftPage.class);
-
-        //Add any extras (in this case, that you want to relaunch this fragment)
 
 
-        //This will hold the intent you've created until the notification is tapped.
-        PendingIntent pendingIntent = PendingIntent.getActivity(AddShiftPage.this, 1, intent, 0);
-        return pendingIntent;
-    }
-    private void showSimpleNotification() {
-        //Use the NotificationCompat compatibility library in order to get gingerbread support.
-        Notification notification = new NotificationCompat.Builder(AddShiftPage.this)
-                //Title of the notification
-                .setContentTitle(title.getText().toString().trim())
-                //Content of the notification once opened
-                .setContentText(message.toString().trim())
-                //This bit will show up in the notification area in devices that support that
-                //Icon that shows up in the notification area
-                .setSmallIcon(R.mipmap.ic_launcher)
-                //Icon that shows up in the drawer
-                .setLargeIcon(BitmapFactory.decodeResource(getResources(),R.mipmap.ic_launcher))
-                //Set the intent
-                .setContentIntent(pendingIntentForNotification())
-                //Build the notification with all the stuff you've just set.
-                .build();
-
-        //Add the auto-cancel flag to make it dismiss when clicked on
-        //This is a bitmask value so you have to pipe-equals it.
-        notification.flags |= Notification.FLAG_AUTO_CANCEL;
-
-        //Grab the NotificationManager and post the notification
-        NotificationManager notificationManager = (NotificationManager)
-                AddShiftPage.this.getSystemService(Context.NOTIFICATION_SERVICE);
-
-        //Set a tag so that the same notification doesn't get reposted over and over again and
-        //you can grab it again later if you need to.
-        notificationManager.notify(TAG_SIMPLE_NOTIFICATION, notification);
-    }
-
-    private void createNotification(String uID, String nDate, String nStartTime, String nEndTime) {
+    private void createNotification(String sID, String uID, String nDate, String nStartTime, String nEndTime) {
 
         Random rnd = new Random();
         int n = 100000 + rnd.nextInt(900000);
         String nId = String.valueOf(n);
 
-        ScheduleNotification notification = new ScheduleNotification(uID,nDate,nId,nStartTime,nEndTime);
+        ScheduleNotification notification = new ScheduleNotification(nId, sID, uID, nDate, nStartTime, nEndTime);
 
         mDatabaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://schwifty-33650.firebaseio.com/");
-        notifRef = mDatabaseReference.child("users");
-        notifRef.child(value.toString()).child(value.toString()).push().setValue(notification);
+        notifRef = mDatabaseReference.child("full_schedule");
+        mDatabaseReference.child("full_schedule").push().setValue(notification);
         snackbar.make(activity_create_shift, "Notification Sent!", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
         mNotificationAdapter.clear();
@@ -200,10 +164,10 @@ public class AddShiftPage extends AppCompatActivity implements View.OnClickListe
             public void onDataChange(DataSnapshot dataSnapshot) {
 
 
-                userIdRef.child(uID.getText().toString()).child("Schedule").push().setValue(title.getText().toString());
+                userIdRef.child(uID.getText().toString()).child("Schedule").push().setValue("sID: "+ numID.getText().toString() + "\nPlace: "+place.getText().toString()+"\nDate: "+title.getText().toString()+"\nStart Shift:"+ message.getText().toString()+"  End Shift:" + endTime.getText().toString() );
 
 
-                snackbar.make(activity_create_shift, "Employee Added!", Snackbar.LENGTH_LONG)
+                snackbar.make(activity_create_shift, "Shift Added!", Snackbar.LENGTH_SHORT)
                         .setAction("Action", null).show();
                 title.getText().clear();
                 message.getText().clear();
@@ -216,7 +180,31 @@ public class AddShiftPage extends AppCompatActivity implements View.OnClickListe
         });
     }
 
-        @Override
+    public void checkBusiness(){
+
+        mDatabaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://schwifty-33650.firebaseio.com/");
+
+        businessRef = mDatabaseReference.child("businesses");
+        businessRef.child(place.getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(!dataSnapshot.exists() || place.getText().toString().equals(null)|| numID.getText().toString().equals(null)){
+                    place.setError("Business does not exist!");
+                }else{
+                    shift();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+
+    @Override
     public void onClick(View v) {
 
         if (v == title) {

@@ -12,30 +12,14 @@ public class ManagerNotifications {
     private String nId;
     private String name;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-
-    public String getdEnd() {
-        return dEnd;
-    }
-
-    public void setdEnd(String dEnd) {
-        this.dEnd = dEnd;
-    }
-
-
-
-
     public ManagerNotifications(){
-
+        // Empty required
     }
 
+    /**
+     * Constructor to create a manager notification with a start date, reason,
+     * ID, end date, and a name
+     * **/
     public ManagerNotifications(String dStart, String nReason, String nId, String dEnd, String name) {
         this.dStart = dStart;
         this.nReason = nReason;
@@ -45,6 +29,9 @@ public class ManagerNotifications {
 
     }
 
+    /**
+     * Getters and setters for manager notification attributes
+     * **/
     public String getdStart() {
         return dStart;
     }
@@ -61,7 +48,13 @@ public class ManagerNotifications {
         this.nReason = nReason;
     }
 
+    public String getName() {
+        return name;
+    }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getnId() {
         return nId;
@@ -69,5 +62,13 @@ public class ManagerNotifications {
 
     public void setnId(String nId) {
         this.nId = nId;
+    }
+
+    public String getdEnd() {
+        return dEnd;
+    }
+
+    public void setdEnd(String dEnd) {
+        this.dEnd = dEnd;
     }
 }

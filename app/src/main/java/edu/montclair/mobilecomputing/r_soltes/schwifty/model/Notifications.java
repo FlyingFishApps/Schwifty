@@ -9,21 +9,15 @@ public class Notifications {
     private String nTitle;
     private String nBody;
     private String nId;
-
-    public String getnDate() {
-        return nDate;
-    }
-
-    public void setnDate(String nDate) {
-        this.nDate = nDate;
-    }
-
     private String nDate;
 
     public Notifications(){
-
+        // Empty required
     }
 
+    /**
+     * Constructor to create a notification with a date, title, body, and id
+     * **/
     public Notifications(String nDate, String nTitle, String nBody, String nId) {
         this.nTitle = nTitle;
         this.nDate = nDate;
@@ -32,6 +26,9 @@ public class Notifications {
 
     }
 
+    /**
+     * Getters and setting for Notification attributes
+     * **/
     public String getnTitle() {
         return nTitle;
     }
@@ -54,5 +51,13 @@ public class Notifications {
 
     public void setnId(String nId) {
         this.nId = nId;
+    }
+
+    public String getnDate() {
+        return nDate;
+    }
+
+    public void setnDate(String nDate) {
+        this.nDate = nDate;
     }
 }

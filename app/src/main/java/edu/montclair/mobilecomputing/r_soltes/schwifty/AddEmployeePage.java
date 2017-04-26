@@ -123,7 +123,7 @@ public class AddEmployeePage extends AppCompatActivity implements View.OnClickLi
     }
 
     /**
-     * 
+     *
      * */
     public void addEmployee(){
         mDatabaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://schwifty-33650.firebaseio.com/");
@@ -158,7 +158,7 @@ public class AddEmployeePage extends AppCompatActivity implements View.OnClickLi
             public void onDataChange(DataSnapshot dataSnapshot) {
 
 
-                userIdRef.child(employeeIdTxt.getText().toString()).child("jobs").push().setValue(businessNameTxt.getText().toString());
+                userIdRef.child(employeeIdTxt.getText().toString()).child("jobs").push().setValue(businessNameTxt.getText().toString()+"\nProject");
 
 
                 snackbar.make(activity_add_employee_page, "Employee Added!", Snackbar.LENGTH_LONG)

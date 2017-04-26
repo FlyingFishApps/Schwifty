@@ -9,9 +9,12 @@ public class User {
     private String username, uid, email, userRole;
 
     public User(){
-
+        // Empty required
     }
 
+    /**
+     * Constructor to create new user with a username, email, user id, and user role
+     * **/
     public User(String username, String email, String uid, String userRole) {
         this.username = username;
         this.uid = uid;
@@ -20,6 +23,9 @@ public class User {
 
     }
 
+    /**
+     * Getters and setters for all User attributes
+     * **/
     public String getUsername() {
         return username;
     }

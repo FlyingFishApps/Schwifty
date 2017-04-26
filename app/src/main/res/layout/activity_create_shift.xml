@@ -5,8 +5,6 @@
     android:id="@+id/activity_create_shift"
     tools:context=".AddShiftPage">
 
-
-
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -32,20 +30,36 @@
         android:layout_alignParentTop="true"
         android:gravity="center"/>
 
-    <!--<android.support.design.widget.TextInputLayout-->
-        <!--android:id="@+id/cb_bName_input"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content">-->
-        <!--<EditText-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:id="@+id/bId_CS"-->
-            <!--android:hint="@string/bID_CS"-->
-            <!--android:layout_marginTop="82dp"-->
-            <!--android:layout_alignParentTop="true"-->
-            <!--android:layout_alignParentLeft="true"-->
-            <!--android:layout_alignParentStart="true" />-->
-    <!--</android.support.design.widget.TextInputLayout>-->
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/cb_bnID_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/nID_CS"
+            android:hint="@string/nID_CS"
+            android:inputType="number"
+            android:layout_marginTop="82dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/cb_bName_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/bId_CS"
+            android:hint="@string/bID_CS"
+            android:layout_marginTop="82dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+    </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/cb_UID_input"
@@ -123,10 +137,10 @@
         <Button
             android:id="@+id/create_shift_btn"
             style="@style/Widget.AppCompat.Button.Colored"
+            android:background="#4286f4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:background="#4286f4"
             android:gravity="center"
             android:padding="10dp"
             android:text="@string/create_shift_btn" />

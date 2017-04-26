@@ -34,18 +34,17 @@ import edu.montclair.mobilecomputing.r_soltes.schwifty.model.ManagerNotification
 import edu.montclair.mobilecomputing.r_soltes.schwifty.model.ManagerNotificationsAdapter;
 import edu.montclair.mobilecomputing.r_soltes.schwifty.model.NotificationAdapter;
 import edu.montclair.mobilecomputing.r_soltes.schwifty.model.Notifications;
+import edu.montclair.mobilecomputing.r_soltes.schwifty.model.ScheduleNotification;
+import edu.montclair.mobilecomputing.r_soltes.schwifty.model.ScheduleNotificationAdapter;
 
 public class ManagerNotificationPage extends AppCompatActivity {
-
-
-
     @BindView(R.id.noti_list_MNP) ListView mListView;
 
     Snackbar snackbar;
     private DatabaseReference mDatabaseReference, notifRef;
     private FirebaseAuth mFirebaseAuth;
     RelativeLayout activity_manager_notification_page;
-    ManagerNotificationsAdapter mNotificationAdapter;
+    ScheduleNotificationAdapter mNotificationAdapter;
     ChildEventListener mChildEventListener;
     FirebaseAuth.AuthStateListener mAuthStateListener;
 
@@ -55,20 +54,17 @@ public class ManagerNotificationPage extends AppCompatActivity {
         setContentView(R.layout.activity_manager_notification_page);
         ButterKnife.bind(this);
         activity_manager_notification_page = (RelativeLayout)findViewById(R.id.activity_manager_notification_page);
-
-
-
-        List<ManagerNotifications> listOfNotifis = new ArrayList<>();
-        notifRef = FirebaseDatabase.getInstance().getReference("manager_notifications");
+        List<ScheduleNotification> listOfNotifis = new ArrayList<>();
+        notifRef = FirebaseDatabase.getInstance().getReference("full_schedule");
         mFirebaseAuth = FirebaseAuth.getInstance();
 
-        mNotificationAdapter = new ManagerNotificationsAdapter(this, R.layout.manager_notification_item, listOfNotifis);
+        mNotificationAdapter = new ScheduleNotificationAdapter(this, R.layout.schedule_notification_item, listOfNotifis);
         mListView.setAdapter(mNotificationAdapter);
 
         mChildEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                ManagerNotifications notification = dataSnapshot.getValue(ManagerNotifications
+                ScheduleNotification notification = dataSnapshot.getValue(ScheduleNotification
                         .class);
                 mNotificationAdapter.add(notification);
             }
@@ -99,10 +95,10 @@ public class ManagerNotificationPage extends AppCompatActivity {
 
 
 
-
-
-
     }
+
+
+
 
     @Override
     public void onBackPressed() {
