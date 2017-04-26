@@ -14,7 +14,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:transcriptMode="alwaysScroll"
-        android:stackFromBottom="false"
+        android:stackFromBottom="true"
         />
     </LinearLayout>
 </RelativeLayout>
