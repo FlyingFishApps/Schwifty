@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
@@ -15,8 +13,6 @@ import java.io.InputStreamReader;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
-import static android.R.attr.button;
 
 public class HowToUsePage extends AppCompatActivity {
 
@@ -30,29 +26,35 @@ public class HowToUsePage extends AppCompatActivity {
 
         textview.setMovementMethod(new ScrollingMovementMethod());
 
-        String data = "";
-
+        // Create string for data
+        String data;
+        // Create new string buffer
         StringBuffer sBuffer = new StringBuffer();
-
+        // Create new input stream
         InputStream is = this.getResources().openRawResource(R.raw.how);
-
+        // Create new buffer reader
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-
+        // If the input stream is not null then read info from data
         if (is != null) {
             try{
                 while ((data = reader.readLine()) != null) {
                     sBuffer.append(data + "\n" + "\t");
                 }
-
+                // Set text view to the info read from data
                 textview.setText(sBuffer);
+                // Close input stream
                 is.close();
 
+            // Catch exception
             }catch (Exception e){
                 e.printStackTrace();
             }
         }
     }
 
+    /**
+     * When back button is pressed go to home page.
+     * **/
     @Override
     public void onBackPressed () {
         Intent intent = new Intent(HowToUsePage.this, HomePage.class);
@@ -60,6 +62,4 @@ public class HowToUsePage extends AppCompatActivity {
         startActivity(intent);
 
     }
-
-
 }

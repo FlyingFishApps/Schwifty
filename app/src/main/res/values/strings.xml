@@ -31,10 +31,9 @@
         <item>Unpaid Request</item>
     </string-array>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="cb_bussiness_name_hint">Business Name</string>
-    <string name="create_bussiness_tv">Create Bussiness</string>
+    <string name="create_bussiness_tv">Create Business</string>
     <string name="cb_create_btn">Create</string>
     <string name="fragment_error">Not Available To Employees</string>
     <string name="add_employee_tv">Add Employee</string>
