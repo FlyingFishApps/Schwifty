@@ -34,17 +34,12 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
     @BindView(R.id.lp_login_password) EditText inputPass;
     @BindView(R.id.lpProgressBar) ProgressBar mprogressBar;
 
-
-    RelativeLayout activity_login_page;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-    private DatabaseReference mDatabaseReference, userRef;
-    private FirebaseDatabase mFirebaseDatabase;
-
-    public static final String TAG = "CURRENT_USER_INFO";
-
-
     public Snackbar snackbar;
+
+    RelativeLayout activity_login_page;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +57,6 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
         // Init Firebase Auth
         mFirebaseAuth = FirebaseAuth.getInstance();
 
-
         // Check if user is signed in
         mAuthListener = new FirebaseAuth.AuthStateListener() {
 
@@ -75,20 +69,26 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
                     finish();
                 } else {
                     // User is signed out
-                    
                 }
             }
         };
-
-
     }
 
+    /**
+     * When activity starts, authListener is added to
+     * check if there is a user currently signed in.
+     * **/
     @Override
     protected void onStart() {
         super.onStart();
         mFirebaseAuth.addAuthStateListener(mAuthListener);
     }
 
+    /**
+     * onClick method to handle which button in UI is clicked.
+     * Starts intent to page corresponding to the id of the button
+     * clicked.
+     * **/
     @Override
     public void onClick(View view) {
 
@@ -110,8 +110,14 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
         }
     }
 
+    /**
+     * Method that checks if Login fields are empty, if so display error through snackbar.
+     * If both fields are filled, checks credentials against users in database.
+     * If correct, user is logged in and redirected to the home page.
+     * **/
     private void loginUser(final String email, final String password) {
 
+        // Shows a progress bar so user knows system is working.
         mprogressBar.setVisibility(View.VISIBLE);
 
         if(TextUtils.isEmpty(email)){
@@ -140,9 +146,14 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
                     });
         }
 
+        // Hides progress bar to show the process is done.
         mprogressBar.setVisibility(View.GONE);
     }
 
+    /**
+     * When activity is stopped, authListener is no longer checking
+     * for a user already logged in.
+     * **/
     @Override
     public void onStop() {
         super.onStop();

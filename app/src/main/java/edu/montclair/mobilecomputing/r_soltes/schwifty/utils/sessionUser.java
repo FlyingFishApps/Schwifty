@@ -14,24 +14,9 @@ import edu.montclair.mobilecomputing.r_soltes.schwifty.LoginPage;
 
 public class sessionUser {
 
-//    public static final String SHARED_PREF_FILENAME="edu.montclair.mobilecomputing.r_soltes.schwifty.SHAREDFILE1";
-//    public static final String KEY_SESSION_USER_ID="";
-//    public static final String KEY_SESSION_USERNAME="";
-//    public static final String KEY_SESSION_USEREMAIL="";
-//    public static final String KEY_SESSION_USERROLE="";
-
-//    public String name;
-//    public String email;
-//    public String userRole;
-//    public String uId;
-
-
-
-
     public sessionUser(){
-
+        // Empty required
     }
-
 
     // Shared Preferences reference
     SharedPreferences pref;
@@ -50,7 +35,6 @@ public class sessionUser {
 
     // All Shared Preferences Keys
     private static final String IS_USER_LOGIN = "IsUserLoggedIn";
-
     public static final String KEY_SESSION_USER_ID="";
     public static final String KEY_SESSION_USERNAME="";
     public static final String KEY_SESSION_USEREMAIL="";
@@ -80,7 +64,6 @@ public class sessionUser {
         editor.putString(KEY_SESSION_USERNAME, name);
         editor.putString(KEY_SESSION_USERROLE, userRole);
 
-        // commit changes
         editor.commit();
     }
 
@@ -98,7 +81,6 @@ public class sessionUser {
         user.put(KEY_SESSION_USERNAME, pref.getString(KEY_SESSION_USERNAME, null));
         user.put(KEY_SESSION_USERROLE, pref.getString(KEY_SESSION_USERROLE, null));
 
-        // return user
         return user;
     }
 
