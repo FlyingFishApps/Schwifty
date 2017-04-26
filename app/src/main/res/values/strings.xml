@@ -73,6 +73,7 @@
     <string name="create_shift_btn">Schedule Shift</string>
     <string name="uid_CS">UID</string>
     <string name="bID_CS">Business Name</string>
+    <string name="shift_home">Schedule</string>
 
 
 </resources>
