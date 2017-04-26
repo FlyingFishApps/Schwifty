@@ -5,8 +5,6 @@
     android:id="@+id/activity_create_shift"
     tools:context=".AddShiftPage">
 
-
-
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -41,8 +39,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/nID_CS"
             android:hint="@string/nID_CS"
+            android:inputType="number"
             android:layout_marginTop="82dp"
-            android:maxLength="3"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />

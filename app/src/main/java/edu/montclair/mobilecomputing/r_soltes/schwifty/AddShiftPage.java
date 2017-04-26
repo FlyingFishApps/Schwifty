@@ -58,7 +58,6 @@ public class AddShiftPage extends AppCompatActivity implements View.OnClickListe
 
     private String value;
     private int mYear, mMonth, mDay, mHour, mMinute;
-    private static final int TAG_SIMPLE_NOTIFICATION = 1;
     Snackbar snackbar;
     private DatabaseReference mDatabaseReference, notifRef, userIdRef, businessRef;
     private FirebaseAuth mFirebaseAuth;
@@ -78,7 +77,7 @@ public class AddShiftPage extends AppCompatActivity implements View.OnClickListe
             @Override
 
             public void onClick(View view) {
-//                createNotification(numID.getText().toString().trim(),s.getSelectedItem().toString().trim(),title1.getText().toString().trim(),title2.getText().toString().trim());
+               createNotification("sID: "+numID.getText().toString().trim(),"nID: "+uID.getText().toString().trim(),"Date: "+title.getText().toString().trim(),"Time in: "+message.getText().toString().trim(),"Time out: "+endTime.getText().toString());
                 checkBusiness();
             }
         });
@@ -89,7 +88,7 @@ public class AddShiftPage extends AppCompatActivity implements View.OnClickListe
         message.setOnClickListener(this);
         endTime.setOnClickListener(this);
         place.setOnClickListener(this);
-        value = uID.getText().toString();
+
 
         mFirebaseAuth = FirebaseAuth.getInstance();
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
@@ -139,7 +138,7 @@ public class AddShiftPage extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    private void createNotification( String sID, String uID, String nDate, String nStartTime, String nEndTime) {
+    private void createNotification(String sID, String uID, String nDate, String nStartTime, String nEndTime) {
 
         Random rnd = new Random();
         int n = 100000 + rnd.nextInt(900000);
