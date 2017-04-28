@@ -87,6 +87,15 @@
                 android:layout_height="match_parent"
                 android:text="@string/prof_userRole"
                 android:padding="20dp"/>
+
+            <Button
+                android:id="@+id/noti_button_PP"
+                android:text="@string/noti_button_PP"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:background="#4286f4"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
         </LinearLayout>
     </LinearLayout>
 

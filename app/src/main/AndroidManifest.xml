@@ -36,6 +36,7 @@
         <activity android:name=".ProfilePage" />
         <activity android:name=".AddShiftPage" />
         <activity android:name=".SchwiftPage" />
+        <activity android:name=".SwapPage" />
         <activity android:name=".HowToUsePage"></activity>
     </application>
 
