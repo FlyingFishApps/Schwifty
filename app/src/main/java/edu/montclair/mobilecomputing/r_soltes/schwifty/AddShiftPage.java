@@ -59,7 +59,7 @@ public class AddShiftPage extends AppCompatActivity implements View.OnClickListe
     private String value;
     private int mYear, mMonth, mDay, mHour, mMinute;
     Snackbar snackbar;
-    private DatabaseReference mDatabaseReference, notifRef, userIdRefn, userIdRef, businessRef;
+    private DatabaseReference mDatabaseReference, notifRef, userIdRefn, userIdRefID, userIdRef, businessRef;
     private FirebaseAuth mFirebaseAuth;
     RelativeLayout activity_create_shift;
     ScheduleNotificationAdapter mNotificationAdapter;
@@ -174,7 +174,7 @@ public class AddShiftPage extends AppCompatActivity implements View.OnClickListe
 
                 snackbar.make(activity_create_shift, "Shift Added!", Snackbar.LENGTH_SHORT)
                         .setAction("Action", null).show();
-
+                        shiftID();
             }
 
             @Override
@@ -188,16 +188,17 @@ public class AddShiftPage extends AppCompatActivity implements View.OnClickListe
 
         mDatabaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://schwifty-33650.firebaseio.com/");
         userIdRefn = mDatabaseReference.child("users").child(uID.getText().toString()).child("uid");
-        userIdRef.child(uID.getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
+
+        userIdRefn.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
-
-                userIdRef.child(uID.getText().toString()).child("Schedule").child("Shift: "+numID.getText().toString()).child("sID").setValue(numID.getText().toString());
-                userIdRef.child(uID.getText().toString()).child("Schedule").child("Shift: "+numID.getText().toString()).child("Place").setValue(place.getText().toString());
-                userIdRef.child(uID.getText().toString()).child("Schedule").child("Shift: "+numID.getText().toString()).child("Date").setValue(title.getText().toString());
-                userIdRef.child(uID.getText().toString()).child("Schedule").child("Shift: "+numID.getText().toString()).child("Start Shift").setValue(message.getText().toString());
-                userIdRef.child(uID.getText().toString()).child("Schedule").child("Shift: "+numID.getText().toString()).child("End Shift").setValue(endTime.getText().toString());
+                String uid = dataSnapshot.getValue().toString();
+                userIdRefID = mDatabaseReference.child("usersIDs").child(uid);
+                userIdRefID.child("Schedule").child("Shift: "+numID.getText().toString()).child("sID").setValue(numID.getText().toString());
+                userIdRefID.child("Schedule").child("Shift: "+numID.getText().toString()).child("Place").setValue(place.getText().toString());
+                userIdRefID.child("Schedule").child("Shift: "+numID.getText().toString()).child("Date").setValue(title.getText().toString());
+                userIdRefID.child("Schedule").child("Shift: "+numID.getText().toString()).child("Start Shift").setValue(message.getText().toString());
+                userIdRefID.child("Schedule").child("Shift: "+numID.getText().toString()).child("End Shift").setValue(endTime.getText().toString());
 
 
                 snackbar.make(activity_create_shift, "Shift Added!", Snackbar.LENGTH_SHORT)

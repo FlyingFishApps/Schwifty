@@ -113,7 +113,7 @@ public class AddEmployeePage extends AppCompatActivity implements View.OnClickLi
 
                 }else{
                     addEmployee();
-                    add();
+
                 }
             }
 
@@ -168,7 +168,7 @@ public class AddEmployeePage extends AppCompatActivity implements View.OnClickLi
                 snackbar.make(activity_add_employee_page, "Employee Added!", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
 
-
+                add();
             }
 
             @Override
@@ -194,6 +194,7 @@ public class AddEmployeePage extends AppCompatActivity implements View.OnClickLi
                 snackbar.make(activity_add_employee_page, "Employee Added!", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
                 businessNameTxt.getText().clear();
+                employeenameTxt.getText().clear();
                 employeeIdTxt.getText().clear();
             }
 

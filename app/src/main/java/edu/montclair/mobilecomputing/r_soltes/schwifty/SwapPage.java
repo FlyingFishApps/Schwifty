@@ -47,8 +47,7 @@ public class SwapPage extends AppCompatActivity {
                 FirebaseUser user1 = mFirebaseAuth.getInstance().getCurrentUser();
 
                 // Creates string user id from current user's user ID
-                final String uid1 = user1.getUid().toString();
-                emP2.setText(uid1);
+                moveFirebaseRecord();
             }
         });
     }
@@ -65,17 +64,19 @@ public class SwapPage extends AppCompatActivity {
 
                         @Override
                         public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-                        reason1 = true;
+                        moveFirebaseRecord2();
                         }
                     });
 
                 }
+
 
                 @Override
                 public void onCancelled(DatabaseError firebaseError) {
 
                 }
             });
+
 
     }
 
@@ -98,7 +99,7 @@ public class SwapPage extends AppCompatActivity {
 
                     @Override
                     public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-                        reason = true;
+                        removeFirebaseRecord();
                     }
                 });
 
