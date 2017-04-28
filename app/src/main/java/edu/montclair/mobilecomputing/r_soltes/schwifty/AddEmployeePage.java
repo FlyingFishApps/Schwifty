@@ -126,7 +126,8 @@ public class AddEmployeePage extends AppCompatActivity implements View.OnClickLi
     }
 
     /**
-     *
+     * Adds an instance of a User by username into the business' child ("bname") root of the database.
+     * Adds an instance of a User by UID into the business' child ("bname") root of the database.
      * */
     public void addEmployee(){
         mDatabaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://schwifty-33650.firebaseio.com/");
@@ -136,17 +137,11 @@ public class AddEmployeePage extends AppCompatActivity implements View.OnClickLi
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-//                HashMap<String, String> newEmployee = new HashMap();
-//
-//                newEmployee.put(employeeIdTxt.getText().toString(), employeeIdTxt.getText().toString());
-
+                            // Adds a instances of the add employee into the business by username.
                 businessRef.child(businessNameTxt.getText().toString()).child("List Of Employees").child(employeenameTxt.getText().toString()).setValue(employeenameTxt.getText().toString());
+                            // Adds a instances of the add employee into the business by UID.
                 businessRef.child(businessNameTxt.getText().toString()).child("List Of Employees UIDs").child(employeeIdTxt.getText().toString()).setValue(employeenameTxt.getText().toString());
-
-
-
-
-
+                
             }
 
             @Override
