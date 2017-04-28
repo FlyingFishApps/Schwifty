@@ -29,13 +29,11 @@
         <item>Jury Duty</item>
         <item>PTO</item>
         <item>Unpaid Request</item>
-        <item>Tylers Reason</item>
     </string-array>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="cb_bussiness_name_hint">Business Name</string>
-    <string name="create_bussiness_tv">Create Bussiness</string>
+    <string name="create_bussiness_tv">Create Business</string>
     <string name="cb_create_btn">Create</string>
     <string name="fragment_error">Not Available To Employees</string>
     <string name="add_employee_tv">Add Employee</string>
@@ -67,6 +65,19 @@
     <string name="manager_notifications_MP">NOTIFICATIONS</string>
     <string name="time_off_tv">Time-Off Request</string>
     <string name="how_to">How To Use App</string>
+    <string name="noti_date">Date</string>
+    <string name="add_shift_MP">Add Shift</string>
+    <string name="create_shift_txt">Create Shift</string>
+    <string name="create_shift_btn">Schedule Shift</string>
+    <string name="uid_CS">UID</string>
+    <string name="bID_CS">Business Name</string>
+    <string name="shift_home">Schedule</string>
+    <string name="nID_CS">Shift ID</string>
+    <string name="noti_button_PP">Notifications</string>
+    <string name="cb_owner_name_hint">Owner Name</string>
+    <string name="manager_swap_MP">Swap Shifts</string>
+    <string name="swapTV_SCP">Schwift Shift</string>
+    <string name="employee_ID_hint">Employee UID</string>
 
 
 </resources>

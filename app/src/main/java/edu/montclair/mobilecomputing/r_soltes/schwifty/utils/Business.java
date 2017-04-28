@@ -9,9 +9,12 @@ public class Business {
     private String bName, bId, bOwner;
 
     public Business(){
-
+        // Empty required
     }
 
+    /**
+     * Constructor to create a new business with a name, id, and owner name
+     * **/
     public Business(String bName, String bId, String bOwner) {
         this.bName = bName;
         this.bId = bId;
@@ -19,10 +22,9 @@ public class Business {
 
     }
 
-    public void updateBusiness(){
-
-    }
-
+    /**
+     * Getters and setters for business attributes
+     * **/
     public String getbName() {
         return bName;
     }

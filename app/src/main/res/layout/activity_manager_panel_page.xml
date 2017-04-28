@@ -30,11 +30,12 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="vertical"
+            android:padding="10dp"
             android:layout_alignParentTop="true">
 
             <Button
                 android:id="@+id/create_business_btn"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:text="@string/create_business_btn"
@@ -45,7 +46,7 @@
 
             <Button
                 android:id="@+id/add_employee_btn"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:text="@string/add_employee_btn"
@@ -55,14 +56,37 @@
                 android:layout_marginBottom="20dp"/>
 
             <Button
+                android:id="@+id/add_shift_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="@string/add_shift_MP"
+                android:background="#4286f4"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:padding="10dp"
+                android:layout_marginBottom="20dp"/>
+
+            <Button
                 android:id="@+id/noti_manger_btn"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:text="@string/manager_notifications_MP"
                 android:background="#4286f4"
                 style="@style/Widget.AppCompat.Button.Colored"
+                android:padding="10dp"
+                android:layout_marginBottom="20dp"/>
+
+            <Button
+                android:id="@+id/noti_swap_btn_MP"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="@string/manager_swap_MP"
+                android:background="#4286f4"
+                style="@style/Widget.AppCompat.Button.Colored"
                 android:padding="10dp"/>
+
 
 
         </LinearLayout>
