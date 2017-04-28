@@ -15,6 +15,7 @@ public class ManagerPanelPage extends AppCompatActivity implements View.OnClickL
     @BindView(R.id.add_employee_btn) Button addEmployeeBtn;
     @BindView(R.id.noti_manger_btn) Button manageNotiBtn;
     @BindView(R.id.add_shift_btn) Button aShiftBtn;
+    @BindView(R.id.noti_swap_btn_MP) Button aSwapBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +25,7 @@ public class ManagerPanelPage extends AppCompatActivity implements View.OnClickL
         addEmployeeBtn.setOnClickListener(this);
         manageNotiBtn.setOnClickListener(this);
         aShiftBtn.setOnClickListener(this);
+        aSwapBtn.setOnClickListener(this);
     }
     @Override
     public void onClick(View view) {
@@ -43,6 +45,10 @@ public class ManagerPanelPage extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.add_shift_btn:
                 startActivity(new Intent(ManagerPanelPage.this,AddShiftPage.class));
+                finish();
+                break;
+            case R.id.noti_swap_btn_MP:
+                startActivity(new Intent(ManagerPanelPage.this,SwapPage.class));
                 finish();
                 break;
             default:

@@ -74,6 +74,10 @@
     <string name="shift_home">Schedule</string>
     <string name="nID_CS">Shift ID</string>
     <string name="noti_button_PP">Notifications</string>
+    <string name="cb_owner_name_hint">Owner Name</string>
+    <string name="manager_swap_MP">Swap Shifts</string>
+    <string name="swapTV_SCP">Schwift Shift</string>
+    <string name="employee_ID_hint">Employee UID</string>
 
 
 </resources>

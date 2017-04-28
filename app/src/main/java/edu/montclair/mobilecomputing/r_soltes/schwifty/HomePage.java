@@ -35,7 +35,7 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener 
     @BindView(R.id.how_to) Button howToBtn;
 
     private FirebaseAuth mFirebaseAuth;
-    private DatabaseReference mDatabaseReference, userRef;
+    private DatabaseReference mDatabaseReference, userRef, nameRef;
 
     public Snackbar snackbar;
     public sessionUser session;
@@ -63,11 +63,12 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener 
         FirebaseUser user = mFirebaseAuth.getInstance().getCurrentUser();
 
         // Make string from the current user's ID
+
         final String uid = user.getUid().toString();
         // Get instance of database
         mDatabaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://schwifty-33650.firebaseio.com/");
         // Create reference to users table in database
-        userRef = mDatabaseReference.child("users");
+        userRef = mDatabaseReference.child("usersIDs");
         // Add value listener to users reference to find a user ID equal to the current user's user ID
         userRef.orderByChild("uid").equalTo(uid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -108,7 +109,7 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener 
                 // Get reference to database
                 mDatabaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://schwifty-33650.firebaseio.com/");
                 // Get Reference to users
-                userRef = mDatabaseReference.child("users");
+                userRef = mDatabaseReference.child("usersIDs");
                 // Add listener to find user ID equal to current user's, user ID
                 userRef.orderByChild("uid").equalTo(uid).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -141,7 +142,8 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener 
 
                     }
                 });
-
+//                startActivity(new Intent(HomePage.this, ManagerPanelPage.class));
+//                finish();
                 break;
             case R.id.nav_job_list:
                 startActivity(new Intent(HomePage.this, JobListPage.class));
@@ -168,24 +170,24 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener 
                 // Gets database reference
                 mDatabaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://schwifty-33650.firebaseio.com/");
                 // Get reference to users
-                userRef = mDatabaseReference.child("users");
+                userRef = mDatabaseReference.child("usersIDs");
                 // Add listener to find user ID in database equal to current user's user ID
                 userRef.orderByChild("uid").equalTo(uid1).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
                         // Create string of user information
-                        String userRole = dataSnapshot.child(uid1).child("userRole").getValue().toString();
-                        String username = dataSnapshot.child(uid1).child("username").getValue().toString();
-                        String userEmail = dataSnapshot.child(uid1).child("email").getValue().toString();
-
-                        // Create session user from user info
-                        session.createSessionUser(userEmail,uid1,username,userRole);
-                        // Get the user details from session user
-                        HashMap<String, String> currentUser = session.getUserDetails();
+                       String userRole = dataSnapshot.child(uid1).child("userRole").getValue().toString();
+//                        String username = dataSnapshot.child(uid1).child("username").getValue().toString();
+//                        String userEmail = dataSnapshot.child(uid1).child("email").getValue().toString();
+//
+//                        // Create session user from user info
+//                        session.createSessionUser(userEmail,uid1,username,userRole);
+//                        // Get the user details from session user
+//                        HashMap<String, String> currentUser = session.getUserDetails();
 
                         // If the current user is a manager then go to Manager notification page
-                        if(currentUser.get(sessionUser.KEY_SESSION_USERROLE).equals("Manager")){
+                        if(userRole.equals("Manager")){
                             startActivity(new Intent(HomePage.this, NotificationPageManager.class));
                             finish();
                         // If the current user is an employee go to EMployee notification page

@@ -68,7 +68,7 @@
 
 
         <EditText
-            android:id="@+id/ae_employee_id"
+            android:id="@+id/ae_employee_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/employee_name_hint"
@@ -78,6 +78,25 @@
             />
 
     </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_below="@+id/ae_employee_id"
+            android:id="@+id/ae_input_employee_ID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <EditText
+                android:id="@+id/ae_employee_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/employee_ID_hint"
+                android:inputType="textCapWords"
+                android:maxLines="1"
+
+                />
+
+        </android.support.design.widget.TextInputLayout>
 
     <!-- Add Employee Button -->
     <Button

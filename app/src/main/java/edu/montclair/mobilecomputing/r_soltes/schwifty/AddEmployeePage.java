@@ -24,9 +24,10 @@ import butterknife.ButterKnife;
 public class AddEmployeePage extends AppCompatActivity implements View.OnClickListener {
 
     @BindView(R.id.ae_business_name) EditText businessNameTxt;
+    @BindView(R.id.ae_employee_name) EditText employeenameTxt;
     @BindView(R.id.ae_employee_id) EditText employeeIdTxt;
     @BindView(R.id.ae_add_employee_btn) Button addEmployeeBtn;
-    private DatabaseReference mDatabaseReference, businessRef, userIdRef;
+    private DatabaseReference mDatabaseReference, businessRef, userIdRef, userIdRef1;
     private String employeeId, businessName;
     Snackbar snackbar;
     RelativeLayout activity_add_employee_page;
@@ -102,7 +103,8 @@ public class AddEmployeePage extends AppCompatActivity implements View.OnClickLi
     public void checkEmployee(){
         mDatabaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://schwifty-33650.firebaseio.com/");
 
-        userIdRef = mDatabaseReference.child("users");
+        userIdRef = mDatabaseReference.child("usersIDs");
+
         userIdRef.child(employeeIdTxt.getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -111,6 +113,7 @@ public class AddEmployeePage extends AppCompatActivity implements View.OnClickLi
 
                 }else{
                     addEmployee();
+                    add();
                 }
             }
 
@@ -133,15 +136,15 @@ public class AddEmployeePage extends AppCompatActivity implements View.OnClickLi
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                HashMap<String, String> newEmployee = new HashMap();
+//                HashMap<String, String> newEmployee = new HashMap();
+//
+//                newEmployee.put(employeeIdTxt.getText().toString(), employeeIdTxt.getText().toString());
 
-                newEmployee.put(employeeIdTxt.getText().toString(), employeeIdTxt.getText().toString());
+                businessRef.child(businessNameTxt.getText().toString()).child("List Of Employees").child(employeenameTxt.getText().toString()).setValue(employeenameTxt.getText().toString());
+                businessRef.child(businessNameTxt.getText().toString()).child("List Of Employees UIDs").child(employeeIdTxt.getText().toString()).setValue(employeenameTxt.getText().toString());
 
-                businessRef.child(businessNameTxt.getText().toString()).child("List Of Employees").push().setValue(newEmployee);
 
 
-                String data = dataSnapshot.child(businessNameTxt.getText().toString()).child("bName").getValue().toString();
-                System.out.println(data);
 
 
             }
@@ -153,12 +156,39 @@ public class AddEmployeePage extends AppCompatActivity implements View.OnClickLi
         });
 
         userIdRef = mDatabaseReference.child("users");
-        userIdRef.child(employeeIdTxt.getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
+
+        userIdRef.child(employeenameTxt.getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
 
-                userIdRef.child(employeeIdTxt.getText().toString()).child("jobs").push().setValue(businessNameTxt.getText().toString()+"\nProject");
+                userIdRef.child(employeenameTxt.getText().toString()).child("jobs").child(businessNameTxt.getText().toString()).setValue(businessNameTxt.getText().toString());
+
+
+                snackbar.make(activity_add_employee_page, "Employee Added!", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+    }
+
+    private void add(){
+        mDatabaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://schwifty-33650.firebaseio.com/");
+        userIdRef1 = mDatabaseReference.child("usersIDs");
+        userIdRef1.child(employeeIdTxt.getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+
+                userIdRef1.child(employeeIdTxt.getText().toString()).child("jobs").child(businessNameTxt.getText().toString()).setValue(businessNameTxt.getText().toString());
 
 
                 snackbar.make(activity_add_employee_page, "Employee Added!", Snackbar.LENGTH_LONG)
