@@ -16,19 +16,16 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.HashMap;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class AddEmployeePage extends AppCompatActivity implements View.OnClickListener {
 
     @BindView(R.id.ae_business_name) EditText businessNameTxt;
-    @BindView(R.id.ae_employee_name) EditText employeenameTxt;
-    @BindView(R.id.ae_employee_id) EditText employeeIdTxt;
+    @BindView(R.id.ae_employee_name) EditText employeeNameTxt;
+    @BindView(R.id.ae_employee_id) EditText employeeUIDTxt;
     @BindView(R.id.ae_add_employee_btn) Button addEmployeeBtn;
-    private DatabaseReference mDatabaseReference, businessRef, userIdRef, userIdRef1;
-    private String employeeId, businessName;
+    private DatabaseReference mDatabaseReference, businessRef, userIdRef, userUIDRef;
     Snackbar snackbar;
     RelativeLayout activity_add_employee_page;
 
@@ -98,18 +95,18 @@ public class AddEmployeePage extends AppCompatActivity implements View.OnClickLi
 
     /**
      * Method to check if the user ID entered by the user is an existing one in the database.
-     * If it does not, alert the user. Otherwise add the employee to the business.
+     * If it does not, alert the user. Otherwise addEmployeeUID the employee to the business.
      * */
     public void checkEmployee(){
         mDatabaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://schwifty-33650.firebaseio.com/");
 
         userIdRef = mDatabaseReference.child("usersIDs");
 
-        userIdRef.child(employeeIdTxt.getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
+        userIdRef.child(employeeUIDTxt.getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(!dataSnapshot.exists()){
-                    employeeIdTxt.setError("Employee does not exist!");
+                    employeeUIDTxt.setError("Employee does not exist!");
 
                 }else{
                     addEmployee();
@@ -137,10 +134,10 @@ public class AddEmployeePage extends AppCompatActivity implements View.OnClickLi
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                            // Adds a instances of the add employee into the business by username.
-                businessRef.child(businessNameTxt.getText().toString()).child("List Of Employees").child(employeenameTxt.getText().toString()).setValue(employeenameTxt.getText().toString());
-                            // Adds a instances of the add employee into the business by UID.
-                businessRef.child(businessNameTxt.getText().toString()).child("List Of Employees UIDs").child(employeeIdTxt.getText().toString()).setValue(employeenameTxt.getText().toString());
+                            // Adds a instances of the addEmployeeUID employee into the business by username.
+                businessRef.child(businessNameTxt.getText().toString()).child("List Of Employees").child(employeeNameTxt.getText().toString()).setValue(employeeNameTxt.getText().toString());
+                            // Adds a instances of the addEmployeeUID employee into the business by UID.
+                businessRef.child(businessNameTxt.getText().toString()).child("List Of Employees UIDs").child(employeeUIDTxt.getText().toString()).setValue(employeeNameTxt.getText().toString());
                 
             }
 
@@ -151,19 +148,19 @@ public class AddEmployeePage extends AppCompatActivity implements View.OnClickLi
         });
 
         userIdRef = mDatabaseReference.child("users");
-
-        userIdRef.child(employeenameTxt.getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
+        userIdRef.child(employeeNameTxt.getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-
-                userIdRef.child(employeenameTxt.getText().toString()).child("jobs").child(businessNameTxt.getText().toString()).setValue(businessNameTxt.getText().toString());
+                    // Stores a job instance in the employees' username child branch.
+                userIdRef.child(employeeNameTxt.getText().toString()).child("jobs").child(businessNameTxt.getText().toString()).setValue(businessNameTxt.getText().toString());
 
 
                 snackbar.make(activity_add_employee_page, "Employee Added!", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
 
-                add();
+                    // Calls the method that stores a job instance in the employees' UID child branch.
+                addEmployeeUID();
             }
 
             @Override
@@ -175,22 +172,27 @@ public class AddEmployeePage extends AppCompatActivity implements View.OnClickLi
 
     }
 
-    private void add(){
+    /**
+     *  Adds a job instance in the employees' UID child branch.
+     * */
+    private void addEmployeeUID(){
         mDatabaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://schwifty-33650.firebaseio.com/");
-        userIdRef1 = mDatabaseReference.child("usersIDs");
-        userIdRef1.child(employeeIdTxt.getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
+        userUIDRef = mDatabaseReference.child("usersIDs");
+        userUIDRef.child(employeeUIDTxt.getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-
-                userIdRef1.child(employeeIdTxt.getText().toString()).child("jobs").child(businessNameTxt.getText().toString()).setValue(businessNameTxt.getText().toString());
+                    // Stores a job instance in the user's UID branch.
+                userUIDRef.child(employeeUIDTxt.getText().toString()).child("jobs").child(businessNameTxt.getText().toString()).setValue(businessNameTxt.getText().toString());
 
 
                 snackbar.make(activity_add_employee_page, "Employee Added!", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+
+                    // Clears all text fields
                 businessNameTxt.getText().clear();
-                employeenameTxt.getText().clear();
-                employeeIdTxt.getText().clear();
+                employeeNameTxt.getText().clear();
+                employeeUIDTxt.getText().clear();
             }
 
             @Override

@@ -30,7 +30,6 @@
 
     <!-- Title -->
     <TextView
-        android:layout_below="@+id/ae_logo"
         android:id="@+id/ae_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -41,7 +40,6 @@
 
     <!-- User ID Input -->
     <android.support.design.widget.TextInputLayout
-        android:layout_below="@+id/ae_tv"
         android:id="@+id/ae_input_business_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -61,7 +59,6 @@
 
     <!-- User ID Input -->
     <android.support.design.widget.TextInputLayout
-        android:layout_below="@+id/ae_input_business_name"
         android:id="@+id/ae_input_employee_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -80,7 +77,6 @@
     </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
-            android:layout_below="@+id/ae_employee_id"
             android:id="@+id/ae_input_employee_ID"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
