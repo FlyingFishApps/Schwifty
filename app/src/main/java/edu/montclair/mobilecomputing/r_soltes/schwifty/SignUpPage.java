@@ -144,7 +144,8 @@ public class SignUpPage extends AppCompatActivity implements View.OnClickListene
     private void createNewUser(String name, String email, String userId, String userRole) {
         User user = new User(name, email, userId, userRole);
 
-        mDatabaseReference.child("users").child(userId).setValue(user);
+        mDatabaseReference.child("users").child(name).setValue(user);
+        mDatabaseReference.child("usersIDs").child(userId).setValue(user);
     }
 
 }

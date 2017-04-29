@@ -29,6 +29,7 @@ import edu.montclair.mobilecomputing.r_soltes.schwifty.utils.Business;
 public class CreateBusinessPage extends AppCompatActivity implements View.OnClickListener {
 
     @BindView(R.id.cb_business_name) EditText businessName;
+    @BindView(R.id.cb_owner_name) EditText ownerName;
     @BindView(R.id.cb_create_btn) Button createBusinessBtn;
     @BindView(R.id.cbProgressBar) ProgressBar mprogressBar;
     private DatabaseReference mDatabaseReference;
@@ -81,17 +82,16 @@ public class CreateBusinessPage extends AppCompatActivity implements View.OnClic
         mprogressBar.setVisibility(View.VISIBLE);
 
         FirebaseUser user = mFirebaseAuth.getInstance().getCurrentUser();
-        String bOwner = user.getUid().toString();
+        String bOwner = ownerName.getText().toString();
         Business business = new Business(name,bId, bOwner);
         mDatabaseReference.child("businesses").child(name).setValue(business);
 
-        HashMap<String, String> employees = new HashMap();
 
-        employees.put(user.getUid(), user.getUid());
 
-        mDatabaseReference.child("businesses").child(name).child("List Of Employees").setValue(employees);
+        mDatabaseReference.child("businesses").child(name).child("List Of Employees").child(ownerName.getText().toString()).setValue(ownerName.getText().toString());
 
         businessName.getText().clear();
+        ownerName.getText().clear();
         mprogressBar.setVisibility(View.GONE);
 
     }
@@ -103,6 +103,7 @@ public class CreateBusinessPage extends AppCompatActivity implements View.OnClic
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
                     businessName.getText().clear();
+                    ownerName.getText().clear();
                     businessName.setError("Business already exists.");
                 }else{
                     createBusiness(businessName.getText().toString().trim());

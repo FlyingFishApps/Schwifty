@@ -64,6 +64,7 @@ public class TimeOffPage extends AppCompatActivity implements View.OnClickListen
     @BindView(R.id.showDate) TextView title;
     @BindView(R.id.showDate2) TextView title1;
     @BindView(R.id.emp_Name) EditText title2;
+    @BindView(R.id.emp_Job) EditText wPlace;
     @BindView(R.id.btn_Submit) Button notiBtn;
     @BindView(R.id.noti_list1)
     ListView mListView;
@@ -203,8 +204,8 @@ public class TimeOffPage extends AppCompatActivity implements View.OnClickListen
         ManagerNotifications notification = new ManagerNotifications(dStart,nReason,nId,dEnd,name);
 
         mDatabaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://schwifty-33650.firebaseio.com/");
-        notifRef = mDatabaseReference.child("manager_notifications");
-        mDatabaseReference.child("manager_notifications").push().setValue(notification);
+        notifRef = mDatabaseReference.child("businesses").child(wPlace.getText().toString());
+        notifRef.child("manager_notifications").setValue(notification);
         snackbar.make(activity_time_off_page, "Notification Sent!", Snackbar.LENGTH_LONG)
             .setAction("Action", null).show();
         mNotificationAdapter.clear();

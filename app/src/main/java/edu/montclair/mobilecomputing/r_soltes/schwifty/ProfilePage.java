@@ -37,7 +37,7 @@ public class ProfilePage extends AppCompatActivity {
 
         final String uid = user.getUid().toString();
         mDatabaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://schwifty-33650.firebaseio.com/");
-        userRef = mDatabaseReference.child("users");
+        userRef = mDatabaseReference.child("usersIDs");
         userRef.orderByChild("uid").equalTo(uid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

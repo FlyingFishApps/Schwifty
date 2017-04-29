@@ -1,22 +1,15 @@
 package edu.montclair.mobilecomputing.r_soltes.schwifty;
 
 import android.app.DatePickerDialog;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.app.TimePickerDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TimePicker;
@@ -36,8 +29,6 @@ import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import edu.montclair.mobilecomputing.r_soltes.schwifty.model.ManagerNotifications;
-import edu.montclair.mobilecomputing.r_soltes.schwifty.model.ManagerNotificationsAdapter;
 import edu.montclair.mobilecomputing.r_soltes.schwifty.model.ScheduleNotification;
 import edu.montclair.mobilecomputing.r_soltes.schwifty.model.ScheduleNotificationAdapter;
 
@@ -59,7 +50,7 @@ public class AddShiftPage extends AppCompatActivity implements View.OnClickListe
     private String value;
     private int mYear, mMonth, mDay, mHour, mMinute;
     Snackbar snackbar;
-    private DatabaseReference mDatabaseReference, notifRef, userIdRef, businessRef;
+    private DatabaseReference mDatabaseReference, notifRef, userIdRefn, userIdRefID, userIdRef, businessRef;
     private FirebaseAuth mFirebaseAuth;
     RelativeLayout activity_create_shift;
     ScheduleNotificationAdapter mNotificationAdapter;
@@ -77,7 +68,9 @@ public class AddShiftPage extends AppCompatActivity implements View.OnClickListe
             @Override
 
             public void onClick(View view) {
-               createNotification("sID: "+numID.getText().toString().trim(),"nID: "+uID.getText().toString().trim(),"Date: "+title.getText().toString().trim(),"Time in: "+message.getText().toString().trim(),"Time out: "+endTime.getText().toString());
+               createNotification("sID: "+numID.getText().toString().trim(),
+                       "nID: "+uID.getText().toString().trim(),"Date: "+title.getText().toString().trim(),
+                       "Time in: "+message.getText().toString().trim(),"Time out: "+endTime.getText().toString());
                 checkBusiness();
             }
         });
@@ -156,21 +149,33 @@ public class AddShiftPage extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    public void shift() {
+
+    /**
+     * Adds an instance of a user's shift, which is made by a manager, than stores them
+     * in users > Schedule > Shift + "sID"
+     * */
+    public void addShift() {
         mDatabaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://schwifty-33650.firebaseio.com/");
         userIdRef = mDatabaseReference.child("users");
         userIdRef.child(uID.getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-
-                userIdRef.child(uID.getText().toString()).child("Schedule").push().setValue("sID: "+ numID.getText().toString() + "\nPlace: "+place.getText().toString()+"\nDate: "+title.getText().toString()+"\nStart Shift:"+ message.getText().toString()+"  End Shift:" + endTime.getText().toString() );
+                    // Adds an instance of the users' sID in the child of Shift branch.
+                userIdRef.child(uID.getText().toString()).child("Schedule").child("Shift: "+numID.getText().toString()).child("sID").setValue(numID.getText().toString());
+                    // Adds an instance of the users' Place in the child of Shift branch.
+                userIdRef.child(uID.getText().toString()).child("Schedule").child("Shift: "+numID.getText().toString()).child("Place").setValue(place.getText().toString());
+                    // Adds an instance of the users' Date in the child of Shift branch.
+                userIdRef.child(uID.getText().toString()).child("Schedule").child("Shift: "+numID.getText().toString()).child("Date").setValue(title.getText().toString());
+                    // Adds an instance of the users' Start Shift in the child of Shift branch.
+                userIdRef.child(uID.getText().toString()).child("Schedule").child("Shift: "+numID.getText().toString()).child("Start Shift").setValue(message.getText().toString());
+                    // Adds an instance of the users' End Shift in the child of Shift branch.
+                userIdRef.child(uID.getText().toString()).child("Schedule").child("Shift: "+numID.getText().toString()).child("End Shift").setValue(endTime.getText().toString());
 
 
                 snackbar.make(activity_create_shift, "Shift Added!", Snackbar.LENGTH_SHORT)
                         .setAction("Action", null).show();
-                title.getText().clear();
-                message.getText().clear();
+                        addShiftID();
             }
 
             @Override
@@ -180,6 +185,50 @@ public class AddShiftPage extends AppCompatActivity implements View.OnClickListe
         });
     }
 
+    /**
+     * Adds an instance of a user's shift, which is made by a manager, than stores them
+     * in usersIDs > Schedule > Shift + "sID"
+     * */
+    public void addShiftID(){
+
+        mDatabaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://schwifty-33650.firebaseio.com/");
+        userIdRefn = mDatabaseReference.child("users").child(uID.getText().toString()).child("uid");
+
+        userIdRefn.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String uid = dataSnapshot.getValue().toString();
+                userIdRefID = mDatabaseReference.child("usersIDs").child(uid);
+
+                    // Adds an instance of the usersIDs' sId in the child of Shift branch.
+                userIdRefID.child("Schedule").child("Shift: "+numID.getText().toString()).child("sID").setValue(numID.getText().toString());
+                    // Adds an instance of the usersIDs' Place in the child of Shift branch.
+                userIdRefID.child("Schedule").child("Shift: "+numID.getText().toString()).child("Place").setValue(place.getText().toString());
+                    // Adds an instance of the usersIDs' Date in the child of Shift branch.
+                userIdRefID.child("Schedule").child("Shift: "+numID.getText().toString()).child("Date").setValue(title.getText().toString());
+                    // Adds an instance of the usersIDs' Start Shift in the child of Shift branch.
+                userIdRefID.child("Schedule").child("Shift: "+numID.getText().toString()).child("Start Shift").setValue(message.getText().toString());
+                    // Adds an instance of the usersIDs' End Shift in the child of Shift branch.
+                userIdRefID.child("Schedule").child("Shift: "+numID.getText().toString()).child("End Shift").setValue(endTime.getText().toString());
+
+
+                snackbar.make(activity_create_shift, "Shift Added!", Snackbar.LENGTH_SHORT)
+                        .setAction("Action", null).show();
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    /**
+     * Method to check if a business exists in the database or not.
+     * If the business entered by the user does not exist, alert user.
+     * Otherwise check the employee;
+     * */
     public void checkBusiness(){
 
         mDatabaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://schwifty-33650.firebaseio.com/");
@@ -191,7 +240,8 @@ public class AddShiftPage extends AppCompatActivity implements View.OnClickListe
                 if(!dataSnapshot.exists() || place.getText().toString().equals(null)|| numID.getText().toString().equals(null)){
                     place.setError("Business does not exist!");
                 }else{
-                    shift();
+                        // Method that adds a shift to users branch under username given by the manager
+                    addShift();
                 }
             }
 
@@ -208,7 +258,6 @@ public class AddShiftPage extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
 
         if (v == title) {
-
             // Get Current Date
             final Calendar c = Calendar.getInstance();
             mYear = c.get(Calendar.YEAR);
@@ -230,9 +279,7 @@ public class AddShiftPage extends AppCompatActivity implements View.OnClickListe
             datePickerDialog.show();
         }
         if (v == message) {
-
             // Get Current Time
-
             final Calendar c = Calendar.getInstance();
             mHour = c.get(Calendar.HOUR_OF_DAY);
             mMinute = c.get(Calendar.MINUTE);
@@ -253,7 +300,6 @@ public class AddShiftPage extends AppCompatActivity implements View.OnClickListe
 
         }
         if (v == endTime) {
-
             // Get Current Time
             final Calendar c = Calendar.getInstance();
             mHour = c.get(Calendar.HOUR_OF_DAY);
