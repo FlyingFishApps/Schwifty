@@ -60,6 +60,25 @@
 
         </android.support.design.widget.TextInputLayout>
 
+        <android.support.design.widget.TextInputLayout
+            android:layout_below="@+id/cb_owner_name"
+            android:id="@+id/cb_input_owner_ID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <EditText
+                android:id="@+id/cb_owner_ID"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/cb_owner_ID_hint"
+                android:inputType="textCapWords"
+                android:maxLines="1"
+
+                />
+
+        </android.support.design.widget.TextInputLayout>
+
     <!-- Username Input -->
     <android.support.design.widget.TextInputLayout
         android:layout_below="@+id/cb_owner_name"

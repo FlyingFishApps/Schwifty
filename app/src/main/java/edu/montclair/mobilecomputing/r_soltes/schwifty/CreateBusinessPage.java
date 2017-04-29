@@ -30,9 +30,10 @@ public class CreateBusinessPage extends AppCompatActivity implements View.OnClic
 
     @BindView(R.id.cb_business_name) EditText businessName;
     @BindView(R.id.cb_owner_name) EditText ownerName;
+    @BindView(R.id.cb_owner_ID) EditText ownerID;
     @BindView(R.id.cb_create_btn) Button createBusinessBtn;
     @BindView(R.id.cbProgressBar) ProgressBar mprogressBar;
-    private DatabaseReference mDatabaseReference;
+    private DatabaseReference mDatabaseReference1,mDatabaseReference;
     private FirebaseAuth mFirebaseAuth;
     Snackbar snackbar;
     RelativeLayout activity_create_business_page;
@@ -49,6 +50,7 @@ public class CreateBusinessPage extends AppCompatActivity implements View.OnClic
         // Firebase Init
         mFirebaseAuth = FirebaseAuth.getInstance();
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
+        mDatabaseReference1 = FirebaseDatabase.getInstance().getReference();
 
         FirebaseUser user = mFirebaseAuth.getInstance().getCurrentUser();
     }
@@ -82,13 +84,18 @@ public class CreateBusinessPage extends AppCompatActivity implements View.OnClic
         mprogressBar.setVisibility(View.VISIBLE);
 
         FirebaseUser user = mFirebaseAuth.getInstance().getCurrentUser();
+            // Current user's Username
         String bOwner = ownerName.getText().toString();
+            // Current user's UID
+        String bOwnerEMP = user.getUid();
         Business business = new Business(name,bId, bOwner);
         mDatabaseReference.child("businesses").child(name).setValue(business);
 
 
-
+            // Adds an instance of the user as an Owner and Employee of the newly made business stored by username.
         mDatabaseReference.child("businesses").child(name).child("List Of Employees").child(ownerName.getText().toString()).setValue(ownerName.getText().toString());
+            // Adds an instance of the user as an Owner and Employee of the newly made business stored by UID.
+        mDatabaseReference.child("businesses").child(name).child("List Of Employees UIDs").child(bOwnerEMP).setValue(ownerName.getText().toString());
 
         businessName.getText().clear();
         ownerName.getText().clear();
@@ -98,7 +105,7 @@ public class CreateBusinessPage extends AppCompatActivity implements View.OnClic
 
     private void checkBusiness(){
 
-        mDatabaseReference.child("businesses").child(businessName.getText().toString().trim()).addListenerForSingleValueEvent(new ValueEventListener() {
+            mDatabaseReference.child("businesses").child(businessName.getText().toString().trim()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
@@ -107,6 +114,11 @@ public class CreateBusinessPage extends AppCompatActivity implements View.OnClic
                     businessName.setError("Business already exists.");
                 }else{
                     createBusiness(businessName.getText().toString().trim());
+
+                    // Create string from current user's user ID
+
+
+
                 }
             }
 
@@ -117,6 +129,33 @@ public class CreateBusinessPage extends AppCompatActivity implements View.OnClic
         });
 
     }
+
+    private void Reason(){
+        FirebaseUser user3 = mFirebaseAuth.getInstance().getCurrentUser();
+        final String uid = user3.getUid().toString();
+        mDatabaseReference1.child("usersIDs").child(uid).child("uid").addListenerForSingleValueEvent(new ValueEventListener() {
+
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    String data = snapshot.getValue().toString();
+                    String data2 = data.substring(data.lastIndexOf("=") + 1);
+                    final String data3 = data2.split("\\}")[0];
+
+
+                    if (data3.toString().equals(ownerID.getText().toString())) {
+                        createBusiness(businessName.getText().toString().trim());
+                    } else
+                        ownerID.setError("HUH");
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }});
+    }
+
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(CreateBusinessPage.this, ManagerPanelPage.class);
