@@ -69,9 +69,9 @@
     <string name="add_shift_MP">Add Shift</string>
     <string name="create_shift_txt">Create Shift</string>
     <string name="create_shift_btn">Schedule Shift</string>
-    <string name="uid_CS">UID</string>
+    <string name="uid_CS">Username</string>
     <string name="bID_CS">Business Name</string>
-    <string name="shift_home">Schedule</string>
+    <string name="shift_home">My Shifts</string>
     <string name="nID_CS">Shift ID</string>
     <string name="noti_button_PP">Notifications</string>
     <string name="cb_owner_name_hint">Owner/Your Username</string>
