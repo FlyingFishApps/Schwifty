@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -15,6 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TimePicker;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -47,10 +49,11 @@ public class AddShiftPage extends AppCompatActivity implements View.OnClickListe
     @BindView(R.id.nID_CS) EditText numID;
     @BindView(R.id.create_shift_btn) Button notiBtn;
 
+    private List<String> listOfJobs = new ArrayList<>();
     private String value;
     private int mYear, mMonth, mDay, mHour, mMinute;
     Snackbar snackbar;
-    private DatabaseReference mDatabaseReference, notifRef, userIdRefn, userIdRefID, userIdRef, businessRef;
+    private DatabaseReference mDatabaseReference, notifRef, userIdRefn, userIdRefID, userIdRef,userBusRef, businessRef;
     private FirebaseAuth mFirebaseAuth;
     RelativeLayout activity_create_shift;
     ScheduleNotificationAdapter mNotificationAdapter;
@@ -84,48 +87,36 @@ public class AddShiftPage extends AppCompatActivity implements View.OnClickListe
 
 
         mFirebaseAuth = FirebaseAuth.getInstance();
-        mDatabaseReference = FirebaseDatabase.getInstance().getReference();
+        mDatabaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://schwifty-33650.firebaseio.com/");
 
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listOfJobs);
 
-        List<ScheduleNotification> listOfNotifis = new ArrayList<>();
-        notifRef = FirebaseDatabase.getInstance().getReference("users");
+        notifRef = mDatabaseReference.child("businesses");
         mFirebaseAuth = FirebaseAuth.getInstance();
 
-        mNotificationAdapter = new ScheduleNotificationAdapter(this, R.layout.schedule_notification_item, listOfNotifis);
-        mListView.setAdapter(mNotificationAdapter);
 
-        mChildEventListener = new ChildEventListener() {
+        notifRef.child("ShopRite").child("full_schedule_noti").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                ScheduleNotification notification = dataSnapshot.getValue(ScheduleNotification
-                        .class);
-                mNotificationAdapter.add(notification);
-            }
+            public void onDataChange(DataSnapshot dataSnapshot){
+                // Add each job in a user's jobs child to the array
+                // Set the array adapter to the list view on UI to display elements in array
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    String data = snapshot.getValue().toString();
+                    String data2 = data.substring(data.lastIndexOf("=")+1);
+                    final String data3 = data2.split("\\}")[0];
 
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
 
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
+                    System.out.println(data3);
+                    listOfJobs.add(data3);
+                    mListView.setAdapter(arrayAdapter);
+                }
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        };
-
-        notifRef.addChildEventListener(mChildEventListener);
-
-
+        });
 
 
     }
@@ -173,8 +164,6 @@ public class AddShiftPage extends AppCompatActivity implements View.OnClickListe
                 userIdRef.child(uID.getText().toString()).child("Schedule").child("Shift: "+numID.getText().toString()).child("End Shift").setValue(endTime.getText().toString());
 
 
-                snackbar.make(activity_create_shift, "Shift Added!", Snackbar.LENGTH_SHORT)
-                        .setAction("Action", null).show();
                         addShiftID();
             }
 
@@ -184,6 +173,49 @@ public class AddShiftPage extends AppCompatActivity implements View.OnClickListe
             }
         });
     }
+
+
+    /**
+     * Adds an instance of a user's shift, which is made by a manager, than stores them
+     * in users > Schedule > Shift + "sID"
+     * */
+    public void addShiftToBus() {
+        mDatabaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://schwifty-33650.firebaseio.com/");
+        userBusRef = mDatabaseReference.child("businesses");
+        userBusRef.child(place.getText().toString()).child("full_schedule").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                // Adds an instance of the users' sID in the child of Shift branch.
+                userBusRef.child(place.getText().toString()).child("full_schedule").child("Shift: "+numID.getText().toString()).child("sID").setValue(numID.getText().toString());
+                // Adds an instance of the users' Place in the child of Shift branch.
+                userBusRef.child(place.getText().toString()).child("full_schedule").child("Shift: "+numID.getText().toString()).child("Place").setValue(place.getText().toString());
+                // Adds an instance of the users' Date in the child of Shift branch.
+                userBusRef.child(place.getText().toString()).child("full_schedule").child("Shift: "+numID.getText().toString()).child("Date").setValue(title.getText().toString());
+                // Adds an instance of the users' Start Shift in the child of Shift branch.
+                userBusRef.child(place.getText().toString()).child("full_schedule").child("Shift: "+numID.getText().toString()).child("Start Shift").setValue(message.getText().toString());
+                // Adds an instance of the users' End Shift in the child of Shift branch.
+                userBusRef.child(place.getText().toString()).child("full_schedule").child("Shift: "+numID.getText().toString()).child("End Shift").setValue(endTime.getText().toString());
+
+                userBusRef.child(place.getText().toString()).child("full_schedule_noti").child(numID.getText().toString()).setValue("Shift: " +numID.getText().toString()
+                        + "\nEmployee: "+ uID.getText().toString()+"\nDate: "+ title.getText().toString() + "\nStart Time:" + message.getText().toString()+
+                        "\nEnd Time: " + endTime.getText().toString());
+
+
+
+                snackbar.make(activity_create_shift, "Shift Added!", Snackbar.LENGTH_SHORT)
+                        .setAction("Action", null).show();
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+
 
     /**
      * Adds an instance of a user's shift, which is made by a manager, than stores them
@@ -212,9 +244,8 @@ public class AddShiftPage extends AppCompatActivity implements View.OnClickListe
                 userIdRefID.child("Schedule").child("Shift: "+numID.getText().toString()).child("End Shift").setValue(endTime.getText().toString());
 
 
-                snackbar.make(activity_create_shift, "Shift Added!", Snackbar.LENGTH_SHORT)
-                        .setAction("Action", null).show();
 
+                addShiftToBus();
             }
 
             @Override
