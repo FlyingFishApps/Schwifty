@@ -43,8 +43,8 @@ public class SchwiftPage extends AppCompatActivity {
 
         final String uid = user.getUid().toString();
         mDatabaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://schwifty-33650.firebaseio.com/");
-        userRef = mDatabaseReference.child("users");
-        userRef.child(uid).child("Schedule").addListenerForSingleValueEvent(new ValueEventListener() {
+        userRef = mDatabaseReference.child("usersIDs");
+        userRef.child(uid).child("sch").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot){
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {

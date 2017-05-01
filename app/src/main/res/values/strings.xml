@@ -79,6 +79,7 @@
     <string name="swapTV_SCP">Schwift Shift</string>
     <string name="employee_ID_hint">Employee UID</string>
     <string name="cb_owner_ID_hint">Your UID</string>
+    <string name="manager_sch_MP">Schedules</string>
 
 
 </resources>
