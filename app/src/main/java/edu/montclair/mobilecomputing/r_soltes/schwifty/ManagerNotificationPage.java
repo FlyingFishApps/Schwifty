@@ -78,7 +78,7 @@ public class ManagerNotificationPage extends AppCompatActivity {
                     final String data3 = data2.split("\\}")[0];
 
                     value = data3;
-                    notifRef.child(value).child("manager_notifications").child("Jamest8").addListenerForSingleValueEvent(new ValueEventListener() {
+                    notifRef.child(value).child("manager_notifications").addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot){
                             // Add each job in a user's jobs child to the array

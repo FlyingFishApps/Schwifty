@@ -150,7 +150,7 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener 
                 finish();
                 break;
             case R.id.nav_schedule:
-                startActivity(new Intent(HomePage.this, SchedulePage.class));
+                startActivity(new Intent(HomePage.this, SchwiftPage.class));
                 finish();
                 break;
             case R.id.nav_time_off:
