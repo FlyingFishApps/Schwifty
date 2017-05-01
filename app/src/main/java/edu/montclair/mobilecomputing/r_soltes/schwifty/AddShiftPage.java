@@ -53,7 +53,7 @@ public class AddShiftPage extends AppCompatActivity implements View.OnClickListe
     private String value;
     private int mYear, mMonth, mDay, mHour, mMinute;
     Snackbar snackbar;
-    private DatabaseReference mDatabaseReference, notifRef, userIdRefn, userIdRefID, userIdRef,userBusRef, businessRef;
+    private DatabaseReference mDatabaseReference, notifRef, notifRefJ, userIdRefn, userIdRefID, userIdRef,userBusRef, businessRef;
     private FirebaseAuth mFirebaseAuth;
     RelativeLayout activity_create_shift;
     ScheduleNotificationAdapter mNotificationAdapter;
@@ -92,10 +92,12 @@ public class AddShiftPage extends AppCompatActivity implements View.OnClickListe
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listOfJobs);
 
         notifRef = mDatabaseReference.child("businesses");
+        notifRefJ = mDatabaseReference.child("usersIDs");
         mFirebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser user3 = mFirebaseAuth.getInstance().getCurrentUser();
+        final String uid = user3.getUid().toString();
 
-
-        notifRef.child("ShopRite").child("full_schedule_noti").addListenerForSingleValueEvent(new ValueEventListener() {
+        notifRefJ.child(uid).child("jobs").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot){
                 // Add each job in a user's jobs child to the array
@@ -105,10 +107,31 @@ public class AddShiftPage extends AppCompatActivity implements View.OnClickListe
                     String data2 = data.substring(data.lastIndexOf("=")+1);
                     final String data3 = data2.split("\\}")[0];
 
+                    value = data3;
+                    notifRef.child(value).child("full_schedule_noti").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot){
+                            // Add each job in a user's jobs child to the array
+                            // Set the array adapter to the list view on UI to display elements in array
+                            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                String data = snapshot.getValue().toString();
+                                String data2 = data.substring(data.lastIndexOf("=")+1);
+                                final String data3 = data2.split("\\}")[0];
 
-                    System.out.println(data3);
-                    listOfJobs.add(data3);
-                    mListView.setAdapter(arrayAdapter);
+
+                                System.out.println(data3);
+                                listOfJobs.add(data3);
+                                mListView.setAdapter(arrayAdapter);
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+
+
                 }
             }
 
@@ -135,8 +158,6 @@ public class AddShiftPage extends AppCompatActivity implements View.OnClickListe
         mDatabaseReference.child("full_schedule").push().setValue(notification);
         snackbar.make(activity_create_shift, "Notification Sent!", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
-        mNotificationAdapter.clear();
-        mNotificationAdapter.clear();
 
     }
 
@@ -197,9 +218,11 @@ public class AddShiftPage extends AppCompatActivity implements View.OnClickListe
                 // Adds an instance of the users' End Shift in the child of Shift branch.
                 userBusRef.child(place.getText().toString()).child("full_schedule").child("Shift: "+numID.getText().toString()).child("End Shift").setValue(endTime.getText().toString());
 
-                userBusRef.child(place.getText().toString()).child("full_schedule_noti").child(numID.getText().toString()).setValue("Shift: " +numID.getText().toString()
-                        + "\nEmployee: "+ uID.getText().toString()+"\nDate: "+ title.getText().toString() + "\nStart Time:" + message.getText().toString()+
-                        "\nEnd Time: " + endTime.getText().toString());
+                userBusRef.child(place.getText().toString()).child("full_schedule_noti").child(numID.getText().toString()).setValue
+                        ("Place: "+ place.getText().toString()+ "\nShift: " +numID.getText().toString()
+                        + "\nEmployee: "+ uID.getText().toString()+"\nDate: "+ title.getText().toString()
+                                + "\nStart Time:" + message.getText().toString()+ "\nEnd Time: " +
+                                endTime.getText().toString());
 
 
 
