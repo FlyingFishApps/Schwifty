@@ -12,6 +12,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -24,6 +25,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,58 +44,72 @@ public class ManagerNotificationPage extends AppCompatActivity {
     @BindView(R.id.noti_list_MNP) ListView mListView;
 
     Snackbar snackbar;
-    private DatabaseReference mDatabaseReference, notifRef;
+    private DatabaseReference mDatabaseReference, notifRef, notifRefJ;
     private FirebaseAuth mFirebaseAuth;
-    RelativeLayout activity_manager_notification_page;
-    ScheduleNotificationAdapter mNotificationAdapter;
-    ChildEventListener mChildEventListener;
-    FirebaseAuth.AuthStateListener mAuthStateListener;
+    private String value;
+    private List<String> listOfJobs = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manager_notification_page);
         ButterKnife.bind(this);
-        activity_manager_notification_page = (RelativeLayout)findViewById(R.id.activity_manager_notification_page);
-        List<ScheduleNotification> listOfNotifis = new ArrayList<>();
 
 
-        FirebaseUser user = mFirebaseAuth.getInstance().getCurrentUser();
-        String uid = user.getUid().toString();
-        notifRef = FirebaseDatabase.getInstance().getReference("usersIDs").child(uid).child("jobs");
-        mNotificationAdapter = new ScheduleNotificationAdapter(this, R.layout.schedule_notification_item, listOfNotifis);
-        mListView.setAdapter(mNotificationAdapter);
+        mDatabaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://schwifty-33650.firebaseio.com/");
 
-        mChildEventListener = new ChildEventListener() {
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listOfJobs);
+
+        notifRef = mDatabaseReference.child("businesses");
+        notifRefJ = mDatabaseReference.child("usersIDs");
+        mFirebaseAuth = FirebaseAuth.getInstance();
+
+        FirebaseUser user3 = mFirebaseAuth.getInstance().getCurrentUser();
+        final String uid = user3.getUid().toString();
+
+        notifRefJ.child(uid).child("jobs").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                ScheduleNotification notification = dataSnapshot.getValue(ScheduleNotification
-                        .class);
-                mNotificationAdapter.add(notification);
-            }
+            public void onDataChange(DataSnapshot dataSnapshot){
+                // Add each job in a user's jobs child to the array
+                // Set the array adapter to the list view on UI to display elements in array
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    String data = snapshot.getValue().toString();
+                    String data2 = data.substring(data.lastIndexOf("=")+1);
+                    final String data3 = data2.split("\\}")[0];
 
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                    value = data3;
+                    notifRef.child(value).child("manager_notifications").child("Jamest8").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot){
+                            // Add each job in a user's jobs child to the array
+                            // Set the array adapter to the list view on UI to display elements in array
+                            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                String data = snapshot.getValue().toString();
+                                String data2 = data.substring(data.lastIndexOf("=")+1);
+                                final String data3 = data2.split("\\}")[0];
 
-            }
 
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
+                                System.out.println(data3);
+                                listOfJobs.add(data3);
+                                mListView.setAdapter(arrayAdapter);
+                            }
+                        }
 
-            }
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
 
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+                        }
+                    });
 
+
+                }
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        };
-
-        notifRef.addChildEventListener(mChildEventListener);
+        });
 
 
 

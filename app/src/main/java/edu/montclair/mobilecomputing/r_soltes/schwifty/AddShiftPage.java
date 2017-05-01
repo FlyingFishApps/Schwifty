@@ -86,7 +86,7 @@ public class AddShiftPage extends AppCompatActivity implements View.OnClickListe
         place.setOnClickListener(this);
 
 
-        mFirebaseAuth = FirebaseAuth.getInstance();
+
         mDatabaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://schwifty-33650.firebaseio.com/");
 
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listOfJobs);
@@ -96,50 +96,6 @@ public class AddShiftPage extends AppCompatActivity implements View.OnClickListe
         mFirebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user3 = mFirebaseAuth.getInstance().getCurrentUser();
         final String uid = user3.getUid().toString();
-
-        notifRefJ.child(uid).child("jobs").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot){
-                // Add each job in a user's jobs child to the array
-                // Set the array adapter to the list view on UI to display elements in array
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    String data = snapshot.getValue().toString();
-                    String data2 = data.substring(data.lastIndexOf("=")+1);
-                    final String data3 = data2.split("\\}")[0];
-
-                    value = data3;
-                    notifRef.child(value).child("full_schedule_noti").addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot){
-                            // Add each job in a user's jobs child to the array
-                            // Set the array adapter to the list view on UI to display elements in array
-                            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                                String data = snapshot.getValue().toString();
-                                String data2 = data.substring(data.lastIndexOf("=")+1);
-                                final String data3 = data2.split("\\}")[0];
-
-
-                                System.out.println(data3);
-                                listOfJobs.add(data3);
-                                mListView.setAdapter(arrayAdapter);
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-
-                        }
-                    });
-
-
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
 
 
     }
@@ -185,6 +141,12 @@ public class AddShiftPage extends AppCompatActivity implements View.OnClickListe
                 userIdRef.child(uID.getText().toString()).child("Schedule").child("Shift: "+numID.getText().toString()).child("End Shift").setValue(endTime.getText().toString());
 
 
+                userIdRef.child(uID.getText().toString()).child("sch").child(numID.getText().toString()).setValue
+                        ("\nPlace: "+ place.getText().toString()+ "\nShift: " +numID.getText().toString()
+                                + "\nEmployee: "+ uID.getText().toString()+"\nDate: "+ title.getText().toString()
+                                + "\nStart Time:" + message.getText().toString()+ "\nEnd Time: " +
+                                endTime.getText().toString());
+
                         addShiftID();
             }
 
@@ -219,10 +181,11 @@ public class AddShiftPage extends AppCompatActivity implements View.OnClickListe
                 userBusRef.child(place.getText().toString()).child("full_schedule").child("Shift: "+numID.getText().toString()).child("End Shift").setValue(endTime.getText().toString());
 
                 userBusRef.child(place.getText().toString()).child("full_schedule_noti").child(numID.getText().toString()).setValue
-                        ("Place: "+ place.getText().toString()+ "\nShift: " +numID.getText().toString()
+                        ("\nPlace: "+ place.getText().toString()+ "\nShift: " +numID.getText().toString()
                         + "\nEmployee: "+ uID.getText().toString()+"\nDate: "+ title.getText().toString()
                                 + "\nStart Time:" + message.getText().toString()+ "\nEnd Time: " +
                                 endTime.getText().toString());
+
 
 
 
@@ -268,6 +231,12 @@ public class AddShiftPage extends AppCompatActivity implements View.OnClickListe
 
 
 
+                userIdRefID.child("sch").child(numID.getText().toString()).setValue
+                        ("\nPlace: "+ place.getText().toString()+ "\nShift: " +numID.getText().toString()
+                                + "\nEmployee: "+ uID.getText().toString()+"\nDate: "+ title.getText().toString()
+                                + "\nStart Time:" + message.getText().toString()+ "\nEnd Time: " +
+                                endTime.getText().toString());
+
                 addShiftToBus();
             }
 
@@ -291,7 +260,8 @@ public class AddShiftPage extends AppCompatActivity implements View.OnClickListe
         businessRef.child(place.getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if(!dataSnapshot.exists() || place.getText().toString().equals(null)|| numID.getText().toString().equals(null)){
+                if(!dataSnapshot.exists() || place.getText().toString().equals(null)|| numID.getText().toString().equals(null)||
+                        title.getText().toString().equals(null)|| message.getText().toString().equals(null)|| endTime.getText().toString().equals(null)){
                     place.setError("Business does not exist!");
                 }else{
                         // Method that adds a shift to users branch under username given by the manager

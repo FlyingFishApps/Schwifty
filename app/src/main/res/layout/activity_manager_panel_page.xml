@@ -85,6 +85,17 @@
                 android:text="@string/manager_swap_MP"
                 android:background="#4286f4"
                 style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_marginBottom="20dp"
+                android:padding="10dp"/>
+
+            <Button
+                android:id="@+id/noti_sch_btn_MP"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="@string/manager_sch_MP"
+                android:background="#4286f4"
+                style="@style/Widget.AppCompat.Button.Colored"
                 android:padding="10dp"/>
 
 
