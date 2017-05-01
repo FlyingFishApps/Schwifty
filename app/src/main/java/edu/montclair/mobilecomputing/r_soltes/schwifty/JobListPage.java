@@ -25,7 +25,7 @@ public class JobListPage extends AppCompatActivity {
     @BindView(R.id.job_list) ListView mListView;
 
     private List<String> listOfJobs = new ArrayList<>();
-    private DatabaseReference mDatabaseReference, userRef;
+    private DatabaseReference mDatabaseReference, userRef, userRef1;
     private FirebaseAuth mFirebaseAuth;
 
     @Override
@@ -45,7 +45,9 @@ public class JobListPage extends AppCompatActivity {
         // Get reference to database
         mDatabaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://schwifty-33650.firebaseio.com/");
         // Get reference to users table in database
-        userRef = mDatabaseReference.child("users");
+        userRef = mDatabaseReference.child("usersIDs");
+
+
         // Add listener to the jobs child of the current user
         userRef.child(uid).child("jobs").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -55,18 +57,22 @@ public class JobListPage extends AppCompatActivity {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     String data = snapshot.getValue().toString();
                     String data2 = data.substring(data.lastIndexOf("=")+1);
-                    String data3 = data2.split("\\}")[0];
-                    System.out.println(data3);
-                    listOfJobs.add(data3);
-                    mListView.setAdapter(arrayAdapter);
-                }
-            }
+                    final String data3 = data2.split("\\}")[0];
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
 
-            }
-        });
+                                System.out.println(data3);
+                                listOfJobs.add(data3);
+                                mListView.setAdapter(arrayAdapter);
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+
+
     }
 
     /**

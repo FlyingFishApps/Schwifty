@@ -18,6 +18,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -55,9 +56,11 @@ public class ManagerNotificationPage extends AppCompatActivity {
         ButterKnife.bind(this);
         activity_manager_notification_page = (RelativeLayout)findViewById(R.id.activity_manager_notification_page);
         List<ScheduleNotification> listOfNotifis = new ArrayList<>();
-        notifRef = FirebaseDatabase.getInstance().getReference("full_schedule");
-        mFirebaseAuth = FirebaseAuth.getInstance();
 
+
+        FirebaseUser user = mFirebaseAuth.getInstance().getCurrentUser();
+        String uid = user.getUid().toString();
+        notifRef = FirebaseDatabase.getInstance().getReference("usersIDs").child(uid).child("jobs");
         mNotificationAdapter = new ScheduleNotificationAdapter(this, R.layout.schedule_notification_item, listOfNotifis);
         mListView.setAdapter(mNotificationAdapter);
 
