@@ -61,6 +61,14 @@
             android:layout_marginBottom="10dp"
             android:hint="Employee2's sID"
             android:inputType="text" />
+        <EditText
+            android:id="@+id/emp_workplace"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:hint="Workplace"
+            android:inputType="text" />
 
         <!--<Button-->
         <!--android:id="@+id/picDate"-->

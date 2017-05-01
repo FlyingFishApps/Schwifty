@@ -27,17 +27,21 @@ public class SwapPage extends AppCompatActivity {
     @BindView(R.id.emp_schwiftname_2)EditText emP2;
     @BindView(R.id.emp_sID_1)EditText sID1;
     @BindView(R.id.emp_sID_2)EditText sID2;
+    @BindView(R.id.emp_workplace)EditText work;
     private FirebaseAuth mFirebaseAuth;
     @BindView(R.id.schwift_btn)Button sBtn;
     private DatabaseReference mData, mData1, mDataq;
     private boolean reason, reason1;
+    private String torn, torn2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schwift_shift_page);
         ButterKnife.bind(this);
+
         mData = FirebaseDatabase.getInstance().getReference().child("users");
+        mDataq = FirebaseDatabase.getInstance().getReference().child("businesses").child(work.getText().toString());
         mData1 = FirebaseDatabase.getInstance().getReference().child("users");
         reason = false;
         reason1 = false;
@@ -62,8 +66,22 @@ public class SwapPage extends AppCompatActivity {
 
                     mData1.child(emP2.getText().toString()).child("Schedule").child("Shift: " + sID1.getText().toString()).setValue(dataSnapshot.getValue(), new DatabaseReference.CompletionListener() {
 
+
                         @Override
                         public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                            mDataq.child("full_schedule_noti").child(sID1.getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    String value = (String) dataSnapshot.getValue();
+                                    System.out.println(value);
+
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+
+                                }
+                            });
                         moveFirebaseRecord2();
                         }
                     });
@@ -99,7 +117,20 @@ public class SwapPage extends AppCompatActivity {
 
                     @Override
                     public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                        mDataq.child("full_schedule_noti").child(sID2.getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+//                                torn2 = dataSnapshot.getValue().toString();
+
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
                         removeFirebaseRecord();
+//                        swapNotifications();
                     }
                 });
 
@@ -111,6 +142,41 @@ public class SwapPage extends AppCompatActivity {
             }
         });
     }
+
+    private void swapNotifications(){
+
+        mDataq.child("full_schedule_noti").child(sID2.getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                mDataq.setValue(torn);
+//                swapNotifications2();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+
+    private void swapNotifications2(){
+
+        mDataq.child("full_schedule_noti").child(sID1.getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                mDataq.setValue(torn2);
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(SwapPage.this, HomePage.class);
