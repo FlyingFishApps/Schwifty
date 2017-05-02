@@ -54,7 +54,6 @@ public class AddShiftPage extends AppCompatActivity implements View.OnClickListe
     RelativeLayout activity_create_shift;
     Snackbar snackbar;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,13 +79,10 @@ public class AddShiftPage extends AppCompatActivity implements View.OnClickListe
         endTime.setOnClickListener(this);
         place.setOnClickListener(this);
 
-
-
         mDatabaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://schwifty-33650.firebaseio.com/");
         notifRef = mDatabaseReference.child("businesses");
         notifRefJ = mDatabaseReference.child("usersIDs");
         mFirebaseAuth = FirebaseAuth.getInstance();
-
 
     }
 
@@ -178,8 +174,6 @@ public class AddShiftPage extends AppCompatActivity implements View.OnClickListe
                         + "\nEmployee: "+ uID.getText().toString()+"\nDate: "+ dateTxt.getText().toString()
                                 + "\nStart Time:" + sTime.getText().toString()+ "\nEnd Time: " +
                                 endTime.getText().toString());
-
-
 
                 numID.getText().clear();
                 place.getText().clear();

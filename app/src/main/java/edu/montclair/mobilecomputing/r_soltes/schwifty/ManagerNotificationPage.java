@@ -43,11 +43,12 @@ import edu.montclair.mobilecomputing.r_soltes.schwifty.model.ScheduleNotificatio
 public class ManagerNotificationPage extends AppCompatActivity {
     @BindView(R.id.noti_list_MNP) ListView mListView;
 
-    Snackbar snackbar;
     private DatabaseReference mDatabaseReference, notifRef, notifRefJ;
     private FirebaseAuth mFirebaseAuth;
     private String value;
     private List<String> listOfJobs = new ArrayList<>();
+
+    Snackbar snackbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +89,6 @@ public class ManagerNotificationPage extends AppCompatActivity {
                                 String data2 = data.substring(data.lastIndexOf("=")+1);
                                 final String data3 = data2.split("\\}")[0];
 
-
                                 System.out.println(data3);
                                 listOfJobs.add(data3);
                                 mListView.setAdapter(arrayAdapter);
@@ -111,13 +111,7 @@ public class ManagerNotificationPage extends AppCompatActivity {
             }
         });
 
-
-
-
     }
-
-
-
 
     @Override
     public void onBackPressed() {

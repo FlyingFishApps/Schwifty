@@ -31,12 +31,12 @@ public class ProfilePage extends AppCompatActivity implements View.OnClickListen
     @BindView(R.id.prof_userRole) TextView userRoleTv;
     @BindView(R.id.noti_button_PP) Button shiftBtn;
     @BindView(R.id.noti_copy_uid_PP) Button copyBtn;
+
     private String copyUID;
     private ClipboardManager myClipboard;
     private ClipData myClip;
+
     TextView textView;
-
-
 
     private FirebaseAuth mFirebaseAuth;
     private DatabaseReference mDatabaseReference, userRef;

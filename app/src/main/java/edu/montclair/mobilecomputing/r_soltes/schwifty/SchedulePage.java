@@ -25,11 +25,13 @@ import butterknife.ButterKnife;
 public class SchedulePage extends AppCompatActivity  {
 
     @BindView(R.id.job_list1)
-    ListView mListView;
+
     private DatabaseReference mDatabaseReference, notifRef, notifRefJ, userIdRefn, userIdRefID, userIdRef,userBusRef, businessRef;
     private FirebaseAuth mFirebaseAuth;
     private String value;
     private List<String> listOfJobs = new ArrayList<>();
+
+    ListView mListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

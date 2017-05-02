@@ -29,14 +29,12 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener 
     @BindView(R.id.nav_job_list) Button jobListBtn;
     @BindView(R.id.nav_schedule) Button scheduleBtn;
     @BindView(R.id.nav_time_off) Button timeOffBtn;
-
     @BindView(R.id.nav_logout) Button logoutBtn;
     @BindView(R.id.hp_username_tv) TextView usernameTv;
     @BindView(R.id.how_to) Button howToBtn;
 
     private FirebaseAuth mFirebaseAuth;
-    private DatabaseReference mDatabaseReference, userRef, nameRef;
-
+    private DatabaseReference mDatabaseReference, userRef;
     public Snackbar snackbar;
     public sessionUser session;
 
@@ -142,8 +140,6 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener 
 
                     }
                 });
-//                startActivity(new Intent(HomePage.this, ManagerPanelPage.class));
-//                finish();
                 break;
             case R.id.nav_job_list:
                 startActivity(new Intent(HomePage.this, JobListPage.class));

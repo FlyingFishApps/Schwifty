@@ -140,7 +140,6 @@ public class TimeOffPage extends AppCompatActivity implements View.OnClickListen
         eDate.setText("Enter End Date");
         s.setSelection(0);
 
-
     }
 
     private void findViewsById() {

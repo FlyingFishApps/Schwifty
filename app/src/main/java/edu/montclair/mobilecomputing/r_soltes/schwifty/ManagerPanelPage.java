@@ -17,6 +17,7 @@ public class ManagerPanelPage extends AppCompatActivity implements View.OnClickL
     @BindView(R.id.add_shift_btn) Button aShiftBtn;
     @BindView(R.id.noti_swap_btn_MP) Button aSwapBtn;
     @BindView(R.id.noti_sch_btn_MP) Button aSchBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +60,6 @@ public class ManagerPanelPage extends AppCompatActivity implements View.OnClickL
                 break;
             default:
                 throw new RuntimeException("Unknown button ID");
-
 
         }
     }
