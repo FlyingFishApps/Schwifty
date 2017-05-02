@@ -39,8 +39,7 @@ public class AddShiftPage extends AppCompatActivity implements View.OnClickListe
 
     @BindView(R.id.uid_CS) EditText uID;
     @BindView(R.id.bId_CS) EditText place;
-    @BindView(R.id.end_time)
-    TextView endTime;
+    @BindView(R.id.end_time) TextView endTime;
     @BindView(R.id.in_time) TextView sTime;
     @BindView(R.id.in_date) TextView dateTxt;
     @BindView(R.id.nID_CS) EditText numID;
@@ -49,10 +48,12 @@ public class AddShiftPage extends AppCompatActivity implements View.OnClickListe
     private List<String> listOfJobs = new ArrayList<>();
     private String value;
     private int mYear, mMonth, mDay, mHour, mMinute;
-    Snackbar snackbar;
     private DatabaseReference mDatabaseReference, notifRef, notifRefJ, userIdRefn, userIdRefID, userIdRef,userBusRef, businessRef;
     private FirebaseAuth mFirebaseAuth;
+
     RelativeLayout activity_create_shift;
+    Snackbar snackbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,8 +102,11 @@ public class AddShiftPage extends AppCompatActivity implements View.OnClickListe
         mDatabaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://schwifty-33650.firebaseio.com/");
         notifRef = mDatabaseReference.child("full_schedule");
         mDatabaseReference.child("full_schedule").push().setValue(notification);
-        snackbar.make(activity_create_shift, "Notification Sent!", Snackbar.LENGTH_LONG)
+        snackbar.make(activity_create_shift, "Shift Added!", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
+        dateTxt.setText("Date");
+        sTime.setText("Shift Start Time");
+        endTime.setText("Shift End Time");
 
     }
 

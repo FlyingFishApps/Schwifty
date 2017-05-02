@@ -43,26 +43,25 @@ import edu.montclair.mobilecomputing.r_soltes.schwifty.model.ManagerNotification
 import edu.montclair.mobilecomputing.r_soltes.schwifty.model.ManagerNotificationsAdapter;
 
 public class TimeOffPage extends AppCompatActivity implements View.OnClickListener {
-    private TextView fromDateEtxt;
-    private TextView toDateEtxt;
-    private DatePickerDialog fromDatePickerDialog;
-    private DatePickerDialog toDatePickerDialog;
-    private SimpleDateFormat dateFormatter;
 
     @BindView(R.id.showDate) TextView sDate;
     @BindView(R.id.showDate2) TextView eDate;
     @BindView(R.id.emp_Name) EditText nameEMP;
     @BindView(R.id.emp_Job) EditText wPlace;
     @BindView(R.id.btn_Submit) Button notiBtn;
-    @BindView(R.id.noti_list1)
-    ListView mListView;
+    @BindView(R.id.timeoff_spinner) Spinner s;
+
+    private TextView fromDateEtxt;
+    private TextView toDateEtxt;
+    private DatePickerDialog fromDatePickerDialog;
+    private DatePickerDialog toDatePickerDialog;
+    private SimpleDateFormat dateFormatter;
     private static final int TAG_SIMPLE_NOTIFICATION = 1;
-    Snackbar snackbar;
     private DatabaseReference mDatabaseReference, notifRef;
     private FirebaseAuth mFirebaseAuth;
-    RelativeLayout activity_time_off_page;
 
-    @BindView(R.id.timeoff_spinner) Spinner s;
+    Snackbar snackbar;
+    RelativeLayout activity_time_off_page;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,19 +83,6 @@ public class TimeOffPage extends AppCompatActivity implements View.OnClickListen
         findViewsById();
         setDateTimeField();
 
-        //lines of code below creates the dropdown to select your major
-        s.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(TimeOffPage.this, parent.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-
-        });
 
     }
     private PendingIntent pendingIntentForNotification() {
@@ -146,10 +132,13 @@ public class TimeOffPage extends AppCompatActivity implements View.OnClickListen
         notifRef = mDatabaseReference.child("businesses").child(wPlace.getText().toString());
         notifRef.child("manager_notifications").child(name).setValue("\nTime Off Request \nStart Date: " + sDate.getText().toString() + "\nEnd Date :"
         + eDate.getText().toString() + "\nReason: " + s.getSelectedItem().toString() + "\n Name: " + nameEMP.getText().toString());
-        snackbar.make(activity_time_off_page, "Notification Sent!", Snackbar.LENGTH_LONG)
+        snackbar.make(activity_time_off_page, "Time Off Request Sent!", Snackbar.LENGTH_LONG)
             .setAction("Action", null).show();
         nameEMP.getText().clear();
         wPlace.getText().clear();
+        sDate.setText("Enter Start Date");
+        eDate.setText("Enter End Date");
+        s.setSelection(0);
 
 
 }
