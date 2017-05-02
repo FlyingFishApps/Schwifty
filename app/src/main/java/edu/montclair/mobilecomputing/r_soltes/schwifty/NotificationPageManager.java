@@ -46,19 +46,18 @@ public class NotificationPageManager extends AppCompatActivity implements View.O
     @BindView(R.id.noti_message) EditText message;
     @BindView(R.id.noti_button) Button notiBtn;
     @BindView(R.id.noti_list) ListView mListView;
+
     private DatePickerDialog fromDatePickerDialog;
     private SimpleDateFormat dateFormatter;
     private static final int TAG_SIMPLE_NOTIFICATION = 1;
-    Snackbar snackbar;
     private DatabaseReference mDatabaseReference, notifRef;
     private FirebaseAuth mFirebaseAuth;
+
+    Snackbar snackbar;
     RelativeLayout activity_notification_page;
     NotificationAdapter mNotificationAdapter;
     ChildEventListener mChildEventListener;
     FirebaseAuth.AuthStateListener mAuthStateListener;
-
-
-//    ArrayList<String> listOfNotifs = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -11,6 +11,16 @@ public class ScheduleNotification {
     private String nEndTime;
     private String uID;
 
+    public ScheduleNotification(String nID, String sID, String uID, String nDate, String nStartTime, String nEndTime) {
+        this.uID = uID;
+        this.sID = sID;
+        this.nId = nID;
+        this.nDate = nDate;
+        this.nStartTime = nStartTime;
+        this.nEndTime = nEndTime;
+
+    }
+
     public String getsID() {
         return sID;
     }
@@ -67,13 +77,5 @@ public class ScheduleNotification {
 
     }
 
-    public ScheduleNotification(String nID, String sID, String uID, String nDate, String nStartTime, String nEndTime) {
-        this.uID = uID;
-        this.sID = sID;
-        this.nId = nID;
-        this.nDate = nDate;
-        this.nStartTime = nStartTime;
-        this.nEndTime = nEndTime;
 
-    }
 }

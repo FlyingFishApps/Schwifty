@@ -39,7 +39,7 @@
     <string name="add_employee_tv">Add Employee</string>
     <string name="ae_BusinessName">Business Name</string>
     <string name="ae_add_employee_btn">Add Employee</string>
-    <string name="employee_name_hint">Employee User ID</string>
+    <string name="employee_name_hint">Employee Username</string>
     <string name="business_name_hint">Business Name</string>
     <string name="add_employee_btn">Add Employee</string>
     <string name="title_activity_open_page">OpenPage</string>
@@ -79,6 +79,12 @@
     <string name="swapTV_SCP">Schwift Shift</string>
     <string name="employee_ID_hint">Employee UID</string>
     <string name="cb_owner_ID_hint">Your UID</string>
+    <string name="manager_sch_MP">Schedules</string>
+    <string name="noti_shift_PP">My Work Shifts</string>
+    <string name="noti_copy_PP">Copy Your UID</string>
+    <string name="s_time_btn">Shift Start Time</string>
+    <string name="e_time_btn">Shift End Time</string>
+    <string name="date_tv">Date</string>
 
 
 </resources>

@@ -57,43 +57,59 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/prof_username"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:text="@string/prof_username"
+                android:layout_gravity="left"
                 android:padding="20dp"/>
 
             <TextView
                 android:id="@+id/prof_email"
+                android:layout_gravity="left"
+
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:text="@string/prof_email"
                 android:padding="20dp"/>
 
             <TextView
                 android:id="@+id/prof_userID"
+                android:layout_gravity="left"
+
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:text="@string/prof_userID"
                 android:padding="20dp"/>
 
             <TextView
                 android:id="@+id/prof_userRole"
+                android:layout_gravity="left"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:text="@string/prof_userRole"
                 android:padding="20dp"/>
 
             <Button
                 android:id="@+id/noti_button_PP"
-                android:text="@string/noti_button_PP"
+                android:text="@string/noti_shift_PP"
                 style="@style/Widget.AppCompat.Button.Colored"
                 android:background="#4286f4"
-                android:layout_weight="1"
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Button
+
+                android:id="@+id/noti_copy_uid_PP"
+                android:text="@string/noti_copy_PP"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:background="#4286f4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>

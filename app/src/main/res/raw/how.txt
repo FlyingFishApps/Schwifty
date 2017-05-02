@@ -3,7 +3,7 @@ Profile Feature
 •	Profile panel shows users username, email, user ID, and user role.
 Job List Feature
 •	The job list panel was created with the purpose of an employee possibly having more than one job, where both businesses would use the app.
-__________________________________________________________
+____________________________________________________
 For Employees Only
 
 Time Off Feature – This feature allows the employee to request time off of work.
@@ -18,7 +18,7 @@ Schedule Feature
 •	User can see when they are working
 •	Press shift to switch or remove shifts
 •	Press Release to release shift
-___________________________________________________________
+_____________________________________________________
 For Managers Only
 
 Manager Panel feature – here the manager will be able to create their business, add employees into the business add shifts for an employee and check time off request notifications from employees.

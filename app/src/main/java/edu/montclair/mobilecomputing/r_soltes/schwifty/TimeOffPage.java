@@ -1,20 +1,13 @@
 package edu.montclair.mobilecomputing.r_soltes.schwifty;
 
 import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
-import android.icu.text.DateFormat;
-import android.icu.util.Calendar;
-import android.icu.util.GregorianCalendar;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -38,11 +31,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import org.w3c.dom.Text;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
@@ -51,32 +41,27 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import edu.montclair.mobilecomputing.r_soltes.schwifty.model.ManagerNotifications;
 import edu.montclair.mobilecomputing.r_soltes.schwifty.model.ManagerNotificationsAdapter;
-import edu.montclair.mobilecomputing.r_soltes.schwifty.model.NotificationAdapter;
-import edu.montclair.mobilecomputing.r_soltes.schwifty.model.Notifications;
 
 public class TimeOffPage extends AppCompatActivity implements View.OnClickListener {
+
+    @BindView(R.id.showDate) TextView sDate;
+    @BindView(R.id.showDate2) TextView eDate;
+    @BindView(R.id.emp_Name) EditText nameEMP;
+    @BindView(R.id.emp_Job) EditText wPlace;
+    @BindView(R.id.btn_Submit) Button notiBtn;
+    @BindView(R.id.timeoff_spinner) Spinner s;
+
     private TextView fromDateEtxt;
     private TextView toDateEtxt;
     private DatePickerDialog fromDatePickerDialog;
     private DatePickerDialog toDatePickerDialog;
     private SimpleDateFormat dateFormatter;
-
-    @BindView(R.id.showDate) TextView title;
-    @BindView(R.id.showDate2) TextView title1;
-    @BindView(R.id.emp_Name) EditText title2;
-    @BindView(R.id.emp_Job) EditText wPlace;
-    @BindView(R.id.btn_Submit) Button notiBtn;
-    @BindView(R.id.noti_list1)
-    ListView mListView;
     private static final int TAG_SIMPLE_NOTIFICATION = 1;
-    Snackbar snackbar;
     private DatabaseReference mDatabaseReference, notifRef;
     private FirebaseAuth mFirebaseAuth;
+
+    Snackbar snackbar;
     RelativeLayout activity_time_off_page;
-    ManagerNotificationsAdapter mNotificationAdapter;
-    ChildEventListener mChildEventListener;
-    FirebaseAuth.AuthStateListener mAuthStateListener;
-    @BindView(R.id.timeoff_spinner) Spinner s;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,68 +74,14 @@ public class TimeOffPage extends AppCompatActivity implements View.OnClickListen
             @Override
             public void onClick(View view) {
                 showSimpleNotification();
-                createNotification(title.getText().toString().trim(),s.getSelectedItem().toString().trim(),title1.getText().toString().trim(),title2.getText().toString().trim());
+                createNotification(sDate.getText().toString().trim(),s.getSelectedItem().toString().trim(),
+                        eDate.getText().toString().trim(), nameEMP.getText().toString().trim());
             }
         });
 
         dateFormatter = new SimpleDateFormat("MM-dd-yyyy", Locale.US);
         findViewsById();
         setDateTimeField();
-
-        //lines of code below creates the dropdown to select your major
-        s.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(TimeOffPage.this, parent.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-
-        });
-
-
-        List<ManagerNotifications> listOfNotifis = new ArrayList<>();
-        notifRef = FirebaseDatabase.getInstance().getReference("manager_notifications");
-        mFirebaseAuth = FirebaseAuth.getInstance();
-
-        mNotificationAdapter = new ManagerNotificationsAdapter(this, R.layout.manager_notification_item, listOfNotifis);
-        mListView.setAdapter(mNotificationAdapter);
-
-        mChildEventListener = new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                ManagerNotifications notification = dataSnapshot.getValue(ManagerNotifications
-                        .class);
-                mNotificationAdapter.add(notification);
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        };
-
-        notifRef.addChildEventListener(mChildEventListener);
-
-
 
 
     }
@@ -169,7 +100,7 @@ public class TimeOffPage extends AppCompatActivity implements View.OnClickListen
         //Use the NotificationCompat compatibility library in order to get gingerbread support.
         Notification notification = new NotificationCompat.Builder(TimeOffPage.this)
                 //Title of the notification
-                .setContentTitle(title.getText().toString().trim())
+                .setContentTitle(sDate.getText().toString().trim())
                 //Content of the notification once opened
                 .setContentText(s.getSelectedItem().toString().trim())
                 //This bit will show up in the notification area in devices that support that
@@ -197,29 +128,24 @@ public class TimeOffPage extends AppCompatActivity implements View.OnClickListen
 
     private void createNotification(String dStart, String nReason, String dEnd, String name) {
 
-        Random rnd = new Random();
-        int n = 100000 + rnd.nextInt(900000);
-        String nId = String.valueOf(n);
-
-        ManagerNotifications notification = new ManagerNotifications(dStart,nReason,nId,dEnd,name);
-
         mDatabaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://schwifty-33650.firebaseio.com/");
         notifRef = mDatabaseReference.child("businesses").child(wPlace.getText().toString());
-        notifRef.child("manager_notifications").setValue(notification);
-        snackbar.make(activity_time_off_page, "Notification Sent!", Snackbar.LENGTH_LONG)
+        notifRef.child("manager_notifications").child(name).setValue("\nTime Off Request \nStart Date: " + sDate.getText().toString() + "\nEnd Date :"
+        + eDate.getText().toString() + "\nReason: " + s.getSelectedItem().toString() + "\n Name: " + nameEMP.getText().toString());
+        snackbar.make(activity_time_off_page, "Time Off Request Sent!", Snackbar.LENGTH_LONG)
             .setAction("Action", null).show();
-        mNotificationAdapter.clear();
-        mNotificationAdapter.clear();
+        nameEMP.getText().clear();
+        wPlace.getText().clear();
+        sDate.setText("Enter Start Date");
+        eDate.setText("Enter End Date");
+        s.setSelection(0);
 
-}
-
-
+    }
 
     private void findViewsById() {
         fromDateEtxt = (TextView) findViewById(R.id.showDate);
         fromDateEtxt.setInputType(InputType.TYPE_NULL);
         fromDateEtxt.requestFocus();
-
         toDateEtxt = (TextView) findViewById(R.id.showDate2);
         toDateEtxt.setInputType(InputType.TYPE_NULL);
     }
@@ -257,8 +183,6 @@ public class TimeOffPage extends AppCompatActivity implements View.OnClickListen
         return true;
     }
 
-
-
     @Override
     public void onClick(View view) {
         if(view == fromDateEtxt) {
@@ -267,8 +191,6 @@ public class TimeOffPage extends AppCompatActivity implements View.OnClickListen
             toDatePickerDialog.show();
         }
     }
-
-
 
     @Override
     public void onBackPressed() {
