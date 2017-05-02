@@ -104,7 +104,7 @@ public class SignUpPage extends AppCompatActivity implements View.OnClickListene
 
     /**
      * Method to register the user into the database.
-     * If the task is not successful, user is shown an error message.
+     * If the task is not successful, user is shown an error sTime.
      * When task is successful it calls createNewUser method and clears the text field in the form.
      * **/
     private void signupUser(final String email, String password) {

@@ -61,9 +61,7 @@ public class TimeOffPage extends AppCompatActivity implements View.OnClickListen
     private DatabaseReference mDatabaseReference, notifRef;
     private FirebaseAuth mFirebaseAuth;
     RelativeLayout activity_time_off_page;
-    ManagerNotificationsAdapter mNotificationAdapter;
-    ChildEventListener mChildEventListener;
-    FirebaseAuth.AuthStateListener mAuthStateListener;
+
     @BindView(R.id.timeoff_spinner) Spinner s;
 
     @Override
@@ -77,7 +75,8 @@ public class TimeOffPage extends AppCompatActivity implements View.OnClickListen
             @Override
             public void onClick(View view) {
                 showSimpleNotification();
-                createNotification(sDate.getText().toString().trim(),s.getSelectedItem().toString().trim(), eDate.getText().toString().trim(), nameEMP.getText().toString().trim());
+                createNotification(sDate.getText().toString().trim(),s.getSelectedItem().toString().trim(),
+                        eDate.getText().toString().trim(), nameEMP.getText().toString().trim());
             }
         });
 
@@ -143,12 +142,6 @@ public class TimeOffPage extends AppCompatActivity implements View.OnClickListen
 
     private void createNotification(String dStart, String nReason, String dEnd, String name) {
 
-        Random rnd = new Random();
-        int n = 100000 + rnd.nextInt(900000);
-        String nId = String.valueOf(n);
-
-
-
         mDatabaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://schwifty-33650.firebaseio.com/");
         notifRef = mDatabaseReference.child("businesses").child(wPlace.getText().toString());
         notifRef.child("manager_notifications").child(name).setValue("\nTime Off Request \nStart Date: " + sDate.getText().toString() + "\nEnd Date :"
@@ -167,7 +160,6 @@ public class TimeOffPage extends AppCompatActivity implements View.OnClickListen
         fromDateEtxt = (TextView) findViewById(R.id.showDate);
         fromDateEtxt.setInputType(InputType.TYPE_NULL);
         fromDateEtxt.requestFocus();
-
         toDateEtxt = (TextView) findViewById(R.id.showDate2);
         toDateEtxt.setInputType(InputType.TYPE_NULL);
     }

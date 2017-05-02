@@ -156,8 +156,6 @@ public class AddEmployeePage extends AppCompatActivity implements View.OnClickLi
                 userIdRef.child(employeeNameTxt.getText().toString()).child("jobs").child(businessNameTxt.getText().toString()).setValue(businessNameTxt.getText().toString());
 
 
-                snackbar.make(activity_add_employee_page, "Employee Added!", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
 
                     // Calls the method that stores a job instance in the employees' UID child branch.
                 addEmployeeUID();

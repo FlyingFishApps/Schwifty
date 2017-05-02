@@ -97,6 +97,9 @@ public class CreateBusinessPage extends AppCompatActivity implements View.OnClic
             // Adds an instance of the user as an Owner and Employee of the newly made business stored by UID.
         mDatabaseReference.child("businesses").child(name).child("List Of Employees UIDs").child(bOwnerEMP).setValue(ownerName.getText().toString());
 
+        mDatabaseReference1.child("users").child(ownerName.getText().toString()).child("jobs").child(businessName.getText().toString()).setValue(businessName.getText().toString());
+        mDatabaseReference1.child("usersIDs").child(ownerID.getText().toString()).child("jobs").child(businessName.getText().toString()).setValue(businessName.getText().toString());
+
         businessName.getText().clear();
         ownerName.getText().clear();
         mprogressBar.setVisibility(View.GONE);
@@ -130,31 +133,7 @@ public class CreateBusinessPage extends AppCompatActivity implements View.OnClic
 
     }
 
-    private void Reason(){
-        FirebaseUser user3 = mFirebaseAuth.getInstance().getCurrentUser();
-        final String uid = user3.getUid().toString();
-        mDatabaseReference1.child("usersIDs").child(uid).child("uid").addListenerForSingleValueEvent(new ValueEventListener() {
 
-
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    String data = snapshot.getValue().toString();
-                    String data2 = data.substring(data.lastIndexOf("=") + 1);
-                    final String data3 = data2.split("\\}")[0];
-
-
-                    if (data3.toString().equals(ownerID.getText().toString())) {
-                        createBusiness(businessName.getText().toString().trim());
-                    } else
-                        ownerID.setError("HUH");
-                }
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }});
-    }
 
     @Override
     public void onBackPressed() {

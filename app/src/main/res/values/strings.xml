@@ -81,6 +81,10 @@
     <string name="cb_owner_ID_hint">Your UID</string>
     <string name="manager_sch_MP">Schedules</string>
     <string name="noti_shift_PP">My Work Shifts</string>
+    <string name="noti_copy_PP">Copy Your UID</string>
+    <string name="s_time_btn">Shift Start Time</string>
+    <string name="e_time_btn">Shift End Time</string>
+    <string name="date_tv">Date</string>
 
 
 </resources>
