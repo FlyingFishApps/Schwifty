@@ -21,7 +21,8 @@ Schwifty provides multifarious features to keep organized in the workplace.
 * Fill out time-off request form.
 * View profile information.
 ## Using Schwifty
-To use schwifty simply register with an email, username, and password. If you are an employee refer to your manager so you can be added to their business or organization right away. If you are a manager, create a business and start adding employees.
+To use schwifty simply register with an email, username, and password. If you are an employee refer to your manager so you can be added to their business or organization right away. If you are a manager, create a business and start adding employees.  
+For more info please refer to our [wiki](https://github.com/FlyingFishApps/Schwifty/wiki)
 ## Authors
 Ryan Soltes - [Rjsoltes](https://github.com/Rjsoltes)  
 Tyler James - [Jamest8](https://github.com/Jamest8)   
