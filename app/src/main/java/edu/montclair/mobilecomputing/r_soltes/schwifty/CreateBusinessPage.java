@@ -102,6 +102,7 @@ public class CreateBusinessPage extends AppCompatActivity implements View.OnClic
 
         businessName.getText().clear();
         ownerName.getText().clear();
+        ownerID.getText().clear();
         mprogressBar.setVisibility(View.GONE);
 
     }

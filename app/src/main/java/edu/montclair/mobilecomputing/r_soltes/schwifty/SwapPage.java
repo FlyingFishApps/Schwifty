@@ -2,10 +2,12 @@ package edu.montclair.mobilecomputing.r_soltes.schwifty;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,17 +31,21 @@ public class SwapPage extends AppCompatActivity {
     @BindView(R.id.emp_sID_1)EditText sID1;
     @BindView(R.id.emp_sID_2)EditText sID2;
     @BindView(R.id.emp_workplace)EditText work;
-    private FirebaseAuth mFirebaseAuth;
     @BindView(R.id.schwift_btn)Button sBtn;
+
+    private FirebaseAuth mFirebaseAuth;
     private DatabaseReference mData, mData1, mDataq;
     private boolean reason, reason1;
     private String torn, torn2;
+
+    RelativeLayout activity_schwift_shift_page;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schwift_shift_page);
         ButterKnife.bind(this);
+        activity_schwift_shift_page = (RelativeLayout)findViewById(R.id.activity_schwift_shift_page);
 
         mData = FirebaseDatabase.getInstance().getReference().child("users");
         mDataq = FirebaseDatabase.getInstance().getReference().child("businesses").child(work.getText().toString());
@@ -109,8 +115,8 @@ public class SwapPage extends AppCompatActivity {
         emP2.getText().clear();
         emP1.getText().clear();
         work.getText().clear();
-        Toast.makeText(getApplicationContext(), "Shifts Swapped",
-                Toast.LENGTH_SHORT).show();
+        Snackbar.make(activity_schwift_shift_page, "Shift Added!", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show();
 
     }
 
@@ -150,7 +156,7 @@ public class SwapPage extends AppCompatActivity {
             }
         });
     }
-
+    
     private void swapNotifications(){
 
         mDataq.child("full_schedule_noti").child(sID2.getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -183,7 +189,6 @@ public class SwapPage extends AppCompatActivity {
             }
         });
     }
-
 
     @Override
     public void onBackPressed() {
