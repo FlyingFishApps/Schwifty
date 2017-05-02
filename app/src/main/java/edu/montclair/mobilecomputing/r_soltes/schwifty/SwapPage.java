@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -43,8 +44,7 @@ public class SwapPage extends AppCompatActivity {
         mData = FirebaseDatabase.getInstance().getReference().child("users");
         mDataq = FirebaseDatabase.getInstance().getReference().child("businesses").child(work.getText().toString());
         mData1 = FirebaseDatabase.getInstance().getReference().child("users");
-        reason = false;
-        reason1 = false;
+
         sBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,6 +103,14 @@ public class SwapPage extends AppCompatActivity {
     {
         mData.child(emP1.getText().toString()).child("Schedule").child("Shift: "+sID1.getText().toString()).removeValue();
         mData.child(emP2.getText().toString()).child("Schedule").child("Shift: "+sID2.getText().toString()).removeValue();
+
+        sID1.getText().clear();
+        sID2.getText().clear();
+        emP2.getText().clear();
+        emP1.getText().clear();
+        work.getText().clear();
+        Toast.makeText(getApplicationContext(), "Shifts Swapped",
+                Toast.LENGTH_SHORT).show();
 
     }
 

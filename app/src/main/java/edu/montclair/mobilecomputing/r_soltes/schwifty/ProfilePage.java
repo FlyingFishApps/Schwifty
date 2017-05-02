@@ -1,12 +1,16 @@
 package edu.montclair.mobilecomputing.r_soltes.schwifty;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -26,6 +30,12 @@ public class ProfilePage extends AppCompatActivity implements View.OnClickListen
     @BindView(R.id.prof_userID) TextView userIdTv;
     @BindView(R.id.prof_userRole) TextView userRoleTv;
     @BindView(R.id.noti_button_PP) Button shiftBtn;
+    @BindView(R.id.noti_copy_uid_PP) Button copyBtn;
+    private String copyUID;
+    private ClipboardManager myClipboard;
+    private ClipData myClip;
+    TextView textView;
+
 
 
     private FirebaseAuth mFirebaseAuth;
@@ -37,6 +47,8 @@ public class ProfilePage extends AppCompatActivity implements View.OnClickListen
         setContentView(R.layout.activity_profile_page);
         ButterKnife.bind(this);
         shiftBtn.setOnClickListener(this);
+        copyBtn.setOnClickListener(this);
+        myClipboard = (ClipboardManager)getSystemService(CLIPBOARD_SERVICE);
         // Get Firebase user
         FirebaseUser user = mFirebaseAuth.getInstance().getCurrentUser();
 
@@ -70,12 +82,22 @@ public class ProfilePage extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void onClick(View view) {
+
+        FirebaseUser user = mFirebaseAuth.getInstance().getCurrentUser();
+        final String uid = user.getUid().toString();
+
         switch (view.getId()) {
             case R.id.noti_button_PP:
                 startActivity(new Intent(ProfilePage.this, SchwiftPage.class));
                 finish();
                 break;
-
+            case R.id.noti_copy_uid_PP:
+                copyUID = uid;
+                        myClip = ClipData.newPlainText("text", copyUID);
+                myClipboard.setPrimaryClip(myClip);
+                Toast.makeText(getApplicationContext(), "UID Copied",
+                        Toast.LENGTH_SHORT).show();
+                break;
             default:
                 throw new RuntimeException("Unknown button ID");
         }
