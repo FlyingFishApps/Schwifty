@@ -25,7 +25,9 @@ public class AddEmployeePage extends AppCompatActivity implements View.OnClickLi
     @BindView(R.id.ae_employee_name) EditText employeeNameTxt;
     @BindView(R.id.ae_employee_id) EditText employeeUIDTxt;
     @BindView(R.id.ae_add_employee_btn) Button addEmployeeBtn;
+
     private DatabaseReference mDatabaseReference, businessRef, userIdRef, userUIDRef;
+
     Snackbar snackbar;
     RelativeLayout activity_add_employee_page;
 

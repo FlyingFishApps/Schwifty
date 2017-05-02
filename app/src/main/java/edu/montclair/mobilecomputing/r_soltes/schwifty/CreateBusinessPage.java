@@ -33,8 +33,10 @@ public class CreateBusinessPage extends AppCompatActivity implements View.OnClic
     @BindView(R.id.cb_owner_ID) EditText ownerID;
     @BindView(R.id.cb_create_btn) Button createBusinessBtn;
     @BindView(R.id.cbProgressBar) ProgressBar mprogressBar;
+
     private DatabaseReference mDatabaseReference1,mDatabaseReference;
     private FirebaseAuth mFirebaseAuth;
+
     Snackbar snackbar;
     RelativeLayout activity_create_business_page;
 
@@ -60,7 +62,6 @@ public class CreateBusinessPage extends AppCompatActivity implements View.OnClic
         switch (view.getId()) {
             case R.id.cb_create_btn:
                 if(!TextUtils.isEmpty(businessName.getText().toString().trim())){
-//                    createBusiness(businessName.getText().toString().trim());
                     checkBusiness();
                     snackbar.make(activity_create_business_page, "Business Created!", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
@@ -84,17 +85,17 @@ public class CreateBusinessPage extends AppCompatActivity implements View.OnClic
         mprogressBar.setVisibility(View.VISIBLE);
 
         FirebaseUser user = mFirebaseAuth.getInstance().getCurrentUser();
-            // Current user's Username
+        // Current user's Username
         String bOwner = ownerName.getText().toString();
-            // Current user's UID
+        // Current user's UID
         String bOwnerEMP = user.getUid();
         Business business = new Business(name,bId, bOwner);
         mDatabaseReference.child("businesses").child(name).setValue(business);
 
 
-            // Adds an instance of the user as an Owner and Employee of the newly made business stored by username.
+        // Adds an instance of the user as an Owner and Employee of the newly made business stored by username.
         mDatabaseReference.child("businesses").child(name).child("List Of Employees").child(ownerName.getText().toString()).setValue(ownerName.getText().toString());
-            // Adds an instance of the user as an Owner and Employee of the newly made business stored by UID.
+        // Adds an instance of the user as an Owner and Employee of the newly made business stored by UID.
         mDatabaseReference.child("businesses").child(name).child("List Of Employees UIDs").child(bOwnerEMP).setValue(ownerName.getText().toString());
 
         mDatabaseReference1.child("users").child(ownerName.getText().toString()).child("jobs").child(businessName.getText().toString()).setValue(businessName.getText().toString());
@@ -119,10 +120,6 @@ public class CreateBusinessPage extends AppCompatActivity implements View.OnClic
                 }else{
                     createBusiness(businessName.getText().toString().trim());
 
-                    // Create string from current user's user ID
-
-
-
                 }
             }
 
@@ -133,8 +130,6 @@ public class CreateBusinessPage extends AppCompatActivity implements View.OnClic
         });
 
     }
-
-
 
     @Override
     public void onBackPressed() {

@@ -59,19 +59,17 @@ public class JobListPage extends AppCompatActivity {
                     String data2 = data.substring(data.lastIndexOf("=")+1);
                     final String data3 = data2.split("\\}")[0];
 
+                    System.out.println(data3);
+                    listOfJobs.add(data3);
+                    mListView.setAdapter(arrayAdapter);
+                }
+            }
 
-                                System.out.println(data3);
-                                listOfJobs.add(data3);
-                                mListView.setAdapter(arrayAdapter);
-                            }
-                        }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-
-                        }
-                    });
-
+            }
+        });
 
     }
 

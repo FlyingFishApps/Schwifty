@@ -27,12 +27,14 @@ import edu.montclair.mobilecomputing.r_soltes.schwifty.model.Notifications;
  */
 
 public class NotificationPageEmployee extends AppCompatActivity {
-    @BindView(R.id.noti_list_ENP)
-    ListView mListView;
 
-    Snackbar snackbar;
+    @BindView(R.id.noti_list_ENP)
+
     private DatabaseReference mDatabaseReference, notifRef;
     private FirebaseAuth mFirebaseAuth;
+
+    ListView mListView;
+    Snackbar snackbar;
     LinearLayout activity_employee_notification_page;
     NotificationAdapter mNotificationAdapter;
     ChildEventListener mChildEventListener;
@@ -42,8 +44,10 @@ public class NotificationPageEmployee extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_employee_notification_page);
+
         ButterKnife.bind(this);
         activity_employee_notification_page = (LinearLayout) findViewById(R.id.activity_employee_notification_page);
+
         List<Notifications> listOfNotifis = new ArrayList<>();
         notifRef = FirebaseDatabase.getInstance().getReference("notifications");
         mFirebaseAuth = FirebaseAuth.getInstance();
@@ -80,8 +84,6 @@ public class NotificationPageEmployee extends AppCompatActivity {
         };
 
         notifRef.addChildEventListener(mChildEventListener);
-
-
 
     }
 

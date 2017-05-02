@@ -27,10 +27,11 @@ import butterknife.ButterKnife;
 
 public class SchwiftPage extends AppCompatActivity {
 
+    @BindView(R.id.shift_list) ListView mListView;
+
     private List<String> listOfJobs1 = new ArrayList<>();
     private FirebaseAuth mFirebaseAuth;
     private DatabaseReference mDatabaseReference, userRef;
-    @BindView(R.id.shift_list) ListView mListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,5 +73,5 @@ public class SchwiftPage extends AppCompatActivity {
         intent.addCategory(Intent.CATEGORY_HOME);
         startActivity(intent);
     }
-    }
+}
 

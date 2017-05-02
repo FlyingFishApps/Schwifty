@@ -94,19 +94,16 @@ public class SwapPage extends AppCompatActivity {
 
                 }
 
-
                 @Override
                 public void onCancelled(DatabaseError firebaseError) {
 
                 }
             });
 
-
     }
 
 
-    public void removeFirebaseRecord()
-    {
+    public void removeFirebaseRecord(){
         mData.child(emP1.getText().toString()).child("Schedule").child("Shift: "+sID1.getText().toString()).removeValue();
         mData.child(emP2.getText().toString()).child("Schedule").child("Shift: "+sID2.getText().toString()).removeValue();
 
@@ -120,11 +117,9 @@ public class SwapPage extends AppCompatActivity {
 
     }
 
-    public void moveFirebaseRecord2()
-    {
+    public void moveFirebaseRecord2(){
         mData.child(emP2.getText().toString()).child("Schedule").child("Shift: "+sID2.getText().toString()).addListenerForSingleValueEvent(new ValueEventListener()
         {
-
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 mData1.child(emP1.getText().toString()).child("Schedule").child("Shift: "+sID2.getText().toString()).setValue(dataSnapshot.getValue(), new DatabaseReference.CompletionListener(){
