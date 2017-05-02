@@ -141,9 +141,7 @@ public class TimeOffPage extends AppCompatActivity implements View.OnClickListen
         s.setSelection(0);
 
 
-}
-
-
+    }
 
     private void findViewsById() {
         fromDateEtxt = (TextView) findViewById(R.id.showDate);
@@ -186,8 +184,6 @@ public class TimeOffPage extends AppCompatActivity implements View.OnClickListen
         return true;
     }
 
-
-
     @Override
     public void onClick(View view) {
         if(view == fromDateEtxt) {
@@ -196,8 +192,6 @@ public class TimeOffPage extends AppCompatActivity implements View.OnClickListen
             toDatePickerDialog.show();
         }
     }
-
-
 
     @Override
     public void onBackPressed() {
